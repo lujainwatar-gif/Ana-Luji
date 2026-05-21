@@ -2266,15 +2266,27 @@ function toggleHard(term) {
   renderGlossary();
 }
 function recordReview(term, known) {
-  const key = known ? 'lujain-known' : 'lujain-hard';
-  const other = known ? 'lujain-hard' : 'lujain-known';
-  let list = JSON.parse(localStorage.getItem(key) || '[]');
-  let otherList = JSON.parse(localStorage.getItem(other) || '[]');
-  if (!list.includes(term)) list.push(term);
-  const oIdx = otherList.indexOf(term);
-  if (oIdx >= 0) otherList.splice(oIdx, 1);
-  localStorage.setItem(key, JSON.stringify(list));
-  localStorage.setItem(other, JSON.stringify(otherList));
+  // When user clicks "Known" → remove from hard, add to known
+  // When user clicks "Hard" → add to hard, remove from known
+  const knownKey = 'lujain-known';
+  const hardKey = 'lujain-hard';
+  let knownList = JSON.parse(localStorage.getItem(knownKey) || '[]');
+  let hardList = JSON.parse(localStorage.getItem(hardKey) || '[]');
+
+  if (known) {
+    // User knows it → add to known, remove from hard
+    if (!knownList.includes(term)) knownList.push(term);
+    const hIdx = hardList.indexOf(term);
+    if (hIdx >= 0) hardList.splice(hIdx, 1);
+  } else {
+    // User doesn't know it → add to hard, remove from known
+    if (!hardList.includes(term)) hardList.push(term);
+    const kIdx = knownList.indexOf(term);
+    if (kIdx >= 0) knownList.splice(kIdx, 1);
+  }
+
+  localStorage.setItem(knownKey, JSON.stringify(knownList));
+  localStorage.setItem(hardKey, JSON.stringify(hardList));
   sessionReviews.add(term);
   updateProgress();
 }
@@ -2507,9 +2519,36 @@ $('nextCard').onclick = () => { if (currentFlashcardsList.length) { flashcardsIn
 $('focusPrev').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex - 1 + currentFlashcardsList.length) % currentFlashcardsList.length; renderFocusCard(); } };
 $('focusNext').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFocusCard(); } };
 
-$('btnKnown').onclick = () => { if (currentFlashcardsList.length) { recordReview(currentFlashcardsList[flashcardsIndex].term, true); flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFlashcard(); } };
+$('btnKnown').onclick = () => { 
+  if (currentFlashcardsList.length) { 
+    const term = currentFlashcardsList[flashcardsIndex].term;
+    recordReview(term, true); 
+    // Also remove from hard list if it was marked hard before
+    const hardList = getHardTerms();
+    if (hardList.includes(term)) {
+      const idx = hardList.indexOf(term);
+      hardList.splice(idx, 1);
+      setHardTerms(hardList);
+    }
+    flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; 
+    renderFlashcard(); 
+  } 
+};
 $('btnHard').onclick = () => { if (currentFlashcardsList.length) { recordReview(currentFlashcardsList[flashcardsIndex].term, false); toggleHard(currentFlashcardsList[flashcardsIndex].term); flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFlashcard(); } };
-$('focusBtnKnown').onclick = () => { if (currentFlashcardsList.length) { recordReview(currentFlashcardsList[flashcardsIndex].term, true); flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFocusCard(); } };
+$('focusBtnKnown').onclick = () => { 
+  if (currentFlashcardsList.length) { 
+    const term = currentFlashcardsList[flashcardsIndex].term;
+    recordReview(term, true); 
+    const hardList = getHardTerms();
+    if (hardList.includes(term)) {
+      const idx = hardList.indexOf(term);
+      hardList.splice(idx, 1);
+      setHardTerms(hardList);
+    }
+    flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; 
+    renderFocusCard(); 
+  } 
+};
 $('focusBtnHard').onclick = () => { if (currentFlashcardsList.length) { recordReview(currentFlashcardsList[flashcardsIndex].term, false); toggleHard(currentFlashcardsList[flashcardsIndex].term); flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFocusCard(); } };
 
 chapterFilterFlash.addEventListener('change', updateFlashcardsByChapter);
