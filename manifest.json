@@ -1,11 +1,11 @@
 {
-  "name": "Anatomy Terms - Lujain Atlas",
+  "name": "Anatomy Terms",
   "short_name": "Ana Luji",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#E8ECF1",
-  "theme_color": "#4A90D9",
-  "orientation": "any",
+  "background_color": "#F8FAFE",
+  "theme_color": "#1E88E5",
+  "orientation": "portrait",
   "scope": ".",
   "lang": "ar",
   "dir": "rtl",
@@ -13,11 +13,6 @@
     {
       "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
       "type": "image/png"
     },
     {
