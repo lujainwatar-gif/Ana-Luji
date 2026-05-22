@@ -658,6 +658,7 @@
       <h3 style="font-size: 1.1rem; margin-bottom: 12px;">التقدم حسب الفصل</h3>
       <div id="chapterStats"></div>
     </div>
+
     <button id="backToMenuStats">🔙 القائمة الرئيسية</button>
   </div>
 
@@ -2289,10 +2290,6 @@ function recordReview(term, known) {
   localStorage.setItem(hardKey, JSON.stringify(hardList));
   sessionReviews.add(term);
   updateProgress();
-
-  // Update the hard filter badge and glossary
-  renderFlashcard();
-  renderGlossary();
 }
 function getStats() {
   const known = JSON.parse(localStorage.getItem('lujain-known') || '[]');
