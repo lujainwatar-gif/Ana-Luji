@@ -2289,6 +2289,10 @@ function recordReview(term, known) {
   localStorage.setItem(hardKey, JSON.stringify(hardList));
   sessionReviews.add(term);
   updateProgress();
+
+  // Update the hard filter badge and glossary
+  renderFlashcard();
+  renderGlossary();
 }
 function getStats() {
   const known = JSON.parse(localStorage.getItem('lujain-known') || '[]');
@@ -2534,7 +2538,14 @@ $('btnKnown').onclick = () => {
     renderFlashcard(); 
   } 
 };
-$('btnHard').onclick = () => { if (currentFlashcardsList.length) { recordReview(currentFlashcardsList[flashcardsIndex].term, false); toggleHard(currentFlashcardsList[flashcardsIndex].term); flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFlashcard(); } };
+$('btnHard').onclick = () => { 
+  if (currentFlashcardsList.length) { 
+    const term = currentFlashcardsList[flashcardsIndex].term;
+    recordReview(term, false); 
+    flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; 
+    renderFlashcard(); 
+  } 
+};
 $('focusBtnKnown').onclick = () => { 
   if (currentFlashcardsList.length) { 
     const term = currentFlashcardsList[flashcardsIndex].term;
@@ -2549,7 +2560,14 @@ $('focusBtnKnown').onclick = () => {
     renderFocusCard(); 
   } 
 };
-$('focusBtnHard').onclick = () => { if (currentFlashcardsList.length) { recordReview(currentFlashcardsList[flashcardsIndex].term, false); toggleHard(currentFlashcardsList[flashcardsIndex].term); flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFocusCard(); } };
+$('focusBtnHard').onclick = () => { 
+  if (currentFlashcardsList.length) { 
+    const term = currentFlashcardsList[flashcardsIndex].term;
+    recordReview(term, false); 
+    flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; 
+    renderFocusCard(); 
+  } 
+};
 
 chapterFilterFlash.addEventListener('change', updateFlashcardsByChapter);
 chapterFilterQuiz.addEventListener('change', () => generateQuiz(chapterFilterQuiz.value));
