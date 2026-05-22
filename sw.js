@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lujain-atlas-v2';
+const CACHE_NAME = 'lujain-atlas-v3';
 const urlsToCache = [
   './',
   './index.html',
