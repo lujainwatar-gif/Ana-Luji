@@ -476,8 +476,8 @@
 }
 .tts-btn.tts-corner {
   position: absolute;
-  top: -10px;
-  left: -10px;
+  bottom: 10px;
+  right: 10px;
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
@@ -505,7 +505,52 @@ body.dark .tts-btn:hover {
       margin-top: 14px;
       font-weight: 600;
     }
-    
+    body.dark .tts-btn {
+  background: rgba(30,136,229,0.15);
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--primary);
+}
+.tts-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+}
+.tts-btn.tts-corner {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.tts-btn.tts-dark {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  color: #E2E8F0;
+}
+.tts-btn.tts-dark:hover {
+  background: rgba(255,255,255,0.3);
+}
+body.dark .tts-btn {
+  background: rgba(59,130,246,0.2);
+  border-color: #3B82F6;
+  color: #3B82F6;
+}
+body.dark .tts-btn:hover {
+  background: #3B82F6;
+  color: white;
+}
+
+.card-counter { color: #94A3B8; }
     .kbd-hint {
       font-size: 0.75rem;
       color: #8A9BB0;
@@ -571,30 +616,6 @@ body.dark .tts-btn:hover {
       .welcome-card h1 { font-size: 1.9rem; }
       .stats-grid { grid-template-columns: 1fr; }
     }
-  
-    .tts-notice {
-      font-size: 0.72rem;
-      color: #8A9BB0;
-      text-align: center;
-      margin-top: 10px;
-      padding: 6px 12px;
-      background: rgba(30,136,229,0.06);
-      border-radius: 12px;
-      backdrop-filter: blur(4px);
-      line-height: 1.5;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    body.dark .tts-notice {
-      color: #64748B;
-      background: rgba(59,130,246,0.08);
-    }
-    .focus-wrapper .tts-notice {
-      color: rgba(255,255,255,0.4);
-      background: rgba(255,255,255,0.06);
-    }
-
   </style>
 </head>
 <body class="light">
@@ -616,7 +637,7 @@ body.dark .tts-btn:hover {
     <div class="user-greeting" id="userGreeting"></div>
     <div class="menu-grid">
       <button class="menu-btn primary" data-section="flashcards">📖 البطاقات التعليمية</button>
-      <button class="menu-btn" data-section="srs" style="background: #E3F2FD; color: #1565C0;">🧠 المراجعة الذكية</button>
+      
       <button class="menu-btn primary" data-section="quiz">📝 الاختبارات</button>
       <button class="menu-btn primary" data-section="glossary">📚 قائمة المصطلحات</button>
       <button class="menu-btn" data-section="stats" style="background: #E8F5E9; color: #2E7D32;">📊 إحصائياتي</button>
@@ -629,47 +650,7 @@ body.dark .tts-btn:hover {
   </div>
 
   
-  <div id="srsSection" class="section">
-    <div class="stats-grid" style="margin-bottom: 20px;">
-      <div class="stat-card"><div class="stat-number" id="srsDue">0</div><div class="stat-label">واجب المراجعة</div></div>
-      <div class="stat-card"><div class="stat-number" id="srsLearning">0</div><div class="stat-label">قيد التعلم</div></div>
-      <div class="stat-card"><div class="stat-number" id="srsMastered">0</div><div class="stat-label">متقن</div></div>
-    </div>
-    <button class="menu-btn primary" id="startSRS" style="margin-bottom: 20px; font-size: 1.2rem; padding: 18px;">🚀 ابدأ المراجعة الذكية</button>
-    <div id="srsEmpty" class="empty-state" style="display: none;">
-      <div class="empty-state-icon">🎉</div>
-      <p>لا يوجد مصطلحات واجبة المراجعة اليوم!</p>
-      <p style="font-size: 0.9rem; margin-top: 8px;">رجعي لـ "البطاقات التعليمية" لتعلم مصطلحات جديدة</p>
-    </div>
-    <div class="card-scene" id="srsCardScene" style="display: none;">
-      <div class="card" id="srsCard">
-        <div class="card-face card-front">
-          <div class="chapter-label" id="srsChapterLabel"></div>
-          <div class="term-front" id="srsTerm"></div>
-          <button class="tts-btn" onclick="event.stopPropagation(); speakTerm(currentSRSTerm?.term)">🔊</button>
-        </div>
-        <div class="card-back">
-          <div class="definition-back" id="srsDef"></div>
-          <button class="tts-btn" onclick="event.stopPropagation(); speakDefinition(currentSRSTerm?.definition)">🔊</button>
-        </div>
-      </div>
-    </div>
-    <div id="srsRating" style="display: none; margin-top: 18px;">
-      <p style="margin-bottom: 12px; font-weight: 600;">كيف كان مستوى صعوبة المصطلح؟</p>
-      <div class="rating-btns">
-        <button class="rating-btn" style="background: #E53935;" onclick="rateSRS(1)">😵 نسيته</button>
-        <button class="rating-btn" style="background: #FB8C00;" onclick="rateSRS(3)">🤔 صعب</button>
-        <button class="rating-btn" style="background: #43A047;" onclick="rateSRS(4)">😊 سهل</button>
-        <button class="rating-btn" style="background: #1E88E5;" onclick="rateSRS(5)">🤩 سهل جداً</button>
-      </div>
-    </div>
-    <div class="tts-notice" style="margin-top: 8px;">
-      🔊 النطق مولّد تلقائياً (TTS) وقد لا يكون دقيقاً 100% للمصطلحات اللاتينية.
-    </div>
-    <button id="backToMenuSRS" style="margin-top: 20px;">🔙 القائمة الرئيسية</button>
-  </div>
-
-<div id="flashcardsSection" class="section">
+  <div id="flashcardsSection" class="section">
     <div class="filter-row">
       <select id="chapterFilterFlash" style="max-width: 280px;"></select>
       <button class="filter-chip" id="hardOnlyFilter">🔴 المصطلحات الصعبة فقط</button>
@@ -689,10 +670,7 @@ body.dark .tts-btn:hover {
         </div>
         </div>
         <div class="card-back">
-          <div style="position: relative; width: 100%;">
-          <button class="tts-btn tts-corner" onclick="event.stopPropagation(); speakDefinition(currentFlashcardsList[flashcardsIndex]?.definition)" title="نطق التعريف">🔊</button>
           <div class="definition-back" id="fcDef"></div>
-        </div>
         </div>
       </div>
     </div>
@@ -700,9 +678,6 @@ body.dark .tts-btn:hover {
     <div class="rating-btns">
       <button class="rating-btn known" id="btnKnown" title="K">✅ أعرفها</button>
       <button class="rating-btn hard" id="btnHard" title="H">❌ أحتاج مراجعة</button>
-    </div>
-    <div class="tts-notice">
-      🔊 النطق مولّد تلقائياً (TTS) وقد لا يكون دقيقاً 100% للمصطلحات اللاتينية.
     </div>
     <div class="btn-group">
       <button id="prevCard">⬅️ السابق</button>
@@ -727,10 +702,7 @@ body.dark .tts-btn:hover {
         </div>
         </div>
         <div class="card-back">
-          <div style="position: relative; width: 100%;">
-          <button class="tts-btn tts-corner tts-dark" onclick="event.stopPropagation(); speakDefinition(currentFlashcardsList[flashcardsIndex]?.definition)" title="نطق التعريف">🔊</button>
           <div class="definition-back" id="focusDef"></div>
-        </div>
         </div>
       </div>
     </div>
@@ -738,9 +710,6 @@ body.dark .tts-btn:hover {
     <div class="rating-btns">
       <button class="rating-btn known" id="focusBtnKnown">✅ أعرفها</button>
       <button class="rating-btn hard" id="focusBtnHard">❌ أحتاج مراجعة</button>
-    </div>
-    <div class="tts-notice">
-      🔊 النطق مولّد تلقائياً (TTS) وقد لا يكون دقيقاً 100% للمصطلحات اللاتينية.
     </div>
     <div class="btn-group">
       <button id="focusPrev">⬅️ السابق</button>
@@ -2737,14 +2706,14 @@ function speakTerm(term) {
 
     const utterance = new SpeechSynthesisUtterance(term);
     utterance.lang = 'en-US';
-    utterance.rate = 0.85;
-    utterance.pitch = 0.8; // Lower pitch = male voice
+    utterance.rate = 0.75;
+    utterance.pitch = 0.5; // Very low pitch for deep male voice
 
     // Try to find male voice
     const voices = window.speechSynthesis.getVoices();
     const maleVoice = voices.find(v => 
       v.lang.includes('en') && 
-      (v.name.includes('Male') || v.name.includes('David') || v.name.includes('Google US English'))
+      (v.name.includes('Male') || v.name.includes('David') || v.name.includes('Google US English') || v.name.includes('Daniel') || v.name.includes('Fred') || v.name.includes('Alex'))
     );
     if (maleVoice) utterance.voice = maleVoice;
 
@@ -2752,18 +2721,7 @@ function speakTerm(term) {
   }
 }
 
-function speakDefinition(def) {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(def);
-    utterance.lang = 'ar-SA';
-    utterance.rate = 0.9;
-    utterance.pitch = 1;
-
-    window.speechSynthesis.speak(utterance);
-  }
-}
 
 function showScreen(screenId) {
   [nameScreen, menuScreen, flashcardsSection, quizSection, glossarySection, statsSection].forEach(s => s.classList.remove('active-section'));
