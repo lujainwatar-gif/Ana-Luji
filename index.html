@@ -454,13 +454,91 @@
       font-family: 'Cairo', sans-serif;
     }
     .install-btn.show { display: block; }
-    .card-counter {
+    .tts-btn {
+  background: rgba(30,136,229,0.15);
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--primary);
+}
+.tts-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+}
+.tts-btn.tts-dark {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  color: #E2E8F0;
+}
+.tts-btn.tts-dark:hover {
+  background: rgba(255,255,255,0.3);
+}
+body.dark .tts-btn {
+  background: rgba(59,130,246,0.2);
+  border-color: #3B82F6;
+  color: #3B82F6;
+}
+body.dark .tts-btn:hover {
+  background: #3B82F6;
+  color: white;
+}
+
+.card-counter {
       font-size: 0.9rem;
       color: #5A6E8A;
       margin-top: 14px;
       font-weight: 600;
     }
-    body.dark .card-counter { color: #94A3B8; }
+    body.dark .tts-btn {
+  background: rgba(30,136,229,0.15);
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--primary);
+}
+.tts-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+}
+.tts-btn.tts-dark {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  color: #E2E8F0;
+}
+.tts-btn.tts-dark:hover {
+  background: rgba(255,255,255,0.3);
+}
+body.dark .tts-btn {
+  background: rgba(59,130,246,0.2);
+  border-color: #3B82F6;
+  color: #3B82F6;
+}
+body.dark .tts-btn:hover {
+  background: #3B82F6;
+  color: white;
+}
+
+.card-counter { color: #94A3B8; }
     .kbd-hint {
       font-size: 0.75rem;
       color: #8A9BB0;
@@ -573,9 +651,11 @@
           <div class="chapter-label" id="fcChapterLabel"></div>
           <div class="hard-badge" id="fcHardBadge">صعبة</div>
           <div class="term-front" id="fcTerm"></div>
+        <button class="tts-btn" id="ttsTerm" onclick="event.stopPropagation(); speakTerm(currentFlashcardsList[flashcardsIndex]?.term)" title="نطق المصطلح">🔊</button>
         </div>
         <div class="card-back">
           <div class="definition-back" id="fcDef"></div>
+        <button class="tts-btn" id="ttsDef" onclick="event.stopPropagation(); speakDefinition(currentFlashcardsList[flashcardsIndex]?.definition)" title="نطق التعريف">🔊</button>
         </div>
       </div>
     </div>
@@ -602,9 +682,11 @@
           <div class="chapter-label" id="focusChapterLabel"></div>
           <div class="hard-badge" id="focusHardBadge">صعبة</div>
           <div class="term-front" id="focusTerm"></div>
+        <button class="tts-btn tts-dark" id="ttsFocusTerm" onclick="event.stopPropagation(); speakTerm(currentFlashcardsList[flashcardsIndex]?.term)" title="نطق المصطلح">🔊</button>
         </div>
         <div class="card-back">
           <div class="definition-back" id="focusDef"></div>
+        <button class="tts-btn tts-dark" id="ttsFocusDef" onclick="event.stopPropagation(); speakDefinition(currentFlashcardsList[flashcardsIndex]?.definition)" title="نطق التعريف">🔊</button>
         </div>
       </div>
     </div>
@@ -2489,6 +2571,35 @@ function renderStats() {
     `;
     container.appendChild(row);
   });
+}
+
+
+// Text-to-Speech function
+function speakTerm(term) {
+  if ('speechSynthesis' in window) {
+    // Cancel any ongoing speech
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(term);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+  }
+}
+
+function speakDefinition(def) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(def);
+    utterance.lang = 'ar-SA';
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+  }
 }
 
 function showScreen(screenId) {
