@@ -661,12 +661,34 @@
     }
     body.dark .srs-empty { color: #E2E8F0; }
 
+    /* Change name button */
+    .change-name-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(30,136,229,0.92);
+      border: none;
+      border-radius: 40px;
+      padding: 8px 14px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      display: none;
+      transition: transform 0.2s;
+    }
+    .change-name-btn:hover { transform: scale(1.05); }
+    .change-name-btn.show { display: block; }
+
   </style>
 </head>
 <body class="light">
 <button class="update-btn" id="updateBtn">🔄 تحديث التطبيق</button>
 <button class="theme-toggle" id="themeToggle" title="تبديل الوضع"><span>☀️</span><span>🌙</span><span>💙</span><span>🌸</span></button>
 <button class="install-btn" id="installBtn">📲 تثبيت التطبيق</button>
+<button class="change-name-btn" id="changeNameBtn">✏️ تغيير الاسم</button>
 
 <div class="app-container" id="appContainer">
 
@@ -691,7 +713,7 @@
     <div style="text-align: center; margin-top: 30px; padding: 20px; opacity: 0.7;">
       <div style="font-size: 0.75rem; color: #5A6E8A; margin-bottom: 4px;">Made By</div>
       <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 8px;">Lujain Khaled Watar 🩺</div>
-      <div style="font-size: 0.7rem; color: #8A9BB0;">🌺 دعواتكم 🌺</div>
+      <div style="font-size: 0.7rem; color: #5A6E8A;">🌺 دعواتكم 🌺</div>
     </div>
   </div>
 
@@ -2834,10 +2856,16 @@ function showScreen(screenId) {
   else if (screenId === 'srs') { srsSection.classList.add('active-section'); initSrsSession(); }
   // Show update button only on inner screens (not name screen)
   const updateBtn = $('updateBtn');
+  const changeNameBtn = $('changeNameBtn');
   if (screenId === 'name') {
     updateBtn.classList.add('hidden-screen');
+    changeNameBtn.classList.remove('show');
+  } else if (screenId === 'menu') {
+    updateBtn.classList.remove('hidden-screen');
+    changeNameBtn.classList.add('show');
   } else {
     updateBtn.classList.remove('hidden-screen');
+    changeNameBtn.classList.remove('show');
   }
   // Push history so back button works
   if (screenId !== 'name' && screenId !== 'menu') {
@@ -2863,6 +2891,12 @@ $('backToMenuGlossary').onclick = () => showScreen('menu');
 $('backToMenuStats').onclick = () => showScreen('menu');
 $('backToMenuSrs').onclick = () => showScreen('menu');
 chapterFilterSrs.addEventListener('change', initSrsSession);
+$('changeNameBtn').onclick = () => {
+  localStorage.removeItem('lujain-name');
+  studentName = '';
+  $('studentName').value = '';
+  showScreen('name');
+};
 
 // SRS card flip and rating
 $('srsCard').addEventListener('click', srsFlipCard);
