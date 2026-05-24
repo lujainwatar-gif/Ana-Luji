@@ -40,10 +40,16 @@
       align-items: center;
       position: relative;
     }
+    .nav-btn {
+      padding: 7px 16px !important;
+      font-size: 0.82rem !important;
+      border-radius: 50px;
+      min-width: 70px;
+    }
     .theme-toggle {
       position: fixed;
       top: 15px;
-      right: 15px;
+      left: 15px;
       background: rgba(30,136,229,0.92);
       border: none;
       border-radius: 40px;
@@ -146,7 +152,7 @@
     .chapter-label {
       position: absolute;
       top: 14px;
-      left: 18px;
+      right: 18px;
       font-size: 0.7rem;
       font-weight: 700;
       padding: 4px 10px;
@@ -158,7 +164,7 @@
     .hard-badge {
       position: absolute;
       top: 14px;
-      right: 18px;
+      left: 18px;
       background: var(--danger);
       color: white;
       font-size: 0.7rem;
@@ -577,7 +583,7 @@
 
   <div id="nameScreen" class="section active-section">
     <div class="card welcome-card">
-      <h1>📘 Anatomy Terms</h1>
+      <h1>🧠 Anatomy Terms</h1>
       <p>أدخل اسمك لبدء رحلة التعلم</p>
       <input type="text" id="studentName" placeholder="الاسم الكامل" style="text-align: center; max-width: 320px;">
       <button class="primary" id="enterBtn" style="margin-top: 20px; max-width: 200px;">دخول</button>
@@ -626,8 +632,8 @@
       <button class="rating-btn hard" id="btnHard" title="H">❌ أحتاج مراجعة</button>
     </div>
     <div class="btn-group">
-      <button id="prevCard">⬅️ السابق</button>
-      <button id="nextCard">التالي ➡️</button>
+      <button id="prevCard" class="nav-btn">السابق</button>
+      <button id="nextCard" class="nav-btn">التالي</button>
     </div>
     <button id="focusModeBtn" style="background: #1A237E; color: white;">🌙 وضع التركيز</button>
     <button id="backToMenuFlash" style="background: #CBD5E1; margin-top: 10px;">🔙 القائمة الرئيسية</button>
@@ -655,8 +661,8 @@
       <button class="rating-btn hard" id="focusBtnHard">❌ أحتاج مراجعة</button>
     </div>
     <div class="btn-group">
-      <button id="focusPrev">⬅️ السابق</button>
-      <button id="focusNext">التالي ➡️</button>
+      <button id="focusPrev" class="nav-btn">السابق</button>
+      <button id="focusNext" class="nav-btn">التالي</button>
     </div>
     <div class="focus-hint">اضغط <kbd>Esc</kbd> أو الزر أدناه للخروج</div>
     <button class="focus-exit" id="focusExit">✕ خروج من وضع التركيز</button>
@@ -2540,6 +2546,12 @@ function showScreen(screenId) {
   else if (screenId === 'quiz') { quizSection.classList.add('active-section'); generateQuiz(chapterFilterQuiz.value); }
   else if (screenId === 'glossary') { glossarySection.classList.add('active-section'); renderGlossary(); }
   else if (screenId === 'stats') { statsSection.classList.add('active-section'); renderStats(); }
+  // Push history so back button works
+  if (screenId !== 'name' && screenId !== 'menu') {
+    history.pushState({ screen: screenId }, '', '');
+  } else if (screenId === 'menu') {
+    history.replaceState({ screen: 'menu' }, '', '');
+  }
 }
 
 $('enterBtn').onclick = () => {
@@ -2553,6 +2565,26 @@ $('backToMenuFlash').onclick = () => showScreen('menu');
 $('backToMenuQuiz').onclick = () => showScreen('menu');
 $('backToMenuGlossary').onclick = () => showScreen('menu');
 $('backToMenuStats').onclick = () => showScreen('menu');
+
+// Handle Android/browser back button
+let currentScreen = 'name';
+const originalShowScreen = showScreen;
+window.showScreen = showScreen; // keep reference
+
+function pushHistory(screenId) {
+  if (screenId !== 'name' && screenId !== 'menu') {
+    history.pushState({ screen: screenId }, '', '');
+  } else if (screenId === 'menu') {
+    history.replaceState({ screen: 'menu' }, '', '');
+  }
+  currentScreen = screenId;
+}
+
+window.addEventListener('popstate', (e) => {
+  // Back button pressed - always go to menu
+  showScreen('menu');
+  history.replaceState({ screen: 'menu' }, '', '');
+});
 
 flashcardDiv.addEventListener('click', () => flashcardDiv.classList.toggle('flipped'));
 focusCardDiv.addEventListener('click', () => focusCardDiv.classList.toggle('flipped'));
@@ -2687,9 +2719,10 @@ if ('serviceWorker' in navigator) {
     .catch(err => console.log('SW error', err));
 }
 
-// Update button click
+// Update button click — backup data before reload
 document.getElementById('updateBtn').addEventListener('click', () => {
   if (waitingWorker) {
+    // Data is safe in localStorage — no need to backup
     waitingWorker.postMessage({action: 'skipWaiting'});
   }
 });
@@ -2702,7 +2735,12 @@ navigator.serviceWorker.addEventListener('controllerchange', () => {
 const savedName = localStorage.getItem('lujain-name');
 if (savedName) { studentName = savedName; $('studentName').value = savedName; }
 populateChapterFilters();
-showScreen('name');
+// If name already saved, go directly to menu - never show name screen again
+if (savedName) {
+  showScreen('menu');
+} else {
+  showScreen('name');
+}
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lujain-atlas-v6';
+const CACHE_NAME = 'lujain-atlas-v7';
 const urlsToCache = [
   './',
   './index.html',
@@ -12,7 +12,7 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
   );
-  self.skipWaiting();
+  // Do NOT call skipWaiting() here — wait for user to click update button
 });
 
 self.addEventListener('activate', event => {
