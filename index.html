@@ -737,6 +737,7 @@
     <div class="srs-header">
       <div class="srs-due-badge" id="srsDueBadge">0 مصطلح للمراجعة اليوم</div>
     </div>
+    <select id="chapterFilterSrs" style="max-width: 280px;"></select>
     <div class="progress-container">
       <div class="progress-text" id="srsProgressText">0 / 0</div>
       <div class="progress-bar-bg"><div class="progress-bar-fill" id="srsProgressBar" style="width:0%"></div></div>
@@ -2435,6 +2436,7 @@ const flashcardDiv = $('flashcard'), focusCardDiv = $('focusCard');
 const cardCounterSpan = $('cardCounter'), focusCounter = $('focusCounter');
 const chapterFilterFlash = $('chapterFilterFlash'), chapterFilterQuiz = $('chapterFilterQuiz');
 const chapterFilterGlossary = $('chapterFilterGlossary');
+const chapterFilterSrs = $('chapterFilterSrs');
 const glossaryListDiv = $('glossaryList');
 const quizQuestionDiv = $('quizQuestion'), quizOptionsDiv = $('quizOptions');
 const quizFeedbackDiv = $('quizFeedback'), nextQuizBtn = $('nextQuizBtn');
@@ -2504,7 +2506,7 @@ if (savedTheme !== null) { themeIndex = parseInt(savedTheme); setTheme(themeInde
 function populateChapterFilters() {
   const chapters = [...new Set(termsData.map(t => t.chapter))].sort((a,b)=>a-b);
   const options = [['all', 'كل الفصول'], ...chapters.map(c => [c, chapterNames[c]])];
-  [chapterFilterFlash, chapterFilterQuiz, chapterFilterGlossary].forEach(sel => {
+  [chapterFilterFlash, chapterFilterQuiz, chapterFilterGlossary, chapterFilterSrs].forEach(sel => {
     sel.innerHTML = '';
     options.forEach(([val, text]) => {
       const opt = document.createElement('option');
@@ -2689,20 +2691,21 @@ function getSrsData() {
 }
 function saveSrsData(data) { localStorage.setItem('lujain-srs', JSON.stringify(data)); }
 
-function getSrsDueTerms() {
+function getSrsDueTerms(chapterValue = 'all') {
   const data = getSrsData();
   const now = Date.now();
-  // Terms due = scheduled before now, OR never reviewed (no entry)
-  const allTerms = termsData.map(t => t.term);
+  const allTerms = chapterValue === 'all'
+    ? termsData.map(t => t.term)
+    : termsData.filter(t => t.chapter == chapterValue).map(t => t.term);
   return allTerms.filter(term => {
     const entry = data[term];
-    if (!entry) return true; // never reviewed → due
+    if (!entry) return true;
     return entry.nextReview <= now;
   });
 }
 
 function getDueBadgeCount() {
-  return getSrsDueTerms().length;
+  return getSrsDueTerms(chapterFilterSrs ? chapterFilterSrs.value : 'all').length;
 }
 
 function recordSrsReview(term, rating) {
@@ -2723,8 +2726,8 @@ function recordSrsReview(term, rating) {
 }
 
 function initSrsSession() {
-  const dueTerms = getSrsDueTerms();
-  // Shuffle
+  const chapterValue = chapterFilterSrs ? chapterFilterSrs.value : 'all';
+  const dueTerms = getSrsDueTerms(chapterValue);
   srsDueList = dueTerms
     .map(term => termsData.find(t => t.term === term))
     .filter(Boolean)
@@ -2850,12 +2853,16 @@ $('enterBtn').onclick = () => {
   studentName = name; localStorage.setItem('lujain-name', name);
   showScreen('menu');
 };
-document.querySelectorAll('.menu-btn').forEach(btn => btn.onclick = (e) => showScreen(e.target.dataset.section));
+document.querySelectorAll('.menu-btn').forEach(btn => btn.onclick = (e) => {
+  const section = e.currentTarget.dataset.section;
+  if (section) showScreen(section);
+});
 $('backToMenuFlash').onclick = () => showScreen('menu');
 $('backToMenuQuiz').onclick = () => showScreen('menu');
 $('backToMenuGlossary').onclick = () => showScreen('menu');
 $('backToMenuStats').onclick = () => showScreen('menu');
 $('backToMenuSrs').onclick = () => showScreen('menu');
+chapterFilterSrs.addEventListener('change', initSrsSession);
 
 // SRS card flip and rating
 $('srsCard').addEventListener('click', srsFlipCard);
