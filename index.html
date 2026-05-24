@@ -778,6 +778,8 @@
     </div>
     <button id="backToMenuSrs" style="background: #CBD5E1; margin-top: 16px;">🔙 القائمة الرئيسية</button>
   </div>
+
+  <div class="focus-wrapper" id="focusWrapper">
     <div class="card-scene" style="max-width: 520px;">
       <div class="card" id="focusCard">
         <div class="card-face card-front">
@@ -2860,20 +2862,6 @@ $('srsCard').addEventListener('click', srsFlipCard);
 $('srsBtnHard').onclick = () => srsRate('hard');
 $('srsBtnOk').onclick   = () => srsRate('ok');
 $('srsBtnEasy').onclick = () => srsRate('easy');
-
-// Handle Android/browser back button
-let currentScreen = 'name';
-const originalShowScreen = showScreen;
-window.showScreen = showScreen; // keep reference
-
-function pushHistory(screenId) {
-  if (screenId !== 'name' && screenId !== 'menu') {
-    history.pushState({ screen: screenId }, '', '');
-  } else if (screenId === 'menu') {
-    history.replaceState({ screen: 'menu' }, '', '');
-  }
-  currentScreen = screenId;
-}
 
 window.addEventListener('popstate', (e) => {
   // Back button pressed - always go to menu
