@@ -65,7 +65,21 @@
       gap: 6px;
       transition: transform 0.2s;
     }
-    .theme-toggle:hover { transform: scale(1.05); }
+      background: rgba(30,136,229,0.92);
+      border: none;
+      border-radius: 40px;
+      padding: 8px 14px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      font-weight: bold;
+      display: flex;
+      gap: 6px;
+      transition: transform 0.2s;
+    }    .theme-toggle:hover { transform: scale(1.05); }
     .theme-toggle span { font-size: 1.2rem; line-height: 1; }
     .progress-container {
       width: 100%;
@@ -536,7 +550,7 @@
     .update-btn {
       position: fixed;
       top: 15px;
-      left: 15px;
+      right: 15px;
       background: var(--warning);
       color: white;
       border: none;
@@ -553,6 +567,7 @@
       backdrop-filter: blur(6px);
     }
     .update-btn.show { display: block; animation: fadeIn 0.4s ease; }
+    .update-btn.show.hidden-screen { display: none !important; }
     .update-btn:hover { transform: scale(1.05); background: #F57C00; }
 
 
@@ -571,6 +586,80 @@
     body.girly .progress-bar-fill { background: linear-gradient(90deg, #E91E63, #F48FB1); }
     body.girly .update-btn { background: #E91E63; }
     body.girly .update-btn:hover { background: #C2185B; }
+
+    /* SRS Styles */
+    .srs-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .srs-due-badge {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .srs-next-badge {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      background: rgba(102,126,234,0.15);
+      color: #667eea;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+    body.dark .srs-next-badge { background: rgba(102,126,234,0.25); color: #a78bfa; }
+    .srs-rating-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .srs-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 20px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      min-width: 88px;
+      transition: all 0.2s;
+      gap: 3px;
+    }
+    .srs-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .srs-btn:active { transform: scale(0.96); }
+    .srs-btn-label { font-size: 0.95rem; }
+    .srs-btn-when {
+      font-size: 0.72rem;
+      opacity: 0.8;
+      font-weight: 600;
+    }
+    .srs-hard { background: #FFCDD2; color: #B71C1C; }
+    .srs-ok   { background: #FFF9C4; color: #F57F17; }
+    .srs-easy { background: #C8E6C9; color: #1B5E20; }
+    body.dark .srs-hard { background: #7f1d1d; color: #fca5a5; }
+    body.dark .srs-ok   { background: #78350f; color: #fde68a; }
+    body.dark .srs-easy { background: #14532d; color: #86efac; }
+    .srs-flip-hint {
+      font-size: 0.82rem;
+      color: #8A9BB0;
+      margin-top: 12px;
+      text-align: center;
+    }
+    .srs-empty {
+      text-align: center;
+      padding: 30px 20px;
+      color: #1A2A4A;
+    }
+    body.dark .srs-empty { color: #E2E8F0; }
 
   </style>
 </head>
@@ -594,6 +683,7 @@
     <div class="user-greeting" id="userGreeting"></div>
     <div class="menu-grid">
       <button class="menu-btn primary" data-section="flashcards">📖 البطاقات التعليمية</button>
+      <button class="menu-btn" data-section="srs" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">🧠 المراجعة الذكية</button>
       <button class="menu-btn primary" data-section="quiz">📝 الاختبارات</button>
       <button class="menu-btn primary" data-section="glossary">📚 قائمة المصطلحات</button>
       <button class="menu-btn" data-section="stats" style="background: #E8F5E9; color: #2E7D32;">📊 إحصائياتي</button>
@@ -642,7 +732,52 @@
     </div>
   </div>
 
-  <div class="focus-wrapper" id="focusWrapper">
+  <!-- SRS Section -->
+  <div id="srsSection" class="section">
+    <div class="srs-header">
+      <div class="srs-due-badge" id="srsDueBadge">0 مصطلح للمراجعة اليوم</div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-text" id="srsProgressText">0 / 0</div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="srsProgressBar" style="width:0%"></div></div>
+    </div>
+    <div class="card-scene">
+      <div class="card" id="srsCard">
+        <div class="card-face card-front">
+          <div class="chapter-label" id="srsChapterLabel"></div>
+          <div class="srs-next-badge" id="srsNextBadge"></div>
+          <div class="term-front" id="srsTerm"></div>
+        </div>
+        <div class="card-back">
+          <div class="definition-back" id="srsDef"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-counter" id="srsCounter"></div>
+    <!-- SRS 3 rating buttons - shown after flip -->
+    <div class="srs-rating-btns" id="srsRatingBtns" style="display:none;">
+      <button class="srs-btn srs-hard" id="srsBtnHard">
+        <span class="srs-btn-label">😓 صعب</span>
+        <span class="srs-btn-when">بكرا</span>
+      </button>
+      <button class="srs-btn srs-ok" id="srsBtnOk">
+        <span class="srs-btn-label">🙃 متوسط</span>
+        <span class="srs-btn-when">3 أيام</span>
+      </button>
+      <button class="srs-btn srs-easy" id="srsBtnEasy">
+        <span class="srs-btn-label">😊 سهل</span>
+        <span class="srs-btn-when">7 أيام</span>
+      </button>
+    </div>
+    <div class="srs-flip-hint" id="srsFlipHint">اضغط على البطاقة لرؤية الجواب</div>
+    <!-- Empty state when no cards due -->
+    <div class="srs-empty" id="srsEmpty" style="display:none;">
+      <div style="font-size:3rem;">🎉</div>
+      <div style="font-weight:700; font-size:1.2rem; margin:12px 0;">خلصت مراجعة اليوم!</div>
+      <div style="font-size:0.9rem; color:#5A6E8A;" id="srsNextSession"></div>
+    </div>
+    <button id="backToMenuSrs" style="background: #CBD5E1; margin-top: 16px;">🔙 القائمة الرئيسية</button>
+  </div>
     <div class="card-scene" style="max-width: 520px;">
       <div class="card" id="focusCard">
         <div class="card-face card-front">
@@ -2283,10 +2418,17 @@ let quizReverse = false;
 let hardOnly = false;
 let sessionReviews = new Set();
 
+// SRS state
+let srsDueList = [];
+let srsIndex = 0;
+let srsSessionDone = 0;
+let srsFlipped = false;
+
 const $ = id => document.getElementById(id);
 const nameScreen = $('nameScreen'), menuScreen = $('menuScreen');
 const flashcardsSection = $('flashcardsSection'), quizSection = $('quizSection');
 const glossarySection = $('glossarySection'), statsSection = $('statsSection');
+const srsSection = $('srsSection');
 const flashcardDiv = $('flashcard'), focusCardDiv = $('focusCard');
 const cardCounterSpan = $('cardCounter'), focusCounter = $('focusCounter');
 const chapterFilterFlash = $('chapterFilterFlash'), chapterFilterQuiz = $('chapterFilterQuiz');
@@ -2538,14 +2680,160 @@ function renderStats() {
   });
 }
 
+// ===== SRS FUNCTIONS =====
+function getSrsData() {
+  try { return JSON.parse(localStorage.getItem('lujain-srs') || '{}'); }
+  catch { return {}; }
+}
+function saveSrsData(data) { localStorage.setItem('lujain-srs', JSON.stringify(data)); }
+
+function getSrsDueTerms() {
+  const data = getSrsData();
+  const now = Date.now();
+  // Terms due = scheduled before now, OR never reviewed (no entry)
+  const allTerms = termsData.map(t => t.term);
+  return allTerms.filter(term => {
+    const entry = data[term];
+    if (!entry) return true; // never reviewed → due
+    return entry.nextReview <= now;
+  });
+}
+
+function getDueBadgeCount() {
+  return getSrsDueTerms().length;
+}
+
+function recordSrsReview(term, rating) {
+  // rating: 'hard' → 1 day, 'ok' → 3 days, 'easy' → 14 days
+  const data = getSrsData();
+  const now = Date.now();
+  const DAY = 86400000;
+  const intervals = { hard: 1, ok: 3, easy: 7 };
+  const days = intervals[rating];
+  const entry = data[term] || { interval: 0, reviews: 0 };
+  entry.lastReview = now;
+  entry.nextReview = now + (days * DAY);
+  entry.interval = days;
+  entry.reviews = (entry.reviews || 0) + 1;
+  entry.lastRating = rating;
+  data[term] = entry;
+  saveSrsData(data);
+}
+
+function initSrsSession() {
+  const dueTerms = getSrsDueTerms();
+  // Shuffle
+  srsDueList = dueTerms
+    .map(term => termsData.find(t => t.term === term))
+    .filter(Boolean)
+    .sort(() => Math.random() - 0.5);
+  srsIndex = 0;
+  srsSessionDone = 0;
+  srsFlipped = false;
+  updateSrsDueBadge();
+  renderSrsCard();
+}
+
+function updateSrsDueBadge() {
+  const count = getDueBadgeCount();
+  $('srsDueBadge').textContent = count > 0 ? `${count} مصطلح للمراجعة اليوم` : 'كل المصطلحات مراجَعة ✓';
+}
+
+function renderSrsCard() {
+  const cardEl = $('srsCard');
+  const ratingBtns = $('srsRatingBtns');
+  const flipHint = $('srsFlipHint');
+  const emptyEl = $('srsEmpty');
+
+  if (!srsDueList.length || srsIndex >= srsDueList.length) {
+    // Session done
+    cardEl.style.display = 'none';
+    ratingBtns.style.display = 'none';
+    flipHint.style.display = 'none';
+    emptyEl.style.display = 'block';
+    $('srsCounter').textContent = '';
+    $('srsProgressText').textContent = `${srsSessionDone} / ${srsSessionDone}`;
+    $('srsProgressBar').style.width = '100%';
+    // Next due time
+    const data = getSrsData();
+    const future = Object.values(data).map(e => e.nextReview).filter(t => t > Date.now());
+    if (future.length) {
+      const next = Math.min(...future);
+      const hours = Math.round((next - Date.now()) / 3600000);
+      const days = Math.round(hours / 24);
+      $('srsNextSession').textContent = hours < 24
+        ? `المراجعة الجاية خلال ${hours} ساعة`
+        : `المراجعة الجاية بعد ${days} يوم`;
+    } else {
+      $('srsNextSession').textContent = '';
+    }
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+  cardEl.style.display = '';
+
+  const t = srsDueList[srsIndex];
+  srsFlipped = false;
+  cardEl.className = 'card ch' + t.chapter;
+  cardEl.classList.remove('flipped');
+  $('srsChapterLabel').textContent = chapterNames[t.chapter];
+  $('srsTerm').textContent = t.term;
+  $('srsDef').textContent = t.definition;
+
+  // Show next review info if previously reviewed
+  const data = getSrsData();
+  const entry = data[t.term];
+  if (entry && entry.lastRating) {
+    const labels = { hard: 'صعبة سابقاً', ok: 'مضبوط سابقاً', easy: 'سهلة سابقاً' };
+    $('srsNextBadge').textContent = labels[entry.lastRating] || '';
+  } else {
+    $('srsNextBadge').textContent = 'جديدة';
+  }
+
+  ratingBtns.style.display = 'none';
+  flipHint.style.display = 'block';
+
+  const total = srsDueList.length;
+  $('srsCounter').textContent = `${srsIndex + 1} من ${total}`;
+  const pct = Math.round((srsSessionDone / total) * 100);
+  $('srsProgressText').textContent = `${srsSessionDone} / ${total}`;
+  $('srsProgressBar').style.width = pct + '%';
+}
+
+function srsFlipCard() {
+  if (srsFlipped) return;
+  srsFlipped = true;
+  $('srsCard').classList.add('flipped');
+  $('srsRatingBtns').style.display = 'flex';
+  $('srsFlipHint').style.display = 'none';
+}
+
+function srsRate(rating) {
+  const t = srsDueList[srsIndex];
+  recordSrsReview(t.term, rating);
+  srsSessionDone++;
+  srsIndex++;
+  renderSrsCard();
+}
+// ===== END SRS =====
+
 function showScreen(screenId) {
-  [nameScreen, menuScreen, flashcardsSection, quizSection, glossarySection, statsSection].forEach(s => s.classList.remove('active-section'));
+  [nameScreen, menuScreen, flashcardsSection, quizSection, glossarySection, statsSection, srsSection].forEach(s => s.classList.remove('active-section'));
   if (screenId === 'name') nameScreen.classList.add('active-section');
   else if (screenId === 'menu') { menuScreen.classList.add('active-section'); $('userGreeting').innerText = studentName ? `مرحباً ${studentName} 👋` : ''; }
   else if (screenId === 'flashcards') { flashcardsSection.classList.add('active-section'); updateFlashcardsByChapter(); }
   else if (screenId === 'quiz') { quizSection.classList.add('active-section'); generateQuiz(chapterFilterQuiz.value); }
   else if (screenId === 'glossary') { glossarySection.classList.add('active-section'); renderGlossary(); }
   else if (screenId === 'stats') { statsSection.classList.add('active-section'); renderStats(); }
+  else if (screenId === 'srs') { srsSection.classList.add('active-section'); initSrsSession(); }
+  // Show update button only on inner screens (not name screen)
+  const updateBtn = $('updateBtn');
+  if (screenId === 'name') {
+    updateBtn.classList.add('hidden-screen');
+  } else {
+    updateBtn.classList.remove('hidden-screen');
+  }
   // Push history so back button works
   if (screenId !== 'name' && screenId !== 'menu') {
     history.pushState({ screen: screenId }, '', '');
@@ -2565,6 +2853,13 @@ $('backToMenuFlash').onclick = () => showScreen('menu');
 $('backToMenuQuiz').onclick = () => showScreen('menu');
 $('backToMenuGlossary').onclick = () => showScreen('menu');
 $('backToMenuStats').onclick = () => showScreen('menu');
+$('backToMenuSrs').onclick = () => showScreen('menu');
+
+// SRS card flip and rating
+$('srsCard').addEventListener('click', srsFlipCard);
+$('srsBtnHard').onclick = () => srsRate('hard');
+$('srsBtnOk').onclick   = () => srsRate('ok');
+$('srsBtnEasy').onclick = () => srsRate('easy');
 
 // Handle Android/browser back button
 let currentScreen = 'name';
