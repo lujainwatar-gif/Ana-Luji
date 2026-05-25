@@ -648,6 +648,12 @@
     body.dark .srs-hard { background: #7f1d1d; color: #fca5a5; }
     body.dark .srs-ok   { background: #78350f; color: #fde68a; }
     body.dark .srs-easy { background: #14532d; color: #86efac; }
+    body.blue .srs-hard { background: #fee2e2; color: #991b1b; }
+    body.blue .srs-ok   { background: #fef3c7; color: #92400e; }
+    body.blue .srs-easy { background: #d1fae5; color: #065f46; }
+    body.girly .srs-hard { background: #fce7f3; color: #9d174d; }
+    body.girly .srs-ok   { background: #fdf4ff; color: #7e22ce; }
+    body.girly .srs-easy { background: #ede9fe; color: #5b21b6; }
     .srs-flip-hint {
       font-size: 0.82rem;
       color: #8A9BB0;
@@ -2874,6 +2880,13 @@ function srsRate(rating) {
   recordSrsReview(t.term, rating);
   srsSessionDone++;
   srsIndex++;
+  // Instantly flip back to front without animation
+  const cardEl = $('srsCard');
+  cardEl.style.transition = 'none';
+  cardEl.classList.remove('flipped');
+  // Force reflow then re-enable animation
+  cardEl.getBoundingClientRect();
+  cardEl.style.transition = '';
   renderSrsCard();
 }
 // ===== END SRS =====
@@ -3088,6 +3101,13 @@ document.getElementById('updateBtn').addEventListener('click', () => {
 navigator.serviceWorker.addEventListener('controllerchange', () => {
   window.location.reload();
 });
+
+// Check for updates every 30 minutes automatically
+setInterval(() => {
+  navigator.serviceWorker.getRegistration().then(reg => {
+    if (reg) reg.update();
+  });
+}, 30 * 60 * 1000);
 
 const savedName = localStorage.getItem('lujain-name');
 if (savedName) { studentName = savedName; $('studentName').value = savedName; }
