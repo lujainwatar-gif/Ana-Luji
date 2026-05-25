@@ -65,21 +65,7 @@
       gap: 6px;
       transition: transform 0.2s;
     }
-      background: rgba(30,136,229,0.92);
-      border: none;
-      border-radius: 40px;
-      padding: 8px 14px;
-      color: white;
-      font-size: 1.1rem;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: var(--shadow-sm);
-      backdrop-filter: blur(6px);
-      font-weight: bold;
-      display: flex;
-      gap: 6px;
-      transition: transform 0.2s;
-    }    .theme-toggle:hover { transform: scale(1.05); }
+    .theme-toggle:hover { transform: scale(1.05); }
     .theme-toggle span { font-size: 1.2rem; line-height: 1; }
     .progress-container {
       width: 100%;
@@ -687,7 +673,69 @@
     .change-name-btn:hover { transform: scale(1.05); }
     .change-name-btn.show { display: block; }
 
-  </style>
+  
+    /* iOS Safari Fixes */
+    * { -webkit-tap-highlight-color: transparent; }
+    body { 
+      overscroll-behavior-y: none; 
+      -webkit-overflow-scrolling: touch;
+    }
+    .card { 
+      touch-action: manipulation; 
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    button, .menu-btn, .quiz-option { 
+      touch-action: manipulation; 
+    }
+    /* Fix for iPhone notch and safe areas */
+    @supports (padding: max(0px)) {
+      .app-container {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+      }
+      .theme-toggle {
+        top: max(15px, env(safe-area-inset-top));
+        left: max(15px, env(safe-area-inset-left));
+      }
+      .change-name-btn {
+        top: max(15px, env(safe-area-inset-top));
+        right: max(15px, env(safe-area-inset-right));
+      }
+      .install-btn {
+        bottom: max(20px, env(safe-area-inset-bottom));
+        left: max(20px, env(safe-area-inset-left));
+      }
+    }
+    /* Fix for Safari 100vh issue with bottom bar */
+    @supports (-webkit-touch-callout: none) {
+      .app-container, .focus-wrapper {
+        min-height: -webkit-fill-available;
+      }
+    }
+</style>
+
+<!-- iOS Safari PWA refresh hack -->
+<script>
+// Prevent iOS Safari from showing stale content when launching from home screen
+if ('standalone' in window.navigator && window.navigator.standalone) {
+  // App is running in standalone mode (added to home screen)
+  var iosRefreshCheck = function() {
+    var lastVisit = LS.getItem('lujain-last-visit');
+    var now = Date.now();
+    if (lastVisit && (now - parseInt(lastVisit)) > 3600000) {
+      // More than 1 hour since last visit, force refresh
+      LS.setItem('lujain-last-visit', now.toString());
+      window.location.reload(true);
+    } else {
+      LS.setItem('lujain-last-visit', now.toString());
+    }
+  };
+  iosRefreshCheck();
+}
+</script>
 </head>
 <body class="light">
 <button class="update-btn" id="updateBtn">🔄 تحديث التطبيق</button>
@@ -877,6 +925,36 @@
 </div>
 
 <script>
+
+// iOS Safari localStorage wrapper (handles private mode)
+const LS = {
+  _supported: null,
+  _test: function() {
+    if (this._supported !== null) return this._supported;
+    try {
+      const testKey = '__ls_test__';
+      LS.setItem(testKey, 'test');
+      LS.removeItem(testKey);
+      this._supported = true;
+    } catch (e) {
+      this._supported = false;
+    }
+    return this._supported;
+  },
+  getItem: function(key) {
+    if (!this._test()) return null;
+    try { return LS.getItem(key); } catch (e) { return null; }
+  },
+  setItem: function(key, value) {
+    if (!this._test()) return;
+    try { LS.setItem(key, value); } catch (e) {}
+  },
+  removeItem: function(key) {
+    if (!this._test()) return;
+    try { LS.removeItem(key); } catch (e) {}
+  }
+};
+
 const termsData = [
   { term: "Descriptive anatomy", definition: "التشريح الوصفي", chapter: 1 },
   { term: "Regional (topographic) anatomy", definition: "التشريح الناحي (الطبوغرافي)", chapter: 1 },
@@ -2505,10 +2583,10 @@ const progressBar = $('progressBar'), progressText = $('progressText');
 const hardOnlyFilter = $('hardOnlyFilter');
 
 function getHardTerms() {
-  try { return JSON.parse(localStorage.getItem('lujain-hard') || '[]'); }
-  catch { return []; }
+  try { return JSON.parse(LS.getItem('lujain-hard') || '[]'); }
+  catch(e) { return []; }
 }
-function setHardTerms(arr) { localStorage.setItem('lujain-hard', JSON.stringify(arr)); }
+function setHardTerms(arr) { LS.setItem('lujain-hard', JSON.stringify(arr)); }
 function isHard(term) { return getHardTerms().includes(term); }
 function toggleHard(term) {
   const arr = getHardTerms();
@@ -2524,8 +2602,8 @@ function recordReview(term, known) {
   // When user clicks "Hard" → add to hard, remove from known
   const knownKey = 'lujain-known';
   const hardKey = 'lujain-hard';
-  let knownList = JSON.parse(localStorage.getItem(knownKey) || '[]');
-  let hardList = JSON.parse(localStorage.getItem(hardKey) || '[]');
+  let knownList = JSON.parse(LS.getItem(knownKey) || '[]');
+  let hardList = JSON.parse(LS.getItem(hardKey) || '[]');
 
   if (known) {
     // User knows it → add to known, remove from hard
@@ -2539,14 +2617,15 @@ function recordReview(term, known) {
     if (kIdx >= 0) knownList.splice(kIdx, 1);
   }
 
-  localStorage.setItem(knownKey, JSON.stringify(knownList));
-  localStorage.setItem(hardKey, JSON.stringify(hardList));
+  LS.setItem(knownKey, JSON.stringify(knownList));
+  LS.setItem(hardKey, JSON.stringify(hardList));
   sessionReviews.add(term);
   updateProgress();
 }
 function getStats() {
-  const known = JSON.parse(localStorage.getItem('lujain-known') || '[]');
-  const hard = JSON.parse(localStorage.getItem('lujain-hard') || '[]');
+  let known = [], hard = [];
+  try { known = JSON.parse(LS.getItem('lujain-known') || '[]'); } catch(e) { known = []; }
+  try { hard = JSON.parse(LS.getItem('lujain-hard') || '[]'); } catch(e) { hard = []; }
   const total = known.length + hard.length;
   const accuracy = total > 0 ? Math.round((known.length / total) * 100) : 0;
   return { known, hard, total, accuracy };
@@ -2557,10 +2636,10 @@ const themes = ['light', 'dark', 'medical-blue', 'girly'];
 function setTheme(idx) {
   document.body.classList.remove(...themes);
   document.body.classList.add(themes[idx]);
-  localStorage.setItem('lujain-theme', idx);
+  LS.setItem('lujain-theme', idx);
 }
 themeToggle.addEventListener('click', () => { themeIndex = (themeIndex + 1) % 4; setTheme(themeIndex); });
-const savedTheme = localStorage.getItem('lujain-theme');
+const savedTheme = LS.getItem('lujain-theme');
 if (savedTheme !== null) { themeIndex = parseInt(savedTheme); setTheme(themeIndex); }
 
 function populateChapterFilters() {
@@ -2746,10 +2825,10 @@ function renderStats() {
 
 // ===== SRS FUNCTIONS =====
 function getSrsData() {
-  try { return JSON.parse(localStorage.getItem('lujain-srs') || '{}'); }
-  catch { return {}; }
+  try { return JSON.parse(LS.getItem('lujain-srs') || '{}'); }
+  catch(e) { return {}; }
 }
-function saveSrsData(data) { localStorage.setItem('lujain-srs', JSON.stringify(data)); }
+function saveSrsData(data) { LS.setItem('lujain-srs', JSON.stringify(data)); }
 
 function getSrsDueTerms(chapterValue = 'all') {
   const data = getSrsData();
@@ -2919,7 +2998,7 @@ function showScreen(screenId) {
 $('enterBtn').onclick = () => {
   const name = $('studentName').value.trim();
   if (!name) { alert('الرجاء إدخال اسمك'); return; }
-  studentName = name; localStorage.setItem('lujain-name', name);
+  studentName = name; LS.setItem('lujain-name', name);
   showScreen('menu');
 };
 document.querySelectorAll('.menu-btn').forEach(btn => btn.onclick = (e) => {
@@ -2933,14 +3012,14 @@ $('backToMenuStats').onclick = () => showScreen('menu');
 $('backToMenuSrs').onclick = () => showScreen('menu');
 chapterFilterSrs.addEventListener('change', initSrsSession);
 $('changeNameBtn').onclick = () => {
-  localStorage.removeItem('lujain-name');
+  LS.removeItem('lujain-name');
   studentName = '';
   $('studentName').value = '';
   showScreen('name');
 };
 
 // SRS card flip and rating
-$('srsCard').addEventListener('click', srsFlipCard);
+addTapListener($('srsCard'), srsFlipCard);
 $('srsBtnHard').onclick = () => srsRate('hard');
 $('srsBtnOk').onclick   = () => srsRate('ok');
 $('srsBtnEasy').onclick = () => srsRate('easy');
@@ -2951,8 +3030,22 @@ window.addEventListener('popstate', (e) => {
   history.replaceState({ screen: 'menu' }, '', '');
 });
 
-flashcardDiv.addEventListener('click', () => flashcardDiv.classList.toggle('flipped'));
-focusCardDiv.addEventListener('click', () => focusCardDiv.classList.toggle('flipped'));
+// Touch and click support for iOS Safari
+function addTapListener(element, callback) {
+  let touchStarted = false;
+  element.addEventListener('touchstart', function(e) { touchStarted = true; }, {passive: true});
+  element.addEventListener('touchend', function(e) {
+    if (touchStarted) {
+      e.preventDefault();
+      callback();
+    }
+    touchStarted = false;
+  });
+  element.addEventListener('click', callback);
+}
+
+addTapListener(flashcardDiv, () => flashcardDiv.classList.toggle('flipped'));
+addTapListener(focusCardDiv, () => focusCardDiv.classList.toggle('flipped'));
 $('prevCard').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex - 1 + currentFlashcardsList.length) % currentFlashcardsList.length; renderFlashcard(); } };
 $('nextCard').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFlashcard(); } };
 $('focusPrev').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex - 1 + currentFlashcardsList.length) % currentFlashcardsList.length; renderFocusCard(); } };
@@ -3104,7 +3197,7 @@ setInterval(() => {
   });
 }, 30 * 60 * 1000);
 
-const savedName = localStorage.getItem('lujain-name');
+const savedName = LS.getItem('lujain-name');
 if (savedName) { studentName = savedName; $('studentName').value = savedName; }
 populateChapterFilters();
 // If name already saved, go directly to menu - never show name screen again
