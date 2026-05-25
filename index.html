@@ -719,21 +719,29 @@
 
 <!-- iOS Safari PWA refresh hack -->
 <script>
+// LS wrapper defined here early for iOS standalone check
+var LS = {
+  _supported: null,
+  _test: function() {
+    if (this._supported !== null) return this._supported;
+    try { localStorage.setItem('__t__','1'); localStorage.removeItem('__t__'); this._supported = true; }
+    catch(e) { this._supported = false; }
+    return this._supported;
+  },
+  getItem: function(k) { if(!this._test()) return null; try { return localStorage.getItem(k); } catch(e) { return null; } },
+  setItem: function(k,v) { if(!this._test()) return; try { localStorage.setItem(k,v); } catch(e) {} },
+  removeItem: function(k) { if(!this._test()) return; try { localStorage.removeItem(k); } catch(e) {} }
+};
 // Prevent iOS Safari from showing stale content when launching from home screen
 if ('standalone' in window.navigator && window.navigator.standalone) {
-  // App is running in standalone mode (added to home screen)
-  var iosRefreshCheck = function() {
-    var lastVisit = LS.getItem('lujain-last-visit');
-    var now = Date.now();
-    if (lastVisit && (now - parseInt(lastVisit)) > 3600000) {
-      // More than 1 hour since last visit, force refresh
-      LS.setItem('lujain-last-visit', now.toString());
-      window.location.reload(true);
-    } else {
-      LS.setItem('lujain-last-visit', now.toString());
-    }
-  };
-  iosRefreshCheck();
+  var lastVisit = LS.getItem('lujain-last-visit');
+  var now = Date.now();
+  if (lastVisit && (now - parseInt(lastVisit)) > 3600000) {
+    LS.setItem('lujain-last-visit', now.toString());
+    window.location.reload(true);
+  } else {
+    LS.setItem('lujain-last-visit', now.toString());
+  }
 }
 </script>
 </head>
@@ -926,34 +934,7 @@ if ('standalone' in window.navigator && window.navigator.standalone) {
 
 <script>
 
-// iOS Safari localStorage wrapper (handles private mode)
-const LS = {
-  _supported: null,
-  _test: function() {
-    if (this._supported !== null) return this._supported;
-    try {
-      const testKey = '__ls_test__';
-      LS.setItem(testKey, 'test');
-      LS.removeItem(testKey);
-      this._supported = true;
-    } catch (e) {
-      this._supported = false;
-    }
-    return this._supported;
-  },
-  getItem: function(key) {
-    if (!this._test()) return null;
-    try { return LS.getItem(key); } catch (e) { return null; }
-  },
-  setItem: function(key, value) {
-    if (!this._test()) return;
-    try { LS.setItem(key, value); } catch (e) {}
-  },
-  removeItem: function(key) {
-    if (!this._test()) return;
-    try { LS.removeItem(key); } catch (e) {}
-  }
-};
+// LS already defined in head script above
 
 const termsData = [
   { term: "Descriptive anatomy", definition: "التشريح الوصفي", chapter: 1 },
