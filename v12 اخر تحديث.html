@@ -1,0 +1,3103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Anatomy Terms</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1E88E5;
+      --primary-dark: #1565C0;
+      --success: #43A047;
+      --danger: #E53935;
+      --warning: #FB8C00;
+      --radius: 28px;
+      --shadow: 0 20px 40px -12px rgba(0,0,0,0.12);
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    body {
+      font-family: 'Cairo', 'Roboto', sans-serif;
+      background: #F8FAFE;
+      color: #1A2A4A;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.light { background: #F8FAFE; color: #1A2A4A; }
+    body.dark { background: #0F172A; color: #E2E8F0; }
+    body.medical-blue { background: #E6F0FA; color: #0A2F44; }
+    .app-container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .nav-btn {
+      padding: 7px 16px !important;
+      font-size: 0.82rem !important;
+      border-radius: 50px;
+      min-width: 70px;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: rgba(30,136,229,0.92);
+      border: none;
+      border-radius: 40px;
+      padding: 8px 14px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      font-weight: bold;
+      display: flex;
+      gap: 6px;
+      transition: transform 0.2s;
+    }
+      background: rgba(30,136,229,0.92);
+      border: none;
+      border-radius: 40px;
+      padding: 8px 14px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      font-weight: bold;
+      display: flex;
+      gap: 6px;
+      transition: transform 0.2s;
+    }    .theme-toggle:hover { transform: scale(1.05); }
+    .theme-toggle span { font-size: 1.2rem; line-height: 1; }
+    .progress-container {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 16px;
+      text-align: center;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #42A5F5);
+      border-radius: 10px;
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .progress-text {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #5A6E8A;
+    }
+    body.dark .progress-text { color: #94A3B8; }
+    .card-scene {
+      perspective: 1200px;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .card {
+      width: 100%;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 24px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .card.flipped { transform: rotateY(180deg); }
+    .card-face {
+      backface-visibility: hidden;
+      width: 100%;
+    }
+    .card-back {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 36px 24px;
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+    }
+    body.dark .card { background: #1E293B; }
+    body.medical-blue .card { background: #D9E6F5; }
+    .card.ch1 { border-top: 6px solid #EC407A; }
+    .card.ch2 { border-top: 6px solid #66BB6A; }
+    .card.ch3 { border-top: 6px solid #FFA726; }
+    .card.ch4 { border-top: 6px solid #AB47BC; }
+    .card.ch5 { border-top: 6px solid #EF5350; }
+    .card.ch6 { border-top: 6px solid #26C6DA; }
+    .card.ch7 { border-top: 6px solid #5C6BC0; }
+    .card.ch8 { border-top: 6px solid #A5D6A7; }
+    .card.ch9 { border-top: 6px solid #FFEE58; }
+    .card.ch10 { border-top: 6px solid #8D6E63; }
+    .card.ch11 { border-top: 6px solid #B0BEC5; }
+    .card.ch12 { border-top: 6px solid #4DB6AC; }
+    .term-front { font-size: 2rem; font-weight: 800; margin-bottom: 12px; color: var(--primary-dark); }
+    .definition-back { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); }
+    .chapter-label {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.06);
+      color: #5A6E8A;
+    }
+    body.dark .chapter-label { background: rgba(255,255,255,0.08); color: #94A3B8; }
+    .hard-badge {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      background: var(--danger);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: none;
+    }
+    .hard-badge.show { display: block; }
+    .rating-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .rating-btn {
+      padding: 10px 22px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rating-btn.known { background: var(--success); color: white; }
+    .rating-btn.hard { background: var(--danger); color: white; }
+    .rating-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .rating-btn:active { transform: scale(0.96); }
+    body.focus-mode .app-container > *:not(.focus-wrapper) { display: none !important; }
+    body.focus-mode .focus-wrapper { display: flex !important; }
+    .focus-wrapper {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100%;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #0a0a0a;
+      z-index: 999;
+      padding: 20px;
+    }
+    .focus-wrapper .card-scene { max-width: 520px; }
+    .focus-wrapper .card {
+      background: #1a1a2e;
+      color: #E2E8F0;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      min-height: 320px;
+    }
+    .focus-wrapper .term-front,
+    .focus-wrapper .definition-back { color: #E2E8F0; }
+    .focus-wrapper .chapter-label { color: #94A3B8; background: rgba(255,255,255,0.1); }
+    .focus-exit {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      z-index: 1001;
+      backdrop-filter: blur(4px);
+    }
+    .focus-exit:hover { background: rgba(255,255,255,0.25); }
+    .focus-hint {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      margin-top: 16px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    button, .menu-btn, .quiz-option, select, input {
+      font-family: 'Cairo', sans-serif;
+      border: none;
+      outline: none;
+    }
+    button, .menu-btn, .quiz-option {
+      background: #EFF3F8;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #1E3A5F;
+      transition: all 0.2s;
+    }
+    body.dark button, body.dark .menu-btn, body.dark .quiz-option { background: #2D3A4F; color: #E2E8F0; }
+    body.medical-blue button, body.medical-blue .menu-btn, body.medical-blue .quiz-option { background: #B8D0E3; color: #0A2F44; }
+    button:hover, .menu-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    button.primary, .menu-btn.primary { background: var(--primary); color: white; }
+    button.primary:hover { background: var(--primary-dark); }
+    select, input {
+      padding: 12px 18px;
+      border-radius: 60px;
+      border: 1px solid #CBD5E1;
+      background: white;
+      width: 100%;
+      max-width: 400px;
+      margin: 8px auto;
+      font-size: 1rem;
+      display: block;
+    }
+    body.dark select, body.dark input { background: #1E293B; border-color: #475569; color: #F1F5F9; }
+    body.medical-blue select, body.medical-blue input { background: #D0E0EF; border-color: #8FB8D4; color: #0A2F44; }
+        .welcome-card {
+      text-align: center;
+      padding: 40px 28px;
+    }
+    .welcome-card h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--primary), #42A5F5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .welcome-card p { font-size: 1.1rem; color: #5A6E8A; margin-bottom: 24px; }
+    body.dark .welcome-card p { color: #94A3B8; }
+    .menu-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 420px;
+    }
+    .menu-btn {
+      padding: 18px 24px;
+      font-size: 1.1rem;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 12px;
+    }
+    .quiz-direction-toggle {
+      background: var(--warning);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      font-family: 'Cairo', sans-serif;
+    }
+    .quiz-question {
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin: 24px 0;
+      text-align: center;
+      width: 100%;
+    }
+    .quiz-option {
+      display: block;
+      width: 100%;
+      max-width: 480px;
+      margin: 10px auto;
+      text-align: center;
+      padding: 14px 20px;
+    }
+    .quiz-option:hover { background: #E3E8EF; }
+    body.dark .quiz-option:hover { background: #374151; }
+    .quiz-option.correct { background: #C8E6C9 !important; color: #1B5E20 !important; }
+    .quiz-option.wrong { background: #FFCDD2 !important; color: #B71C1C !important; }
+    .quiz-feedback {
+      margin: 16px auto 8px;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-weight: 700;
+      text-align: center;
+      max-width: 480px;
+      transition: all 0.3s;
+      opacity: 0;
+    }
+    .quiz-feedback.show { opacity: 1; }
+    .quiz-feedback.correct { background: #C8E6C9; color: #1B5E20; }
+    .quiz-feedback.wrong { background: #FFCDD2; color: #B71C1C; }
+    body.dark .quiz-feedback.correct { background: #1B5E20; color: #C8E6C9; }
+    body.dark .quiz-feedback.wrong { background: #B71C1C; color: #FFCDD2; }
+    .score-area {
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-align: center;
+      margin: 20px;
+      color: var(--primary-dark);
+    }
+    .glossary-list { width: 100%; max-width: 520px; }
+    .glossary-item {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      border-right: 5px solid var(--primary);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .glossary-item:hover { transform: translateX(-4px); }
+    body.dark .glossary-item { background: #1E293B; border-right-color: #3B82F6; }
+    body.medical-blue .glossary-item { background: #D0E0EF; border-right-color: #2C7DA0; }
+    .glossary-term { font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
+    .glossary-def { color: #4A6585; font-size: 0.95rem; margin-top: 4px; }
+    body.dark .glossary-def { color: #94A3B8; }
+    .glossary-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--danger);
+      color: white;
+      font-weight: 700;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 20px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    body.dark .stat-card { background: #1E293B; }
+    .stat-number { font-size: 2rem; font-weight: 800; color: var(--primary); }
+    .stat-label { font-size: 0.85rem; color: #5A6E8A; margin-top: 4px; }
+    body.dark .stat-label { color: #94A3B8; }
+    body.dark .stats-footer { color: #64748B; }
+    .chapter-progress {
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 10px;
+    }
+    .chapter-progress-bar {
+      height: 8px;
+      background: rgba(0,0,0,0.06);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .chapter-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 8px;
+      transition: width 0.5s;
+    }
+    .section { display: none; width: 100%; }
+    .active-section { display: flex; flex-direction: column; align-items: center; }
+    .install-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--shadow-sm);
+      z-index: 1000;
+      display: none;
+      font-family: 'Cairo', sans-serif;
+    }
+    .install-btn.show { display: block; }
+    .card-counter {
+      font-size: 0.9rem;
+      color: #5A6E8A;
+      margin-top: 14px;
+      font-weight: 600;
+    }
+    body.dark .card-counter { color: #94A3B8; }
+    .kbd-hint {
+      font-size: 0.75rem;
+      color: #8A9BB0;
+      margin-top: 10px;
+      text-align: center;
+    }
+    body.dark .kbd-hint { color: #64748B; }
+    kbd {
+      background: rgba(0,0,0,0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+    body.dark kbd { background: rgba(255,255,255,0.1); }
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #8A9BB0;
+    }
+    .empty-state-icon { font-size: 3rem; margin-bottom: 12px; }
+    .user-greeting {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 12px;
+      justify-content: center;
+    }
+    .filter-chip {
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: #EFF3F8;
+      color: #5A6E8A;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .filter-chip.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary-dark);
+    }
+    body.dark .filter-chip { background: #2D3A4F; color: #94A3B8; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.4s ease; }
+    @media (max-width: 480px) {
+      .app-container { padding: 12px; }
+      .card { padding: 28px 16px; min-height: 220px; }
+      .term-front { font-size: 1.6rem; }
+      .definition-back { font-size: 1.3rem; }
+      .welcome-card h1 { font-size: 1.9rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+
+    .update-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: var(--warning);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      display: none;
+      transition: all 0.3s;
+      backdrop-filter: blur(6px);
+    }
+    .update-btn.show { display: block; animation: fadeIn 0.4s ease; }
+    .update-btn.show.hidden-screen { display: none !important; }
+    .update-btn:hover { transform: scale(1.05); background: #F57C00; }
+
+
+    body.girly { background: #FFF0F5; color: #880E4F; }
+    body.girly .card { background: #FFFFFF; box-shadow: 0 20px 40px -12px rgba(233,30,99,0.15); }
+    body.girly .term-front, body.girly .definition-back { color: #C2185B; }
+    body.girly .chapter-label { background: rgba(233,30,99,0.08); color: #AD1457; }
+    body.girly .card-counter, body.girly .progress-text, body.girly .stat-label, body.girly .glossary-def, body.girly .welcome-card p { color: #AD1457; }
+    body.girly button, body.girly .menu-btn, body.girly .quiz-option { background: #FCE4EC; color: #880E4F; }
+    body.girly .quiz-option.correct { background: #C8E6C9 !important; color: #1B5E20 !important; }
+    body.girly .quiz-option.wrong { background: #FFCDD2 !important; color: #B71C1C !important; }
+    body.girly .glossary-item { background: #FFFFFF; border-right-color: #E91E63; }
+    body.girly .stat-card { background: #FFFFFF; }
+    body.girly .filter-chip { background: #FCE4EC; color: #AD1457; }
+    body.girly .filter-chip.active { background: #E91E63; color: white; border-color: #C2185B; }
+    body.girly .progress-bar-fill { background: linear-gradient(90deg, #E91E63, #F48FB1); }
+    body.girly .update-btn { background: #E91E63; }
+    body.girly .update-btn:hover { background: #C2185B; }
+
+    /* SRS Styles */
+    .srs-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .srs-due-badge {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .srs-next-badge {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      background: rgba(102,126,234,0.15);
+      color: #667eea;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+    body.dark .srs-next-badge { background: rgba(102,126,234,0.25); color: #a78bfa; }
+    .srs-rating-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .srs-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 20px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      min-width: 88px;
+      transition: all 0.2s;
+      gap: 3px;
+    }
+    .srs-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .srs-btn:active { transform: scale(0.96); }
+    .srs-btn-label { font-size: 0.95rem; }
+    .srs-btn-when {
+      font-size: 0.72rem;
+      opacity: 0.8;
+      font-weight: 600;
+    }
+    .srs-hard { background: #FFCDD2; color: #B71C1C; }
+    .srs-ok   { background: #FFF9C4; color: #F57F17; }
+    .srs-easy { background: #C8E6C9; color: #1B5E20; }
+    body.dark .srs-hard { background: #7f1d1d; color: #fca5a5; }
+    body.dark .srs-ok   { background: #78350f; color: #fde68a; }
+    body.dark .srs-easy { background: #14532d; color: #86efac; }
+    .srs-flip-hint {
+      font-size: 0.82rem;
+      color: #8A9BB0;
+      margin-top: 12px;
+      text-align: center;
+    }
+    .srs-empty {
+      text-align: center;
+      padding: 30px 20px;
+      color: #1A2A4A;
+    }
+    body.dark .srs-empty { color: #E2E8F0; }
+
+    /* Change name button */
+    .change-name-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(30,136,229,0.92);
+      border: none;
+      border-radius: 40px;
+      padding: 8px 14px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      display: none;
+      transition: transform 0.2s;
+    }
+    .change-name-btn:hover { transform: scale(1.05); }
+    .change-name-btn.show { display: block; }
+
+  </style>
+</head>
+<body class="light">
+<button class="update-btn" id="updateBtn">🔄 تحديث التطبيق</button>
+<button class="theme-toggle" id="themeToggle" title="تبديل الوضع"><span>☀️</span><span>🌙</span><span>💙</span><span>🌸</span></button>
+<button class="install-btn" id="installBtn">📲 تثبيت التطبيق</button>
+<button class="change-name-btn" id="changeNameBtn">✏️ تغيير الاسم</button>
+
+<div class="app-container" id="appContainer">
+
+  <div id="nameScreen" class="section active-section">
+    <div class="card welcome-card">
+      <h1>🧠 Anatomy Terms</h1>
+      <p>أدخل اسمك لبدء رحلة التعلم</p>
+      <input type="text" id="studentName" placeholder="الاسم الكامل" style="text-align: center; max-width: 320px;">
+      <button class="primary" id="enterBtn" style="margin-top: 20px; max-width: 200px;">دخول</button>
+    </div>
+  </div>
+
+  <div id="menuScreen" class="section">
+    <div class="user-greeting" id="userGreeting"></div>
+    <div class="menu-grid">
+      <button class="menu-btn primary" data-section="flashcards">📖 البطاقات التعليمية</button>
+      <button class="menu-btn" data-section="srs" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">🧠 المراجعة الذكية</button>
+      <button class="menu-btn primary" data-section="quiz">📝 الاختبارات</button>
+      <button class="menu-btn primary" data-section="glossary">📚 قائمة المصطلحات</button>
+      <button class="menu-btn" data-section="stats" style="background: #E8F5E9; color: #2E7D32;">📊 إحصائياتي</button>
+    </div>
+    <div style="text-align: center; margin-top: 30px; padding: 20px; opacity: 0.7;">
+      <div style="font-size: 0.75rem; color: #5A6E8A; margin-bottom: 4px;">Made By</div>
+      <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 8px;">Lujain Khaled Watar 🩺</div>
+      <div style="font-size: 0.7rem; color: #5A6E8A;">🌺 دعواتكم 🌺</div>
+    </div>
+  </div>
+
+  <div id="flashcardsSection" class="section">
+    <div class="filter-row">
+      <select id="chapterFilterFlash" style="max-width: 280px;"></select>
+      <button class="filter-chip" id="hardOnlyFilter">🔴 المصطلحات الصعبة فقط</button>
+    </div>
+    <div class="progress-container">
+      <div class="progress-text" id="progressText">تقدم الجلسة: 0 / 0</div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+    </div>
+    <div class="card-scene">
+      <div class="card" id="flashcard">
+        <div class="card-face card-front">
+          <div class="chapter-label" id="fcChapterLabel"></div>
+          <div class="hard-badge" id="fcHardBadge">صعبة</div>
+          <div class="term-front" id="fcTerm"></div>
+        </div>
+        <div class="card-back">
+          <div class="definition-back" id="fcDef"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-counter" id="cardCounter"></div>
+    <div class="rating-btns">
+      <button class="rating-btn known" id="btnKnown" title="K">✅ أعرفها</button>
+      <button class="rating-btn hard" id="btnHard" title="H">❌ أحتاج مراجعة</button>
+    </div>
+    <div class="btn-group">
+      <button id="prevCard" class="nav-btn">السابق</button>
+      <button id="nextCard" class="nav-btn">التالي</button>
+    </div>
+    <button id="focusModeBtn" style="background: #1A237E; color: white;">🌙 وضع التركيز</button>
+    <button id="backToMenuFlash" style="background: #CBD5E1; margin-top: 10px;">🔙 القائمة الرئيسية</button>
+    <div class="kbd-hint">
+      <kbd>Space</kbd> قلب | <kbd>←</kbd> <kbd>→</kbd> تنقل | <kbd>K</kbd> أعرفها | <kbd>H</kbd> صعبة | <kbd>F</kbd> تركيز
+    </div>
+  </div>
+
+  <!-- SRS Section -->
+  <div id="srsSection" class="section">
+    <div class="srs-header">
+      <div class="srs-due-badge" id="srsDueBadge">0 مصطلح للمراجعة اليوم</div>
+    </div>
+    <select id="chapterFilterSrs" style="max-width: 280px;"></select>
+    <div class="progress-container">
+      <div class="progress-text" id="srsProgressText">0 / 0</div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="srsProgressBar" style="width:0%"></div></div>
+    </div>
+    <div class="card-scene">
+      <div class="card" id="srsCard">
+        <div class="card-face card-front">
+          <div class="chapter-label" id="srsChapterLabel"></div>
+          <div class="srs-next-badge" id="srsNextBadge"></div>
+          <div class="term-front" id="srsTerm"></div>
+        </div>
+        <div class="card-back">
+          <div class="definition-back" id="srsDef"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-counter" id="srsCounter"></div>
+    <!-- SRS 3 rating buttons - shown after flip -->
+    <div class="srs-rating-btns" id="srsRatingBtns" style="display:none;">
+      <button class="srs-btn srs-hard" id="srsBtnHard">
+        <span class="srs-btn-label">😓 صعب</span>
+        <span class="srs-btn-when">بكرا</span>
+      </button>
+      <button class="srs-btn srs-ok" id="srsBtnOk">
+        <span class="srs-btn-label">🙃 متوسط</span>
+        <span class="srs-btn-when">3 أيام</span>
+      </button>
+      <button class="srs-btn srs-easy" id="srsBtnEasy">
+        <span class="srs-btn-label">😊 سهل</span>
+        <span class="srs-btn-when">7 أيام</span>
+      </button>
+    </div>
+    <div class="srs-flip-hint" id="srsFlipHint">اضغط على البطاقة لرؤية الجواب</div>
+    <!-- Empty state when no cards due -->
+    <div class="srs-empty" id="srsEmpty" style="display:none;">
+      <div style="font-size:3rem;">🎉</div>
+      <div style="font-weight:700; font-size:1.2rem; margin:12px 0;">خلصت مراجعة اليوم!</div>
+      <div style="font-size:0.9rem; color:#5A6E8A;" id="srsNextSession"></div>
+    </div>
+    <button id="backToMenuSrs" style="background: #CBD5E1; margin-top: 16px;">🔙 القائمة الرئيسية</button>
+  </div>
+
+  <div class="focus-wrapper" id="focusWrapper">
+    <div class="card-scene" style="max-width: 520px;">
+      <div class="card" id="focusCard">
+        <div class="card-face card-front">
+          <div class="chapter-label" id="focusChapterLabel"></div>
+          <div class="hard-badge" id="focusHardBadge">صعبة</div>
+          <div class="term-front" id="focusTerm"></div>
+        </div>
+        <div class="card-back">
+          <div class="definition-back" id="focusDef"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-counter" id="focusCounter"></div>
+    <div class="rating-btns">
+      <button class="rating-btn known" id="focusBtnKnown">✅ أعرفها</button>
+      <button class="rating-btn hard" id="focusBtnHard">❌ أحتاج مراجعة</button>
+    </div>
+    <div class="btn-group">
+      <button id="focusPrev" class="nav-btn">السابق</button>
+      <button id="focusNext" class="nav-btn">التالي</button>
+    </div>
+    <div class="focus-hint">اضغط <kbd>Esc</kbd> أو الزر أدناه للخروج</div>
+    <button class="focus-exit" id="focusExit">✕ خروج من وضع التركيز</button>
+  </div>
+
+  <div id="quizSection" class="section">
+    <select id="chapterFilterQuiz" style="max-width: 320px;"></select>
+    <div class="quiz-header">
+      <div class="card-counter" id="quizCounter"></div>
+      <button class="quiz-direction-toggle" id="quizDirToggle">🔄 تبديل الاتجاه</button>
+    </div>
+    <div id="quizArea" style="width:100%; max-width: 520px;">
+      <div class="quiz-question" id="quizQuestion"></div>
+      <div id="quizOptions"></div>
+      <div id="quizFeedback" class="quiz-feedback"></div>
+      <button id="nextQuizBtn" class="primary" style="display: none; margin: 10px auto; max-width: 200px;">السؤال التالي</button>
+      <div id="quizScore" class="score-area"></div>
+      <button id="restartQuizBtn" style="display: none; margin: 0 auto; max-width: 200px;">إعادة الاختبار</button>
+    </div>
+    <button id="backToMenuQuiz" style="margin-top: 20px;">🔙 القائمة الرئيسية</button>
+    <div class="kbd-hint"><kbd>1</kbd>-<<kbd>4</kbd> اختيار إجابة</div>
+  </div>
+
+  <div id="glossarySection" class="section">
+    <input type="text" id="glossarySearch" placeholder="🔍 بحث..." class="search-bar" style="max-width: 320px;">
+    <select id="chapterFilterGlossary" style="max-width: 320px;"></select>
+    <div class="glossary-list" id="glossaryList"></div>
+    <button id="backToMenuGlossary" style="margin-top: 20px;">🔙 القائمة الرئيسية</button>
+  </div>
+
+  <div id="statsSection" class="section">
+    <h2 style="margin-bottom: 20px; font-size: 1.6rem;">📊 إحصائياتي</h2>
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card"><div class="stat-number" id="statTotal">0</div><div class="stat-label">إجمالي المراجعات</div></div>
+      <div class="stat-card"><div class="stat-number" id="statKnown">0</div><div class="stat-label">أعرفها ✅</div></div>
+      <div class="stat-card"><div class="stat-number" id="statHard">0</div><div class="stat-label">أحتاج مراجعة ❌</div></div>
+      <div class="stat-card"><div class="stat-number" id="statAccuracy">0%</div><div class="stat-label">نسبة الإتقان</div></div>
+    </div>
+    <div style="width:100%; max-width: 480px; margin-bottom: 20px;">
+      <h3 style="font-size: 1.1rem; margin-bottom: 12px;">التقدم حسب الفصل</h3>
+      <div id="chapterStats"></div>
+    </div>
+
+    <button id="backToMenuStats">🔙 القائمة الرئيسية</button>
+  </div>
+
+</div>
+
+<script>
+const termsData = [
+  { term: "Descriptive anatomy", definition: "التشريح الوصفي", chapter: 1 },
+  { term: "Regional (topographic) anatomy", definition: "التشريح الناحي (الطبوغرافي)", chapter: 1 },
+  { term: "Clinical anatomy", definition: "التشريح السريري", chapter: 1 },
+  { term: "Technical anatomy", definition: "التشريح التقني", chapter: 1 },
+  { term: "Radiological anatomy", definition: "التشريح الشعاعي", chapter: 1 },
+  { term: "Functional (physiological) anatomy", definition: "التشريح الوظيفي (الفيزيولوجي)", chapter: 1 },
+  { term: "Systemic anatomy", definition: "التشريح الجهازي", chapter: 1 },
+  { term: "Frontal (coronal) plane", definition: "المستوى الجبهي (الإكليلي)", chapter: 1 },
+  { term: "Sagittal plane", definition: "المستوى السهمي", chapter: 1 },
+  { term: "Median plane", definition: "المستوى الناصف", chapter: 1 },
+  { term: "Transverse plane", definition: "المستوى المستعرض (الأفقي)", chapter: 1 },
+  { term: "Oblique plane", definition: "المستوى المائل", chapter: 1 },
+  { term: "Medial", definition: "التوضع الإِنسي", chapter: 1 },
+  { term: "Lateral", definition: "التوضع الوحشي", chapter: 1 },
+  { term: "Dorsal", definition: "الظهري", chapter: 1 },
+  { term: "Posterior", definition: "الخلفي", chapter: 1 },
+  { term: "Ventral", definition: "البطني", chapter: 1 },
+  { term: "Anterior", definition: "الأمامي", chapter: 1 },
+  { term: "Intermidiate", definition: "الوسطاني", chapter: 1 },
+  { term: "Internal", definition: "الداخلي (الباطن)", chapter: 1 },
+  { term: "External", definition: "الخارجي (الظاهر)", chapter: 1 },
+  { term: "Proximal", definition: "الداني (القريب)", chapter: 1 },
+  { term: "Distal", definition: "القاصي (البعيد)", chapter: 1 },
+  { term: "Superficial", definition: "السطحي", chapter: 1 },
+  { term: "Deep", definition: "العميق", chapter: 1 },
+  { term: "Palmar", definition: "الوجه الراحي", chapter: 1 },
+  { term: "Plantar", definition: "الوجه الأخمصي", chapter: 1 },
+  { term: "Adduction", definition: "التقريب", chapter: 1 },
+  { term: "Abduction", definition: "التبعيد", chapter: 1 },
+  { term: "Medial rotation", definition: "الدوران الإنسي", chapter: 1 },
+  { term: "Lateral rotation", definition: "الدوران الوحشي", chapter: 1 },
+  { term: "Flexion", definition: "القبض (الثني أو العطف)", chapter: 1 },
+  { term: "Extension", definition: "البسط", chapter: 1 },
+  { term: "Circumduction", definition: "الإحاطة", chapter: 1 },
+  { term: "Protrusion", definition: "التقدُّم", chapter: 1 },
+  { term: "Retrusion", definition: "التراجع", chapter: 1 },
+  { term: "Elevation", definition: "الرفع", chapter: 1 },
+  { term: "Depression", definition: "الخفض", chapter: 1 },
+  { term: "Pronation", definition: "الكبّ", chapter: 1 },
+  { term: "Supination", definition: "الاستلقاء", chapter: 1 },
+  { term: "Opposition", definition: "المقابلة", chapter: 1 },
+  { term: "Reposition", definition: "العودة", chapter: 1 },
+  { term: "Inversion", definition: "الشتر (القلب أو الانقلاب الداخلي)", chapter: 1 },
+  { term: "Eversion", definition: "الشنْف (القلب أو الانقلاب الخارجي)", chapter: 1 },
+  { term: "Dorsiflexion", definition: "القبض الظهري (رفع القدم)=بسط القدم", chapter: 1 },
+  { term: "Plantiflexion", definition: "القبض الأخمصي (خفض القدم)=قبض القدم", chapter: 1 },
+  { term: "Long bones", definition: "العظام الطويلة", chapter: 2 },
+  { term: "Epiphyses", definition: "المشاشتان", chapter: 2 },
+  { term: "Epiphyseal plate", definition: "الصفيحة المشاشية", chapter: 2 },
+  { term: "Flate bones", definition: "العظام المسطحة", chapter: 2 },
+  { term: "Short bones", definition: "العظام القصيرة", chapter: 2 },
+  { term: "Articulates", definition: "المفصل (باللاتيني)", chapter: 2 },
+  { term: "Arthron", definition: "المفصل بالإغريقي", chapter: 2 },
+  { term: "Arthritis", definition: "التهاب المفاصل", chapter: 2 },
+  { term: "Synostosis", definition: "الالتحام العظمي", chapter: 2 },
+  { term: "itis", definition: "لاحقة الالتهاب", chapter: 2 },
+  { term: "Synarthrosis", definition: "المفصل الملتحم", chapter: 2 },
+  { term: "Sutures", definition: "الدروز", chapter: 2 },
+  { term: "Syndesmoses", definition: "المرتبطات", chapter: 2 },
+  { term: "Gomphosis", definition: "المفصل المرتج (بين السن وعظم السنخ)", chapter: 2 },
+  { term: "Synchondrosis", definition: "الالتحام الغضروفي", chapter: 2 },
+  { term: "Pubic symphysis", definition: "ارتفاق العانة", chapter: 2 },
+  { term: "Shaft", definition: "جسم العظم", chapter: 2 },
+  { term: "Cartilage of growth plate", definition: "غضروف صفيحة النمو", chapter: 2 },
+  { term: "Intervertebral discs", definition: "الأقراص بين الفقرية", chapter: 2 },
+  { term: "Interosseous membrane", definition: "الغشاء بين العظمين", chapter: 2 },
+  { term: "Articular surfaces", definition: "السطوح المفصلية", chapter: 2 },
+  { term: "Plane (arthrodia) joints", definition: "مفاصل مسطحة", chapter: 2 },
+  { term: "Hinge (trochoid) joints", definition: "مفاصل بكرية", chapter: 2 },
+  { term: "Pivot joints", definition: "مفاصل صائرية (إسطوانية)", chapter: 2 },
+  { term: "Condyloid (ellipsoid) joints", definition: "مفاصل لقمية (إهليلجية)", chapter: 2 },
+  { term: "Ball and socket (enarthosis) joints", definition: "مفاصل كروية", chapter: 2 },
+  { term: "Saddle (sellar) joints", definition: "مفاصل سرجية", chapter: 2 },
+  { term: "Articular disc", definition: "قرص مفصلي", chapter: 2 },
+  { term: "menisci", definition: "هِلالَي", chapter: 2 },
+  { term: "Articular capsule", definition: "المحفظة المفصلية", chapter: 2 },
+  { term: "Ligaments", definition: "الأربطة", chapter: 2 },
+  { term: "Fusiforme", definition: "مغزلي الشكل", chapter: 2 },
+  { term: "Unipenniforme", definition: "أحادي الريشة", chapter: 2 },
+  { term: "Penniforme", definition: "العضلة الريشية", chapter: 2 },
+  { term: "Digastric", definition: "العضلة ذات البطنين", chapter: 2 },
+  { term: "Polygastric", definition: "العضلة متعددة البطون", chapter: 2 },
+  { term: "Neurocranium", definition: "القحف العصبي", chapter: 2 },
+  { term: "Frontal bone", definition: "العظم الجبهي", chapter: 2 },
+  { term: "Nasion", definition: "الأنفون (الثلمة الأنفية)", chapter: 2 },
+  { term: "Superciliary arch", definition: "القوس الحاجبية", chapter: 2 },
+  { term: "Supra orbital notch", definition: "الثلمة فوق الحجاج", chapter: 2 },
+  { term: "Zygomatic process of frontal bone", definition: "الناتئ الوجني للعظم الجبهي", chapter: 2 },
+  { term: "Nasal bone", definition: "العظم الأنفي", chapter: 2 },
+  { term: "Glabella", definition: "المقطب", chapter: 2 },
+  { term: "Frontal crest", definition: "العرف الجبهي", chapter: 2 },
+  { term: "Crista galli", definition: "عرف الديك", chapter: 2 },
+  { term: "Cribriform plate", definition: "الصفيحة المصفوية", chapter: 2 },
+  { term: "Lesser wing of sphenoid bone", definition: "الجناح الصغير للعظم الوتدي", chapter: 2 },
+  { term: "Anterior clinoid process", definition: "الناتئ السريري الأمامي", chapter: 2 },
+  { term: "Foramen cecum", definition: "الثقبة العوراء", chapter: 2 },
+  { term: "Parietal bone", definition: "العظم الجداري", chapter: 2 },
+  { term: "Occipital bone", definition: "العظم القذالي", chapter: 2 },
+  { term: "Clivus", definition: "المحدر", chapter: 2 },
+  { term: "Foramen magnum", definition: "الثقبة الكبرى", chapter: 2 },
+  { term: "Medulla", definition: "البصلة", chapter: 2 },
+  { term: "Inion", definition: "القَمحدوة", chapter: 2 },
+  { term: "Superior nuchal line", definition: "الخط النقري العلوي", chapter: 2 },
+  { term: "External occipital protuberance", definition: "الناشزة القذالية الخارجية", chapter: 2 },
+  { term: "Mastoid notch", definition: "الثلمة الخشائية", chapter: 2 },
+  { term: "Inferior nuchal line", definition: "الخط النقري السفلي", chapter: 2 },
+  { term: "Groove for sigmoid sinus", definition: "تلم الجيب السيني", chapter: 2 },
+  { term: "Groove for transverse sinus", definition: "تلم الجيب المستعرض", chapter: 2 },
+  { term: "Internal occipital crest", definition: "العرف القذالي الداخلي", chapter: 2 },
+  { term: "Internal occipital protuberance", definition: "الناشزة القذالية الداخلية", chapter: 2 },
+  { term: "Hypoglossal canal", definition: "النفق تحت اللساني", chapter: 2 },
+  { term: "Jugular foramen", definition: "الثقبة الوداجية", chapter: 2 },
+  { term: "Internal acoustic meatus", definition: "صماخ السمع الداخلي", chapter: 2 },
+  { term: "Jugular tubercle", definition: "الحديبة الوداجية", chapter: 2 },
+  { term: "Sphenoid bone", definition: "العظم الوتدي", chapter: 2 },
+  { term: "Superior orbital fissure", definition: "الشق الحجاجي العلوي", chapter: 2 },
+  { term: "Lateral plate", definition: "الصفيحة الوحشية", chapter: 2 },
+  { term: "Medial plate", definition: "الصفيحة الإنسية", chapter: 2 },
+  { term: "Greater wings", definition: "الجناحان الكبيران", chapter: 2 },
+  { term: "Optic canal", definition: "النفق البصري (يمر منه الشريان العيني والعصب البصري)", chapter: 2 },
+  { term: "Foramen rotundum", definition: "الثقبة المدورة(يعبرها الفكي العلوي)", chapter: 2 },
+  { term: "Foramen spinosum", definition: "الثقبة الشوكية (يعبرها السحائي الأوسط)", chapter: 2 },
+  { term: "Tegmen tympani", definition: "غطاء الطبل", chapter: 2 },
+  { term: "Foramen ovale", definition: "الثقبة البيضوية (يعبرها العصب الفكي السفلي)", chapter: 2 },
+  { term: "Dorsum sellae", definition: "ظهر السرج", chapter: 2 },
+  { term: "Trigeminal impression", definition: "انطباع مثلث التوائم", chapter: 2 },
+  { term: "Arcuate eminence", definition: "البارزة المقوسة", chapter: 2 },
+  { term: "Posterior clinoid process", definition: "الناتئ السريري الخلفي", chapter: 2 },
+  { term: "Hypophysial fossa", definition: "حفرة النخامى", chapter: 2 },
+  { term: "Tuberculum sellae", definition: "حديبة السرج", chapter: 2 },
+  { term: "Chiasmatic sulcus", definition: "التلم التصالبي", chapter: 2 },
+  { term: "Pterygoid processes", definition: "الناتئان الجناحيان", chapter: 2 },
+  { term: "Temporal bone", definition: "العظم الصدغي", chapter: 2 },
+  { term: "Squamous part", definition: "القسم الصدفي", chapter: 2 },
+  { term: "External accoustic meatus", definition: "الصماخ السمعي الخارجي", chapter: 2 },
+  { term: "Mastoid process", definition: "الناتئ الخشائي", chapter: 2 },
+  { term: "Mastoid part", definition: "القسم الخشائي", chapter: 2 },
+  { term: "Petrous part", definition: "القسم الصخري", chapter: 2 },
+  { term: "Styloid process", definition: "الناتئ الإبري", chapter: 2 },
+  { term: "Stylomastoid foramen", definition: "الثقبة الإبرية الخشائية", chapter: 2 },
+  { term: "Ethmoidal bone", definition: "العظم الغربالي", chapter: 2 },
+  { term: "Horizontal plate", definition: "الصفيحة الأفقية (المصفوية، المثقبة)", chapter: 2 },
+  { term: "Perpendicular plate", definition: "الصفيحة العمودية", chapter: 2 },
+  { term: "Ethmoidal labyrinth", definition: "التيه الغربالي", chapter: 2 },
+  { term: "Ethmoidal cells", definition: "الخلايا الغربالية", chapter: 2 },
+  { term: "Vomer", definition: "الميكعة", chapter: 2 },
+  { term: "Palatine process of maxillary bone", definition: "الناتئ الحنكي للفك العلوي", chapter: 2 },
+  { term: "Maxillary sinus", definition: "الجيب الفكي", chapter: 2 },
+  { term: "Viscerocranium", definition: "القحف الحشوي", chapter: 2 },
+  { term: "Cranial cavity", definition: "جوف القحف", chapter: 2 },
+  { term: "Piriforme aperture", definition: "الفتحة الكمثرية", chapter: 2 },
+  { term: "Inferior nasal concha", definition: "القرين (المحارة) الأنفي السفلي", chapter: 2 },
+  { term: "Ramus of mandible", definition: "فرع الفك السفلي (الرأد)", chapter: 2 },
+  { term: "Maxilla", definition: "الفك العلوي", chapter: 2 },
+  { term: "Mental protuberance", definition: "الناشزة الذقنية", chapter: 2 },
+  { term: "Mental tubercle", definition: "الحديبة الذقنية", chapter: 2 },
+  { term: "Mental foramen", definition: "الثقبة الذقنية", chapter: 2 },
+  { term: "Mandible", definition: "عظم الفك السفلي", chapter: 2 },
+  { term: "Oblique line", definition: "الخط المائل", chapter: 2 },
+  { term: "Alveolar process", definition: "الناتئ السنخي", chapter: 2 },
+  { term: "Anterior nasal spine", definition: "الشوكة الأنفية الأمامية", chapter: 2 },
+  { term: "Nasal crest", definition: "العرف الأنفي (الحنكي)", chapter: 2 },
+  { term: "Infra orbital foramen", definition: "الثقبة تحت الحجاج", chapter: 2 },
+  { term: "Mental spine", definition: "الشوكة الذقنية", chapter: 2 },
+  { term: "Coronoid process", definition: "الناتئ المنقاري", chapter: 2 },
+  { term: "Condylar process", definition: "الناتئ اللقمي للفكي السفلي", chapter: 2 },
+  { term: "Lingula", definition: "اللُسين", chapter: 2 },
+  { term: "Mandibular notch", definition: "ثلمة الفك السفلي", chapter: 2 },
+  { term: "Mandibular foramen", definition: "الثقبة الفكية السفلية", chapter: 2 },
+  { term: "Mylohyoid groove", definition: "التلم الضرسي اللامي", chapter: 2 },
+  { term: "Submandibular fossa", definition: "الحفرة تحت الفك السفلي", chapter: 2 },
+  { term: "Sublingual fossa", definition: "الحفرة تحت اللسان", chapter: 2 },
+  { term: "Digastric fossa", definition: "حفرة ذات البطنين", chapter: 2 },
+  { term: "Palatine process", definition: "الناتئ الحنكي", chapter: 2 },
+  { term: "Pulb cavity", definition: "الجوف اللبي", chapter: 2 },
+  { term: "Incisive fossa", definition: "الحفرة القاطعية", chapter: 2 },
+  { term: "Hard palate", definition: "الحنك الصلب", chapter: 2 },
+  { term: "Scaphoid fossa", definition: "الحفرة الزورقية", chapter: 2 },
+  { term: "Carotid canal", definition: "النفق السباتي", chapter: 2 },
+  { term: "Stylomastoid foramen", definition: "الثقبة الإبرية الخشائية(يخرج منها العصب الوجهي)", chapter: 2 },
+  { term: "Pharyngeal tubercle", definition: "الحديبة البلعومية", chapter: 2 },
+  { term: "External occipital crest", definition: "العرف القذالي الخارجي", chapter: 2 },
+  { term: "Occipital condyle", definition: "اللقمة القذالية", chapter: 2 },
+  { term: "Hamulus", definition: "الشص", chapter: 2 },
+  { term: "Alveolar arch", definition: "القوس السنخية", chapter: 2 },
+  { term: "Palatine bone", definition: "العظم الحنكي", chapter: 2 },
+  { term: "Lacrimal bone", definition: "العظم الدمعي", chapter: 2 },
+  { term: "Lacrimal sac", definition: "كيس الدمع", chapter: 2 },
+  { term: "Zygomatic bone", definition: "العظم الوجني", chapter: 2 },
+  { term: "Hyoid bone", definition: "العظم اللامي", chapter: 2 },
+  { term: "Lesser horn", definition: "القرن الصغير", chapter: 2 },
+  { term: "Calvaria", definition: "قبة القحف", chapter: 2 },
+  { term: "Anterior cranial fossa", definition: "الحفرة القحفية الأمامية", chapter: 2 },
+  { term: "Middle cranial fossa", definition: "الحفرة القحفية المتوسطة", chapter: 2 },
+  { term: "Posterior cranial fossa", definition: "الحفرة القحفية الخلفية", chapter: 2 },
+  { term: "Temporomandibular joint TMJ", definition: "المفصل الصدغي الفكي", chapter: 2 },
+  { term: "Articular tubercle of temporal bone", definition: "الحديبة المفصلية للعظم الصدغي", chapter: 2 },
+  { term: "Articular capsule of temporomandibular joint", definition: "المحفظة المفصلية للمفصل الصدغي الفكي", chapter: 2 },
+  { term: "Coronal suture", definition: "الدرز الإكليلي", chapter: 2 },
+  { term: "Sagittal suture", definition: "الدرز السهمي", chapter: 2 },
+  { term: "Lambdoid suture", definition: "الدرز اللامي", chapter: 2 },
+  { term: "Squamus suture", definition: "الدرز الصدفي (بين الصدغي والجداري)", chapter: 2 },
+  { term: "Hyaline cartilage", definition: "الغضروف الزجاجي", chapter: 2 },
+  { term: "Acromioclavicular joint", definition: "المفصل الأخرمي الترقوي", chapter: 2 },
+  { term: "Zygomaticus minor", definition: "العضلة الوجنية الصغيرة", chapter: 2 },
+  { term: "Greater horn", definition: "القرن الكبير", chapter: 2 },
+  { term: "Temporalis muscle", definition: "العضلة الصدغية", chapter: 2 },
+  { term: "Masseter", definition: "العضلة الماضغة", chapter: 2 },
+  { term: "Glasser fissure (petrotympanic)", definition: "شق كلازر (الشق الصخري الطبلي)", chapter: 2 },
+  { term: "Lateral pterygoid muscle", definition: "العضلة الجناحية الوحشية", chapter: 2 },
+  { term: "Enamel", definition: "الميناء", chapter: 2 },
+  { term: "Dentin", definition: "العاج", chapter: 2 },
+  { term: "Septal cartilage", definition: "الغضروف الحاجزي", chapter: 2 },
+  { term: "Compact bone", definition: "عظم كثيف", chapter: 2 },
+  { term: "Synovial membrane", definition: "غشاء زليلي", chapter: 2 },
+  { term: "occipito-atlantalarticulation joint", definition: "المفصل القذالي الفهقي", chapter: 2 },
+  { term: "Muscle insertion", definition: "مرتكز العضلة", chapter: 2 },
+  { term: "Temporal fossa", definition: "الحفرة الصدغية", chapter: 2 },
+  { term: "Infratemporal fossa", definition: "الحفرة تحت الصدغية", chapter: 2 },
+  { term: "Pteryopalatine fossa", definition: "الحفرة الجناحية الحنكية", chapter: 2 },
+  { term: "Eminentia cruciata", definition: "البارزة الصليبية", chapter: 2 },
+  { term: "Thoracic cage", definition: "القفص الصدري", chapter: 2 },
+  { term: "Trunk", definition: "الجذع", chapter: 2 },
+  { term: "Intercostal spaces", definition: "الأوراب", chapter: 2 },
+  { term: "Sternum", definition: "القص", chapter: 2 },
+  { term: "Manubrium of sternum", definition: "قبضة القص", chapter: 2 },
+  { term: "Body of sternum", definition: "جسم القص", chapter: 2 },
+  { term: "Sternebrae", definition: "القسيمات القصية", chapter: 2 },
+  { term: "Xiphoid process", definition: "الناتئ الرهابي", chapter: 2 },
+  { term: "Transverse process", definition: "الناتئ المستعرض", chapter: 2 },
+  { term: "Superior articular process", definition: "ناتئ مفصلي علوي", chapter: 2 },
+  { term: "Superior costal facet", definition: "وجيه ضلعي علوي", chapter: 2 },
+  { term: "Intervertebral disc", definition: "القرص بين الفقري", chapter: 2 },
+  { term: "Costal cartilage", definition: "الغضروف الضلعي", chapter: 2 },
+  { term: "Ribs", definition: "الأضلاع", chapter: 2 },
+  { term: "Costal tubercle", definition: "الحديبة الضلعية", chapter: 2 },
+  { term: "Costal groove", definition: "التلم الضلعي", chapter: 2 },
+  { term: "Articular facet", definition: "وجيه مفصلي", chapter: 2 },
+  { term: "Costovertebral joints", definition: "المفاصل الضلعية الفقرية", chapter: 2 },
+  { term: "Joints of heads of ribs", definition: "مفاصل رؤوس الأضلاع", chapter: 2 },
+  { term: "Costotransverse joint", definition: "المفاصل الضلعية المستعرضة", chapter: 2 },
+  { term: "Costochondral joints", definition: "المفاصل الضلعية الغضروفية", chapter: 2 },
+  { term: "Manubriosternal joint", definition: "المفصل القبضي القصي", chapter: 2 },
+  { term: "Xiphosternal joint", definition: "المفصل الرهابي القصي", chapter: 2 },
+  { term: "Vertebral column", definition: "العمود الفقري", chapter: 2 },
+  { term: "Cervical vertebrae", definition: "الفقرات الرقبية", chapter: 2 },
+  { term: "Atlas", definition: "الفهقة (الفقرة الرقبية 1)", chapter: 2 },
+  { term: "Articular fovea", definition: "نقرة مفصلية", chapter: 2 },
+  { term: "lateral masses", definition: "الكتلتين الجانبيتين", chapter: 2 },
+  { term: "Axis", definition: "الفقرة الرقبية الثانية (المحور، الفائق)", chapter: 2 },
+  { term: "Dens", definition: "سن المحور", chapter: 2 },
+  { term: "Thoracic vertebrae", definition: "الفقرات الصدرية", chapter: 2 },
+  { term: "Transverse costal facet", definition: "وجيه (نقرة) مفصلي ضلعي مستعرض", chapter: 2 },
+  { term: "Lumbar vertebrae", definition: "الفقرات القطنية", chapter: 2 },
+  { term: "Sacrum", definition: "العجز", chapter: 2 },
+  { term: "Sacral vertebrae", definition: "فقرات عجزية", chapter: 2 },
+  { term: "Promontory", definition: "الطنف العجزي", chapter: 2 },
+  { term: "Anterior sacral foramina", definition: "الثقب العجزية (الحوضية) الأمامية", chapter: 2 },
+  { term: "Lateral part", definition: "القسم الجانبي", chapter: 2 },
+  { term: "Auricular surface", definition: "السطح الصيواني", chapter: 2 },
+  { term: "Coccyx", definition: "العصعص", chapter: 2 },
+  { term: "Parietal pleura", definition: "الجنبة الجدارية", chapter: 2 },
+  { term: "Sternal (Luis) angle", definition: "الزاوية القصية (لويس)", chapter: 2 },
+  { term: "Scalene tubercle", definition: "الحديبة الأخمعية", chapter: 2 },
+  { term: "Scalenus anterior", definition: "العضلة الأخمعية الأمامية", chapter: 2 },
+  { term: "Vertebral artery", definition: "الشريان الفقري", chapter: 2 },
+  { term: "Floating ribs", definition: "الأضلاع السائبة", chapter: 2 },
+  { term: "False ribs", definition: "الأضلاع الكاذبة", chapter: 2 },
+  { term: "Spinous process", definition: "الناتئ الشوكي", chapter: 2 },
+  { term: "Vertebral foramen", definition: "الثقبة الفقرية", chapter: 2 },
+  { term: "Synovial joint", definition: "مفصل زليلي", chapter: 2 },
+  { term: "Clavicle", definition: "الترقوة", chapter: 2 },
+  { term: "Scapula", definition: "العظم الكتفي (لوح الكتف)", chapter: 2 },
+  { term: "Scapular spine", definition: "شوكة الكتف", chapter: 2 },
+  { term: "Infraspinous fossa", definition: "الحفرة تحت الشوكية", chapter: 2 },
+  { term: "Scapular borders", definition: "حواف العظم الكتفي", chapter: 2 },
+  { term: "Superior border", definition: "الحافة العلوية", chapter: 2 },
+  { term: "Medial border", definition: "الحافة الإنسية", chapter: 2 },
+  { term: "Subscapular fossa", definition: "الحفرة تحت الكتف", chapter: 2 },
+  { term: "Inferior angle", definition: "الزاوية السفلية", chapter: 2 },
+  { term: "Lateral border", definition: "الحافة الوحشية", chapter: 2 },
+  { term: "Infraglenoid tubercle", definition: "الحديبة تحت الجوف الحقاني", chapter: 2 },
+  { term: "Acromion", definition: "الأخرم", chapter: 2 },
+  { term: "Glenoid cavity/ fossa", definition: "الجوف الحقاني", chapter: 2 },
+  { term: "Coracoid process", definition: "الناتئ الغرابي", chapter: 2 },
+  { term: "Supraspinous fossa", definition: "الحفرة فوق الشوكية", chapter: 2 },
+  { term: "Humerus", definition: "العضد", chapter: 2 },
+  { term: "Superior extremity of humerus", definition: "النهاية العلوية لعظم العضد", chapter: 2 },
+  { term: "Greater tubercle", definition: "الحديبة الكبيرة", chapter: 2 },
+  { term: "Lesser tubercle", definition: "الحديبة الصغيرة", chapter: 2 },
+  { term: "Intertubercular sulcus", definition: "التلم بين الحديبتين", chapter: 2 },
+  { term: "Surgical neck", definition: "العنق الجراحي", chapter: 2 },
+  { term: "Anatomical neck", definition: "العنق التشريحي", chapter: 2 },
+  { term: "Medial epicondyle", definition: "اللُقيمة الإنسية", chapter: 2 },
+  { term: "Lateral epicondyle", definition: "اللُقيمة الوحشية", chapter: 2 },
+  { term: "Capitulum", definition: "الرؤيس (الوابلة)", chapter: 2 },
+  { term: "Trochlea", definition: "البكرة العضدية", chapter: 2 },
+  { term: "Coronoid fossa", definition: "الحفرة المنقارية", chapter: 2 },
+  { term: "Radial fossa", definition: "الحفرة الكعبرية", chapter: 2 },
+  { term: "Olecranon fossa", definition: "الحفرة الزجية", chapter: 2 },
+  { term: "Ulna", definition: "الزند", chapter: 2 },
+  { term: "Superior extremity of ulna", definition: "النهاية العلوية للزند", chapter: 2 },
+  { term: "Olecranon", definition: "الزج", chapter: 2 },
+  { term: "Trochlear notch", definition: "الثلمة البكرية", chapter: 2 },
+  { term: "Olecranon process", definition: "الناتئ الزجي", chapter: 2 },
+  { term: "Ulnar tuberosity", definition: "الأحدوبة الزندية", chapter: 2 },
+  { term: "Radial notch of ulnar", definition: "الثلمة الكعبرية للزند", chapter: 2 },
+  { term: "Supinator crest", definition: "عرف الاستلقائية (على عظم الزند)", chapter: 2 },
+  { term: "Body of ulna", definition: "جسم عظم الزند", chapter: 2 },
+  { term: "Radius", definition: "الكعبرة", chapter: 2 },
+  { term: "Superior extremity of Radius", definition: "النهاية العلوية للكعبرة", chapter: 2 },
+  { term: "Radial tuberosity", definition: "أحدوبة كعبرية", chapter: 2 },
+  { term: "Dorsal tubercle", definition: "الحديبة الظهرية (الخلفية)", chapter: 2 },
+  { term: "Ulnar notch of radius", definition: "الثلمة الزندية للكعبرة", chapter: 2 },
+  { term: "Interosseous border", definition: "الحافة بين العظمية", chapter: 2 },
+  { term: "Carpal bones", definition: "عظام الرسغ", chapter: 2 },
+  { term: "Scaphoid bone", definition: "العظم القاربي (الزورقي)", chapter: 2 },
+  { term: "Lunate bone", definition: "العظم الهلالي", chapter: 2 },
+  { term: "Triquetrum bone", definition: "العظم المثلثي", chapter: 2 },
+  { term: "Pisiform bone", definition: "العظم الحمّصي", chapter: 2 },
+  { term: "Trapezium bone", definition: "العظم المربعي", chapter: 2 },
+  { term: "Trapezoid bone", definition: "العظم المنحرفي", chapter: 2 },
+  { term: "Capitate bone", definition: "العظم الكبير (ذو الرأس)", chapter: 2 },
+  { term: "Hamate bone", definition: "العظم الكلابي", chapter: 2 },
+  { term: "Hamulus", definition: "الشص الكلابي", chapter: 2 },
+  { term: "Metacarpal bones", definition: "السنعيات", chapter: 2 },
+  { term: "Phalanges", definition: "السُلاميات", chapter: 2 },
+  { term: "Shoulder (glenohumeral) joint", definition: "مفصل الكتف (الحقاني العضدي)", chapter: 2 },
+  { term: "Coracohumeral ligament", definition: "الرباط الغرابي العضدي", chapter: 2 },
+  { term: "Glenohumeral ligaments", definition: "الأربطة الحقانية العضدية", chapter: 2 },
+  { term: "Elbow joint", definition: "مفصل المرفق", chapter: 2 },
+  { term: "Transverse humeral ligament", definition: "الرباط العضدي المستعرض", chapter: 2 },
+  { term: "Anular ligament of radius", definition: "الرباط الحلقي للكعبرة", chapter: 2 },
+  { term: "Ulnar collateral ligament", definition: "الرباط الجانبي الزندي", chapter: 2 },
+  { term: "Hip bone", definition: "العظم الوركي", chapter: 2 },
+  { term: "Ankle joint", definition: "مفصل الكاحل (بكري)", chapter: 2 },
+  { term: "Knee joint", definition: "مفصل الركبة", chapter: 2 },
+  { term: "Ilium", definition: "الحرقفة", chapter: 2 },
+  { term: "Ischium", definition: "الإسك", chapter: 2 },
+  { term: "Iscial tuberosity", definition: "الأحدوبة الإسكية", chapter: 2 },
+  { term: "Pubis", definition: "العانة", chapter: 2 },
+  { term: "Anterior superior iliac spine", definition: "الشوكة الحرقفية العلوية الأمامية", chapter: 2 },
+  { term: "Obturator foramen", definition: "الثقبة السدادية", chapter: 2 },
+  { term: "Pubic tubercle", definition: "حديبة العانة", chapter: 2 },
+  { term: "Ischial spine", definition: "الشوكة الإسكية", chapter: 2 },
+  { term: "Pelvic inlet", definition: "مدخل الحوض", chapter: 2 },
+  { term: "Iliac fossa", definition: "الحفرة الحرقفية", chapter: 2 },
+  { term: "Obturator groove", definition: "التلم السدادي", chapter: 2 },
+  { term: "Pectineal line", definition: "الخط المشطي", chapter: 2 },
+  { term: "Lesser sciatic notch", definition: "الثلمة الإسكية الصغيرة", chapter: 2 },
+  { term: "Iliac crest", definition: "عرف الحرقفة", chapter: 2 },
+  { term: "Gluteal surface", definition: "السطح الألوي", chapter: 2 },
+  { term: "Femur", definition: "الفخذ", chapter: 2 },
+  { term: "Greater trochanter", definition: "المدور الكبير", chapter: 2 },
+  { term: "Lesser trochanter", definition: "المدور الصغير", chapter: 2 },
+  { term: "Trochanteric fossa", definition: "الحفرة المدورية", chapter: 2 },
+  { term: "Intertrochanteric line", definition: "الخط بين المدورين", chapter: 2 },
+  { term: "Fovea", definition: "النقرة", chapter: 2 },
+  { term: "Quadrate tubercle", definition: "حديبة المربعة", chapter: 2 },
+  { term: "Linea aspera", definition: "الخط الخشن", chapter: 2 },
+  { term: "Lateral margin of linea aspera", definition: "الشفة الوحشية للخط الخشن", chapter: 2 },
+  { term: "Gluteal tuberosity", definition: "الأحدوبة الألوية", chapter: 2 },
+  { term: "Intertrochanteric crest", definition: "العرف بين المدورين", chapter: 2 },
+  { term: "Medial condyle", definition: "اللقمة الإنسية", chapter: 2 },
+  { term: "Lateral condyle", definition: "اللقمة الوحشية", chapter: 2 },
+  { term: "Lateral/Medial supracondylar line", definition: "الخط فوق اللقمي الوحشي/الإنسي", chapter: 2 },
+  { term: "Adductor tubercle", definition: "حديبة المقربة", chapter: 2 },
+  { term: "Patellar surface", definition: "السطح الرضفي", chapter: 2 },
+  { term: "Patella", definition: "الرضفة (الداغصة)", chapter: 2 },
+  { term: "Tibia", definition: "الظنبوب", chapter: 2 },
+  { term: "Tibial tuberosity", definition: "الأحدوبة الظنبوبية", chapter: 2 },
+  { term: "Fibula", definition: "الشظية", chapter: 2 },
+  { term: "Soleal line", definition: "الخط النعلي", chapter: 2 },
+  { term: "Intercondylar eminence", definition: "البارزة بين اللقمتين", chapter: 2 },
+  { term: "Lateral malleolus", definition: "الكعب الوحشي", chapter: 2 },
+  { term: "Medial malleolus", definition: "الكعب الإنسي", chapter: 2 },
+  { term: "Malleolar fossa", definition: "الحفرة الكعبية", chapter: 2 },
+  { term: "Fibular groove on tibia", definition: "التلم الشظوي للظنبوب", chapter: 2 },
+  { term: "Tarsal bones", definition: "عظام رصغ القدم", chapter: 2 },
+  { term: "Talus", definition: "عظم القعب", chapter: 2 },
+  { term: "Calcaneum", definition: "العظم العقبي", chapter: 2 },
+  { term: "Navicular bone", definition: "العظم الزورقي", chapter: 2 },
+  { term: "Cuboid bone", definition: "العظم النردي", chapter: 2 },
+  { term: "Cuneiform bone", definition: "العظام الإسفينية", chapter: 2 },
+  { term: "Metatarsal bone", definition: "العظام المشطية", chapter: 2 },
+  { term: "Subtalar joint", definition: "المفصل تحت القعب", chapter: 2 },
+  { term: "Deep transverse metatarsal ligaments", definition: "الرباط المشطي المستعرض العميق", chapter: 2 },
+  { term: "Toes", definition: "أصابع القدم", chapter: 2 },
+  { term: "Ischiofemoral ligament", definition: "الرباط الإسكي الفخذي", chapter: 2 },
+  { term: "Iliofemoral ligament", definition: "الرباط الحرقفي الفخذي", chapter: 2 },
+  { term: "Pubofemoral ligament", definition: "الرباط العاني الفخذي", chapter: 2 },
+  { term: "Menisci of the knee joint", definition: "هِلالا مفصل الركبة", chapter: 2 },
+  { term: "Shoulder gridle", definition: "الزنار الكتفي", chapter: 2 },
+  { term: "Groove for subclavius muscle", definition: "تلم العضلة تحت الترقوة", chapter: 2 },
+  { term: "Semicanal", definition: "ميزابة", chapter: 2 },
+  { term: "Deltoid tuberosity", definition: "الأحدوبة الدالية", chapter: 2 },
+  { term: "Bicipital aponeurosis", definition: "سفاق ذات الرأسين", chapter: 2 },
+  { term: "Intermuscular septum", definition: "الحاجز السفاقي بين العضلي", chapter: 2 },
+  { term: "Distal phalanges", definition: "السلاميات البعيدة", chapter: 2 },
+  { term: "Proximal phalanges", definition: "السلاميات القريبة", chapter: 2 },
+  { term: "Middle phalanges", definition: "السلاميات المتوسطة", chapter: 2 },
+  { term: "Glenoid labrum", definition: "الشفا الحقاني", chapter: 2 },
+  { term: "Gluteal line", definition: "الخط الألوي", chapter: 2 },
+  { term: "Ischial ramus", definition: "فرع الإسك", chapter: 2 },
+  { term: "Sacrotuberous", definition: "الرباط العجزي الحدبي", chapter: 2 },
+  { term: "Sacrospinal ligament", definition: "الرباط العجزي الشوكي", chapter: 2 },
+  { term: "Lesser/Greater sciatic foramen", definition: "الثقبة الوركية الصغيرة/الكبيرة", chapter: 2 },
+  { term: "Acetabulum", definition: "الحُقّ", chapter: 2 },
+  { term: "Patellar ligament", definition: "الرباط الرضفي", chapter: 2 },
+  { term: "Sustentaculum tali", definition: "معلاق القعب", chapter: 2 },
+  { term: "Tarsal sinus", definition: "الجيب الرصغي", chapter: 2 },
+  { term: "Transverse arch", definition: "القوس المستعرضة", chapter: 2 },
+  { term: "Proximal tibiofibular joint", definition: "المفصل الظنبوبي الشظوي القريب", chapter: 2 },
+  { term: "Anterior cruciate ligament", definition: "الرباط المتصالب الأمامي", chapter: 2 },
+  { term: "Posterior cruciate ligament", definition: "الرباط المتصالب الخلفي", chapter: 2 },
+  { term: "Fibular collateral ligament", definition: "الرباط الجانبي الشظوي", chapter: 2 },
+  { term: "Medial margin of linea aspera", definition: "الشفة الإنسية للخط الخشن", chapter: 2 },
+  { term: "Arcuate line", definition: "الخط المقوّس", chapter: 2 },
+  { term: "Pubic crest", definition: "العرف العاني", chapter: 2 },
+  { term: "Superior pubic ramus", definition: "فرع العانة العلوي", chapter: 2 },
+  { term: "Inferior pubic ramus", definition: "فرع العانة السفلي", chapter: 2 },
+  { term: "Body of pubis", definition: "جسم العانة", chapter: 2 },
+  { term: "Greater sciatic notch", definition: "الثلمة الإسكية الكبيرة", chapter: 2 },
+  { term: "Posterior superior iliac spine", definition: "الشوكة الحرقفية الخلفية العلوية", chapter: 2 },
+  { term: "Anterior inferior iliac spine", definition: "الشوكة الحرقفية الأمامية السفليّة", chapter: 2 },
+  { term: "Tubercle of scaphoid", definition: "حديبة القاربي", chapter: 2 },
+  { term: "Tubercle of Trapezium", definition: "حديبة المربعي", chapter: 2 },
+  { term: "Inferior extremity of Radius", definition: "النهاية السفلية للكعبرة", chapter: 2 },
+  { term: "Body of Radius", definition: "جسم عظم الكعبرة", chapter: 2 },
+  { term: "Crest of greater Tubercle", definition: "عرف الحديبة الكبيرة", chapter: 2 },
+  { term: "Articular Surface For Clavicle", definition: "سطح مفصلي مع الترقوة", chapter: 2 },
+  { term: "Superior angle", definition: "الزاوية العلوية", chapter: 2 },
+  { term: "Suprascapular notch", definition: "الثلمة فوق الكتفي", chapter: 2 },
+  { term: "Vertebral body", definition: "جسم الفقرة", chapter: 2 },
+  { term: "Posterior nasal spine", definition: "الشوكة الأنفية الخلفية", chapter: 2 },
+  { term: "Mylohyoid line", definition: "الخط الضرسي اللامي", chapter: 2 },
+  { term: "Nasal cavity", definition: "جوف الأنف", chapter: 2 },
+  { term: "Jugular fossa", definition: "الحفرة الوداجيّة", chapter: 2 },
+  { term: "foramen lacerum", definition: "الثقبة الممزّقة", chapter: 2 },
+  { term: "Rostrum sphenoidale", definition: "المنقار الوتدي", chapter: 2 },
+  { term: "sphenoid crest", definition: "العرف الوتدي", chapter: 2 },
+  { term: "angle of mandible", definition: "زاوية الفك السفلي", chapter: 2 },
+  { term: "Orbital part of frontal bone", definition: "القسم الحجاجي للعظم الجبهي", chapter: 2 },
+  { term: "Functional joint anatomy", definition: "التشريح الوظيفي للمفاصل", chapter: 2 },
+  { term: "Belly (venter)", definition: "بطن العضلة", chapter: 2 },
+  { term: "Skull", definition: "القحف", chapter: 2 },
+  { term: "Fibrous", definition: "ليفيّة", chapter: 2 },
+  { term: "Cartilaginous", definition: "غضروفيّة", chapter: 2 },
+  { term: "Solid joints", definition: "المفاصل الصلبة", chapter: 2 },
+  { term: "Depressor Angli oris", definition: "العضلة خافضة صوار الفم", chapter: 2 },
+  { term: "Cement", definition: "الملاط", chapter: 2 },
+  { term: "Muscles of head", definition: "عضلات الرأس", chapter: 3 },
+  { term: "Muscles of facial expression", definition: "عضلات الوجه التعبيرية", chapter: 3 },
+  { term: "Orbicularis oculi", definition: "العضلة الدويرية العينية", chapter: 3 },
+  { term: "Orbicularis oris", definition: "العضلة الدويرية الفموية", chapter: 3 },
+  { term: "Frontalis", definition: "العضلة الجبهية", chapter: 3 },
+  { term: "Occipitalis", definition: "العضلة القذالية", chapter: 3 },
+  { term: "Temporalis", definition: "العضلة الصدغية", chapter: 3 },
+  { term: "Epicranial aponeurosis", definition: "السفاق الشووي (الخوذة السفاقية)", chapter: 3 },
+  { term: "Muscles of mastication", definition: "العضلات الماضغة", chapter: 3 },
+  { term: "Muscles of neck", definition: "عضلات العنق", chapter: 3 },
+  { term: "Sternocleidomastoid", definition: "العضلة القصيّة الترقويّة الخشائيّة (القترائية)", chapter: 3 },
+  { term: "Trapezius", definition: "شبه المنحرفة", chapter: 3 },
+  { term: "Platysma", definition: "العضلة المبطحة", chapter: 3 },
+  { term: "Semispinalis capitis", definition: "العضلة نصف الشوكية الرأسية", chapter: 3 },
+  { term: "Splenius capitis", definition: "العضلة الضمادية (الشريطية) الرأسية", chapter: 3 },
+  { term: "Longus colli (cervicis)", definition: "العضلة الطويلة الرقبية", chapter: 3 },
+  { term: "Longus capitis", definition: "العضلة الطويلة الرأسية", chapter: 3 },
+  { term: "Rectus capitis lateralis", definition: "العضلة المستقيمة الرأسية الجانبية", chapter: 3 },
+  { term: "Rectus capitis anterior", definition: "العضلة المستقيمة الرأسية الأمامية", chapter: 3 },
+  { term: "Suprahyoid muscles", definition: "عضلات فوق العظم اللامي", chapter: 3 },
+  { term: "Infrahyoid muscles", definition: "العضلات تحت العظم اللامي", chapter: 3 },
+  { term: "Erector spinae muscles", definition: "العضلات ناصبة الفقار", chapter: 3 },
+  { term: "Iliocostalis", definition: "العضلة الحرقفية الضلعية (من أقسام العضلة الناصبة للفقار)", chapter: 3 },
+  { term: "Longissimus", definition: "العضلة الطولى (من أقسام العضلة الناصبة للفقار)", chapter: 3 },
+  { term: "Spinalis", definition: "العضلة الشوكية (من أقسام العضلة الناصبة للفقار)", chapter: 3 },
+  { term: "Muscles of thoracic wall", definition: "عضلات جدار الصدر", chapter: 3 },
+  { term: "Muscles of respiration", definition: "عضلات التنفس", chapter: 3 },
+  { term: "Intercostal muscles", definition: "العضلات الوربية (بين الأضلاع)", chapter: 3 },
+  { term: "Levatores costarum", definition: "رافعات الأضلاع", chapter: 3 },
+  { term: "Transversus thoracic", definition: "المستعرضة الظهرية", chapter: 3 },
+  { term: "Diaphragm", definition: "الحجاب الحاجز", chapter: 3 },
+  { term: "External intercostal muscle", definition: "العضلة الوربية الخارجية", chapter: 3 },
+  { term: "Internal intercostal muscle", definition: "العضلة الوربية الداخلية", chapter: 3 },
+  { term: "Innermost intercostal muscle", definition: "العضلة الوربية العمقى (البطانية)", chapter: 3 },
+  { term: "Pectoralis major", definition: "العضلة الصدرية الكبيرة", chapter: 3 },
+  { term: "Pectoralis minor", definition: "العضلة الصدرية الصغيرة", chapter: 3 },
+  { term: "Muscles of abdominal wall", definition: "عضلات جدران البطن", chapter: 3 },
+  { term: "Rectus abdominis", definition: "العضلة المستقيمة البطنية", chapter: 3 },
+  { term: "Linea alba", definition: "الخط الأبيض", chapter: 3 },
+  { term: "Serratus anterior", definition: "المنشارية الأمامية", chapter: 3 },
+  { term: "External oblique muscle", definition: "العضلة المائلة الخارجية (المنحرفة الظاهرة)", chapter: 3 },
+  { term: "Internal oblique muscle", definition: "العضلة المائلة الداخلية (المنحرفة الباطنة)", chapter: 3 },
+  { term: "Cremasteric muscle", definition: "العضلة المشمّرة (الرافعة للخصية)", chapter: 3 },
+  { term: "Transversus abdominis muscle", definition: "العضلة المستعرضة البطنية", chapter: 3 },
+  { term: "Psoas", definition: "العضلة القطنية (البسواس)", chapter: 3 },
+  { term: "Psoas major", definition: "العضلة القطنية الكبيرة", chapter: 3 },
+  { term: "Psoas minor", definition: "العضلة القطنية الصغيرة", chapter: 3 },
+  { term: "Iliacus", definition: "العضلة الحرقفية", chapter: 3 },
+  { term: "Quadratus lumborum", definition: "العضلة المربعّة القطنية", chapter: 3 },
+  { term: "Muscles of pelvis and perineum", definition: "عضلات الحوض والعجان", chapter: 3 },
+  { term: "Pelvic floor muscles", definition: "عضلات أرضية الحوض", chapter: 3 },
+  { term: "Piriformis", definition: "العضلة الكمثرية", chapter: 3 },
+  { term: "Obturator internus", definition: "العضلة السدادية الداخلية (الباطنة)", chapter: 3 },
+  { term: "Pelvic diaphragm", definition: "الحجاب الحوضي", chapter: 3 },
+  { term: "Levator ani", definition: "العضلة رافعة الشرج", chapter: 3 },
+  { term: "Coccygeus", definition: "العضلة العصعصية", chapter: 3 },
+  { term: "Perineum", definition: "العِجان", chapter: 3 },
+  { term: "Sphincter urethrae", definition: "المصرة الإحليلية", chapter: 3 },
+  { term: "Compressor urethrae", definition: "ضاغطة الإحليل (عند الإناث)", chapter: 3 },
+  { term: "Superficial and deep Transvers perineal", definition: "العضلة المستعرضة العجانية السطحية والعميقة", chapter: 3 },
+  { term: "Pubococcygeus", definition: "العضلة العانية العصعصية (من أقسام العضلة الرافعة للشرج)", chapter: 3 },
+  { term: "Puborectalis", definition: "العضلة العانية المستقيمية (من أقسام العضلة الرافعة للشرج)", chapter: 3 },
+  { term: "Iliococcygeus", definition: "العضلة الحرقفية العصعصية (من أقسام العضلة الرافعة للشرج)", chapter: 3 },
+  { term: "Tendinous arch", definition: "القوس الليفية", chapter: 3 },
+  { term: "Urogenital hiatus", definition: "الفرجة البولية التناسلية", chapter: 3 },
+  { term: "Deep perineal pouch", definition: "الجيب العجاني العميق", chapter: 3 },
+  { term: "Urethrovaginal sphincter", definition: "المصرة الإحليلية المهبلية", chapter: 3 },
+  { term: "Anal orifice", definition: "فتحة الشرج", chapter: 3 },
+  { term: "Sacrospinous ligament", definition: "الرباط العجزي الشوكي", chapter: 3 },
+  { term: "Obturator canal", definition: "النفق السدادي", chapter: 3 },
+  { term: "Muscles of upper limb", definition: "عضلات الطرف العلوي", chapter: 3 },
+  { term: "Ontogenesis", definition: "فترة تنشُّؤ الفرد", chapter: 3 },
+  { term: "Functional classification", definition: "تصنيف وظيفي", chapter: 3 },
+  { term: "Compartments", definition: "حجرات (مساكن)", chapter: 3 },
+  { term: "Regions", definition: "نواحٍ", chapter: 3 },
+  { term: "Muscles of pectoral or shoulder girdle", definition: "عضلات الزنار الكتفي أو الصدري", chapter: 3 },
+  { term: "Coracobrachialis", definition: "العضلة الغرابية العضدية", chapter: 3 },
+  { term: "Supraspinatus", definition: "العضلة فوق الشوكية", chapter: 3 },
+  { term: "Infraspinatus", definition: "تحت الشوكية", chapter: 3 },
+  { term: "Teres minor", definition: "المدورة الصغيرة", chapter: 3 },
+  { term: "Deltoid muscle", definition: "الدالية", chapter: 3 },
+  { term: "Subscapularis", definition: "تحت الكتفية", chapter: 3 },
+  { term: "Teres major", definition: "مدورة كبيرة", chapter: 3 },
+  { term: "Latissimus dorsi", definition: "العريضة الظهرية", chapter: 3 },
+  { term: "Subclavius", definition: "تحت الترقوية", chapter: 3 },
+  { term: "Omohyoideus", definition: "كتفية لامية (كتلامية)", chapter: 3 },
+  { term: "Rhomboideus minor", definition: "معينية صغيرة", chapter: 3 },
+  { term: "Rhomboideus major", definition: "المعينية الكبيرة", chapter: 3 },
+  { term: "Levator scapulae", definition: "رافعة الكتف", chapter: 3 },
+  { term: "Trapezius", definition: "شبه المنحرفة", chapter: 3 },
+  { term: "Aponeuroses and Spaces, Fasciae", definition: "لفافات الزنار الكتفي وسُفقه وأحيازه", chapter: 3 },
+  { term: "Axillary fossa", definition: "الحفرة الإبطية", chapter: 3 },
+  { term: "Anterior plica axillary", definition: "الطية الإبطية الأمامية", chapter: 3 },
+  { term: "Deltoid fascia", definition: "اللفافة الدالية", chapter: 3 },
+  { term: "Brachial fascia", definition: "اللفافة العضدية", chapter: 3 },
+  { term: "Pectoral fascia", definition: "اللفافة الصدرية", chapter: 3 },
+  { term: "Clavipectoral fascia", definition: "لفافة ترقيّة صدرية", chapter: 3 },
+  { term: "Thoracoacromial artery", definition: "الشريان الصدري الأخرمي (فرع من الشريان الإبطي)", chapter: 3 },
+  { term: "Lateral thoracic artery", definition: "الشريان الصدري الوحشي (فرع من الشريان الإبطي)", chapter: 3 },
+  { term: "Medial pectoral nerve", definition: "العصب الصدري الأنسي", chapter: 3 },
+  { term: "Lateral pectoral nerve", definition: "العصب الصدري الوحشي", chapter: 3 },
+  { term: "Axilla floor fascia", definition: "لفافة قاعدة الإبط", chapter: 3 },
+  { term: "Triangular interval", definition: "الفاصل المثلثي (حيز إبطي سفلي)", chapter: 3 },
+  { term: "Posterior axillary fold", definition: "الطية الإبطية الخلفية", chapter: 3 },
+  { term: "Triangular space", definition: "الحيز المثلثي", chapter: 3 },
+  { term: "Quadrangular space", definition: "الحيّز المربعي", chapter: 3 },
+  { term: "Muscles of arm", definition: "عضلات الذراع", chapter: 3 },
+  { term: "Biceps brachialis", definition: "ذات الرأسين العضدية", chapter: 3 },
+  { term: "Triceps brachii", definition: "مثلثة الرؤوس العضدية", chapter: 3 },
+  { term: "Muscles of forearm", definition: "عضلات الساعد", chapter: 3 },
+  { term: "Flexors", definition: "القابضات (العاطفات)", chapter: 3 },
+  { term: "Extensors", definition: "الباسطات", chapter: 3 },
+  { term: "Pronator teres", definition: "الكابة المدورة", chapter: 3 },
+  { term: "Flexor digitorum superficialis", definition: "قابضة الأصابع السطحية", chapter: 3 },
+  { term: "Flexor carpi radialis", definition: "قابضة الرسغ الكعبرية", chapter: 3 },
+  { term: "Flexor carpi ulnaris", definition: "قابضة الرسغ الزندية", chapter: 3 },
+  { term: "Pronator quadratus", definition: "الكابة المربعة", chapter: 3 },
+  { term: "Palmaris longus", definition: "الراحية الطويلة", chapter: 3 },
+  { term: "Supinator", definition: "الاستلقائية", chapter: 3 },
+  { term: "Pronator teres", definition: "الكابة المدورة", chapter: 3 },
+  { term: "Brachioradialis", definition: "العضدية الكعبرية", chapter: 3 },
+  { term: "Brachialis", definition: "العضدية", chapter: 3 },
+  { term: "Flexor digitorum profundus", definition: "قابضة الأصابع العميقة", chapter: 3 },
+  { term: "Flexor pollicis longus", definition: "قابضة الإبهام الطويلة", chapter: 3 },
+  { term: "Extensor carpi radialis brevis", definition: "باسطة الرسغ الكعبرية القصيرة", chapter: 3 },
+  { term: "Extensor digiti minimi", definition: "باسطة الخنصر", chapter: 3 },
+  { term: "Extensor carpi ulnaris", definition: "باسطة الرسغ الزندية", chapter: 3 },
+  { term: "Anconeus", definition: "المرفقية", chapter: 3 },
+  { term: "Abductor pollicis longus", definition: "مبعدة الإبهام الطويلة", chapter: 3 },
+  { term: "Extensor pollicis brevis", definition: "باسطة الإبهام القصيرة", chapter: 3 },
+  { term: "Extensor pollicis longus", definition: "باسطة الإبهام الطويلة", chapter: 3 },
+  { term: "Extensor indicis", definition: "باسطة السبابة", chapter: 3 },
+  { term: "Flexor carpi ulnaris", definition: "قابضة الرسغ الزندية", chapter: 3 },
+  { term: "Common flexor tendon", definition: "الوتر المشترك للقابضات", chapter: 3 },
+  { term: "Flexor retinaculum", definition: "قيد القابضات", chapter: 3 },
+  { term: "Flexor digitor superficialis", definition: "قابضة الأصابع السطحية", chapter: 3 },
+  { term: "Muscles of metacarpus", definition: "عضلات المشط", chapter: 3 },
+  { term: "Interossi palmaris", definition: "عضلات بين عظمية راحية", chapter: 3 },
+  { term: "Interossi dorsalis muscles", definition: "عضلات بين عظمية ظهرية", chapter: 3 },
+  { term: "Iumbricales", definition: "العضلات الخراطينية", chapter: 3 },
+  { term: "Thenar", definition: "الرانفة (ألية اليد)", chapter: 3 },
+  { term: "Abductor pollicis brevis", definition: "مبعدة الإبهام القصيرة", chapter: 3 },
+  { term: "Flexor pollicis brevis", definition: "قابضة الإبهام القصيرة", chapter: 3 },
+  { term: "Adductor pollicis", definition: "مقربة الإبهام", chapter: 3 },
+  { term: "Opponens pollicis", definition: "مقابلة الإبهام", chapter: 3 },
+  { term: "Hypothenar", definition: "ضرة اليد", chapter: 3 },
+  { term: "Abductor digiti minimi", definition: "مبعدة الخنصر", chapter: 3 },
+  { term: "Flexor digiti minimi brevis", definition: "قابضة الخنصر القصيرة", chapter: 3 },
+  { term: "Opponens digiti minimi", definition: "مقابلة الخنصر", chapter: 3 },
+  { term: "Muscles of lower limb", definition: "عضلات الطرف السفلي", chapter: 3 },
+  { term: "Muscles of pelvic girdle", definition: "عضلات الزنار الحوضي", chapter: 3 },
+  { term: "Psoas", definition: "العضلة القطنية", chapter: 3 },
+  { term: "Lesser trochanter", definition: "المدور الصغير", chapter: 3 },
+  { term: "Iliacus", definition: "العضلة الحرقفية", chapter: 3 },
+  { term: "Iliopsoas", definition: "الحرقفية القطنية", chapter: 3 },
+  { term: "Gluteus maximus", definition: "العضلة الألوية العظمى", chapter: 3 },
+  { term: "Iliotibial tract", definition: "السبيل الحرقفي الظنبوبي", chapter: 3 },
+  { term: "Hamstrings", definition: "العرقوبيات", chapter: 3 },
+  { term: "Gluteus medius", definition: "الألوية المتوسطة", chapter: 3 },
+  { term: "Gluteus minimus", definition: "الألوية الصغرى", chapter: 3 },
+  { term: "Piriformis", definition: "العضلة الكمثرية", chapter: 3 },
+  { term: "Obturator internus", definition: "العضلة السدادية الداخلية", chapter: 3 },
+  { term: "Obturator externus", definition: "العضلة السدادية الخارجية", chapter: 3 },
+  { term: "Tensor fasciae lata muscle", definition: "العضلة موترة اللفافة العريضة", chapter: 3 },
+  { term: "Muscles of thigh", definition: "عضلات الفخذ", chapter: 3 },
+  { term: "Quadriceps femoris", definition: "مربعة الرؤوس الفخذية", chapter: 3 },
+  { term: "Rectus femoris", definition: "المستقيمة الفخذية", chapter: 3 },
+  { term: "Vastus medialis", definition: "المتسعة الإنسية", chapter: 3 },
+  { term: "Pectineus", definition: "العضلة المشطية (العانية)", chapter: 3 },
+  { term: "Sartorius", definition: "العضلة الخياطية", chapter: 3 },
+  { term: "Hamstrings", definition: "عضلات الفخذ الخلفية (العرقوبيات)", chapter: 3 },
+  { term: "Biceps femoris", definition: "العضلة ذات الرأسين الفخذية", chapter: 3 },
+  { term: "Semi tendinosus", definition: "العضلة نصف الوترية", chapter: 3 },
+  { term: "Semimembranosus", definition: "العضلة نصف الغشائية", chapter: 3 },
+  { term: "Adductors", definition: "المقرّبات", chapter: 3 },
+  { term: "Adductor magnus", definition: "العضلة المقرّبة الكبيرة", chapter: 3 },
+  { term: "Adductor longus", definition: "العضلة المقرّبة الطويلة", chapter: 3 },
+  { term: "Adductor brevis", definition: "العضلة المقربة القصيرة", chapter: 3 },
+  { term: "Gracilis", definition: "العضلة الناحلة (الرشيقة)", chapter: 3 },
+  { term: "Muscles of leg", definition: "عضلات الساق", chapter: 3 },
+  { term: "Tibialis anterior", definition: "العضلة الظنبوبية الأمامية", chapter: 3 },
+  { term: "Extensor digitorum longus", definition: "باسطة الأصابع الطويلة", chapter: 3 },
+  { term: "Extensor hallucis longus", definition: "باسطة إبهام القدم الطويلة", chapter: 3 },
+  { term: "Tendon sheath", definition: "أغماد الأوتار", chapter: 3 },
+  { term: "Fibularis (peroneus) longus", definition: "العضلة الشظوية الطويلة", chapter: 3 },
+  { term: "Fibularis (peroneus) brevis", definition: "العضلة الشظوية الصغيرة", chapter: 3 },
+  { term: "Fibularis tertius", definition: "العضلة الشظوية الثالثة", chapter: 3 },
+  { term: "Gastrocnemius", definition: "العضلة التوْءَمية الساقية", chapter: 3 },
+  { term: "Soleus", definition: "العضلة النعلية", chapter: 3 },
+  { term: "Triceps muscle of calf", definition: "مثلثة الرؤوس الربلية", chapter: 3 },
+  { term: "Tibialis posterior", definition: "العضلة الظنبوبية الخلفية", chapter: 3 },
+  { term: "Flexor digitorum longus", definition: "قابضة الأصابع الطويلة", chapter: 3 },
+  { term: "Flexor hallucis longus", definition: "قابضة إبهام القدم الطويلة", chapter: 3 },
+  { term: "Muscles of the foot", definition: "عضلات القدم", chapter: 3 },
+  { term: "Flexor digitorum brevis", definition: "قابضة الأصابع القصيرة", chapter: 3 },
+  { term: "Abductor hallucis", definition: "مبعدة إبهام القدم", chapter: 3 },
+  { term: "Abductor digiti minimi", definition: "مبعدة إصبع القدم الصغرى", chapter: 3 },
+  { term: "Lumberical muscles", definition: "العضلات الخراطينية", chapter: 3 },
+  { term: "Plantar interosseous muscles", definition: "العضلات بين العظمية الأخمصية", chapter: 3 },
+  { term: "Calcaneal tendon", definition: "الوتر العقبي (وتر أشيل، وتر أخيل)", chapter: 3 },
+  { term: "Popliteus", definition: "المأبضية", chapter: 3 },
+  { term: "Vestus lateralis", definition: "المتسعة الوحشية", chapter: 3 },
+  { term: "Vestus intermedius", definition: "المتسعة المتوسطة", chapter: 3 },
+  { term: "Ischial tuberosity", definition: "الأحدوبة الإسكية", chapter: 3 },
+  { term: "Calcaneus", definition: "العقب", chapter: 3 },
+  { term: "Radial artery", definition: "الشريان الكعبري", chapter: 3 },
+  { term: "Dorsum of foot artery", definition: "شريان ظهر القدم", chapter: 3 },
+  { term: "Aponeurosis", definition: "السفاق", chapter: 3 },
+  { term: "Muscles of trunk", definition: "عضلات الجذع", chapter: 3 },
+  { term: "Narinae", definition: "المنخرين", chapter: 4 },
+  { term: "nasal septum", definition: "حاجز الأنف (الوتيرة الأنفيّة)", chapter: 4 },
+  { term: "choana", definition: "المنعر (الكوّة)", chapter: 4 },
+  { term: "Nares", definition: "المنخر", chapter: 4 },
+  { term: "Oral cavity", definition: "جوف الفم", chapter: 4 },
+  { term: "Alae of the nose", definition: "جناحَي الأنف", chapter: 4 },
+  { term: "piriform aperture", definition: "فتحة كمثرية", chapter: 4 },
+  { term: "Nasopharynx", definition: "بلعوم أنفي", chapter: 4 },
+  { term: "meatus", definition: "صماخ", chapter: 4 },
+  { term: "Concha", definition: "محارة (قرين)", chapter: 4 },
+  { term: "Nasal mucosa", definition: "مخاطية الأنف", chapter: 4 },
+  { term: "Maxillary sinus", definition: "الجيب الفكي", chapter: 4 },
+  { term: "Septal cartilage", definition: "الغضروف الحاجزي", chapter: 4 },
+  { term: "Ethmoidal sinus", definition: "الجيب الغربالي", chapter: 4 },
+  { term: "Cellulae ethmoidalis", definition: "الخلايا الغربالية", chapter: 4 },
+  { term: "Frontal sinus", definition: "الجيب الجبهي", chapter: 4 },
+  { term: "Sphenoidal sinus", definition: "جيب وتدي", chapter: 4 },
+  { term: "Pharynx", definition: "البلعوم", chapter: 4 },
+  { term: "Oropharynx", definition: "البلعوم الفموي", chapter: 4 },
+  { term: "Laryngopharynx", definition: "البلعوم الحنجري", chapter: 4 },
+  { term: "Crista galli", definition: "عرف الديك", chapter: 4 },
+  { term: "Carotid sheath", definition: "الغمد السباتي", chapter: 4 },
+  { term: "Pharyngotympanic tube", definition: "النفير البلعومي الطبلي (نفير أوستاش)", chapter: 4 },
+  { term: "Trachea", definition: "الرغامى", chapter: 4 },
+  { term: "Esophagus", definition: "المريء", chapter: 4 },
+  { term: "tonsil", definition: "لوزة", chapter: 4 },
+  { term: "Palatine tonsil", definition: "اللوزة الحنكية", chapter: 4 },
+  { term: "Palatoglossal fold", definition: "الطية الحنكية اللسانية", chapter: 4 },
+  { term: "Palatopharyngeal fold", definition: "الطية الحنكية البلعومية", chapter: 4 },
+  { term: "pharyngeal tonsil", definition: "اللوزة البلعومية", chapter: 4 },
+  { term: "Piriform fossa (Piriform recesses)", definition: "الحفرة /الجيب الكمثرية (الردب الكمثري)", chapter: 4 },
+  { term: "Laryngeal", definition: "حنجري", chapter: 4 },
+  { term: "lingual tonsil", definition: "اللوزة اللسانية", chapter: 4 },
+  { term: "Oropharyngeal isthmus", definition: "برزخ الحلق(الفموي البلعومي)", chapter: 4 },
+  { term: "recesses", definition: "ردب", chapter: 4 },
+  { term: "Tensor veli palatine muscle", definition: "العضلة موترة شراع الحنك", chapter: 4 },
+  { term: "constrictor", definition: "مضيقة (عاصرة)", chapter: 4 },
+  { term: "Palatopharyngeal muscle", definition: "العضلة الحنكية البلعومية", chapter: 4 },
+  { term: "Stylopharyngeal muscle", definition: "العضلة الإبرية البلعومية", chapter: 4 },
+  { term: "Salpingopharyngeal muscle", definition: "العضلة النفيرية البلعومية", chapter: 4 },
+  { term: "Pharyngeal raphe", definition: "الرفاء البلعومي", chapter: 4 },
+  { term: "Larynx", definition: "الحنجرة", chapter: 4 },
+  { term: "Cartilages", definition: "غضاريف", chapter: 4 },
+  { term: "Thyroid cartilage", definition: "الغضروف الدرقي", chapter: 4 },
+  { term: "Laryngeal Prominence", definition: "الشامخة الحنجرية (تفاحة آدم)", chapter: 4 },
+  { term: "Cricoid cartilage", definition: "الغضروف الحلقي", chapter: 4 },
+  { term: "Arytenoid cartilages", definition: "الغضروفان الطرجهاليان", chapter: 4 },
+  { term: "Vocal process", definition: "ناتئ صوتي", chapter: 4 },
+  { term: "Thyroarytenoid muscle", definition: "العضلة الدرقية الطرجهالية", chapter: 4 },
+  { term: "Cricoarytenoid muscles", definition: "العضلتان الحلقيتان الطرجهاليتان", chapter: 4 },
+  { term: "Corinculate cartilages", definition: "الغضروفان القرينيان", chapter: 4 },
+  { term: "Cuneiform cartilages", definition: "الغضروفان الإسفينيان", chapter: 4 },
+  { term: "Epiglottis", definition: "غضروف الفلكة (لسان المزمار)", chapter: 4 },
+  { term: "Aditus (inlet)", definition: "مدخل", chapter: 4 },
+  { term: "Laryngeal vestibulum", definition: "دهليز الحنجرة", chapter: 4 },
+  { term: "Vestibular folds", definition: "الطيتان الدهليزيتان", chapter: 4 },
+  { term: "Ventricles of the larynx", definition: "البطينان الحنجريان", chapter: 4 },
+  { term: "Glottis", definition: "المزمار", chapter: 4 },
+  { term: "Vocal folds", definition: "الطيتان الصوتيتان", chapter: 4 },
+  { term: "Rima glottidis", definition: "مشق المزمار", chapter: 4 },
+  { term: "Infraglottic cavity", definition: "الجوف تحت المزماري", chapter: 4 },
+  { term: "Pulmonary trunk", definition: "الجذع الرئوي", chapter: 4 },
+  { term: "Carina", definition: "المهماز", chapter: 4 },
+  { term: "Bronchi", definition: "القصبات", chapter: 4 },
+  { term: "Lobar bronchi", definition: "القصبات الفصية", chapter: 4 },
+  { term: "Segmental bronchi", definition: "القصبات الشدفية", chapter: 4 },
+  { term: "Respiratory bronchioles", definition: "القصيبات التنفسية", chapter: 4 },
+  { term: "Lobes", definition: "فصوص", chapter: 4 },
+  { term: "Hilum", definition: "سرة الرئة", chapter: 4 },
+  { term: "Pulmonary artery", definition: "الشريان الرئوي", chapter: 4 },
+  { term: "Costal surface", definition: "وجه ضلعي للرئة", chapter: 4 },
+  { term: "Oblique fissure", definition: "الشق المائل", chapter: 4 },
+  { term: "Pleurae", definition: "الجنبتان", chapter: 4 },
+  { term: "Thoracic cage", definition: "القفص الصدري", chapter: 4 },
+  { term: "Mediastinum", definition: "المَنْصِف", chapter: 4 },
+  { term: "Left pleural cavity", definition: "جوف الجنبة الأيسر", chapter: 4 },
+  { term: "Diaphragm", definition: "الحجاب الحاجز", chapter: 4 },
+  { term: "Inferior vena cava", definition: "الوريد الأجوف السفلي", chapter: 4 },
+  { term: "Aorta", definition: "الأبهر", chapter: 4 },
+  { term: "Esophageal hiatus", definition: "الفرجة المريئية", chapter: 4 },
+  { term: "Aortic hiatus", definition: "الفرجة الأبهرية", chapter: 4 },
+  { term: "Caval opening", definition: "الفتحة الأجوفية", chapter: 4 },
+  { term: "Phrenic nerve", definition: "العصب الحجابي", chapter: 4 },
+  { term: "Inferior/Middle/Superior pharyngeal constrictor", definition: "مضيقة (عاصرة) البلعوم السفلية/الوسطى/العلوية", chapter: 4 },
+  { term: "Central tendon of diaphragm", definition: "الوتر المركزي للحجاب", chapter: 4 },
+  { term: "Inferior thoracic aperture", definition: "فتحة الصدر السفلية (مخرج الصدر)", chapter: 4 },
+  { term: "Superior thoracic aperture", definition: "فتحة الصدر العلوية (مدخل الصدر)", chapter: 4 },
+  { term: "Respiration", definition: "التنفس", chapter: 4 },
+  { term: "Pulmonary veins", definition: "الأوردة الرئوية", chapter: 4 },
+  { term: "Base ( Diaphragmatic surface)", definition: "قاعدة الرئة (الوجه الحجابي)", chapter: 4 },
+  { term: "Fissures", definition: "الشقوق", chapter: 4 },
+  { term: "Lungs", definition: "الرئتان", chapter: 4 },
+  { term: "Main bronchi", definition: "القصبتين الرئيسيتين", chapter: 4 },
+  { term: "Arch of arota", definition: "قوس الأبهر", chapter: 4 },
+  { term: "Vagus nerve", definition: "العصب المبهم", chapter: 4 },
+  { term: "Laryngeal cavity", definition: "جوف الحنجرة", chapter: 4 },
+  { term: "Cricoarytenoid articulatoin", definition: "المفصل الحلقي الطرجهالي", chapter: 4 },
+  { term: "Cricothyroid articulation", definition: "المفصل الحلقي الدرقي", chapter: 4 },
+  { term: "Joints of larynx", definition: "مفاصل الحنجرة", chapter: 4 },
+  { term: "Muscula process", definition: "الناتئ العضلي", chapter: 4 },
+  { term: "Cartilages of larynx", definition: "غضاريف الحنجرة", chapter: 4 },
+  { term: "Muscles of pharynx", definition: "عضلات البلعوم", chapter: 4 },
+  { term: "Laryngeal inlet", definition: "مدخل الحنجرة", chapter: 4 },
+  { term: "Paranasal sinuses", definition: "الجيوب المجاورة (جانب) الأنف", chapter: 4 },
+  { term: "Inferior meatus", definition: "الصماخ السفلي", chapter: 4 },
+  { term: "Middle meatus", definition: "الصماخ الأوسط", chapter: 4 },
+  { term: "Superior meatus", definition: "الصماخ العلوي", chapter: 4 },
+  { term: "Inferior nasal concha", definition: "المحارة (القرين) الأنفية السفلية", chapter: 4 },
+  { term: "Nasal cavity", definition: "جوف الأنف", chapter: 4 },
+  { term: "Soft palate", definition: "الحنك الرخو", chapter: 4 },
+  { term: "Dorsum of the nose", definition: "ظهر الأنف", chapter: 4 },
+  { term: "Root", definition: "جذر", chapter: 4 },
+  { term: "External nose", definition: "الأنف الظاهر", chapter: 4 },
+  { term: "Apex", definition: "قمة", chapter: 4 },
+  { term: "Sternocostal surface", definition: "الوجه القصي الضلعي للقلب", chapter: 5 },
+  { term: "Anterior interventricular groove", definition: "التلم بين البطينين الأمامي", chapter: 5 },
+  { term: "Anterior interventricular artery", definition: "الشريان بين البطينين الأمامي", chapter: 5 },
+  { term: "Left coronary artery", definition: "الشريان الإكليلي الأيسر", chapter: 5 },
+  { term: "Superior vena cava", definition: "الوريد الأجوف العلوي", chapter: 5 },
+  { term: "Diaphragmatic surface", definition: "الوجه الحجابي للقلب", chapter: 5 },
+  { term: "Posterior interventricular groove", definition: "التلم بين البطينين الخلفي", chapter: 5 },
+  { term: "Right coronary artery", definition: "الشريان الإكليلي الأيمن", chapter: 5 },
+  { term: "Base", definition: "قاعدة", chapter: 5 },
+  { term: "Apex", definition: "قمة", chapter: 5 },
+  { term: "Inferior vena cava", definition: "الوريد الأجوف السفلي", chapter: 5 },
+  { term: "Coronary sinus", definition: "الجيب الإكليلي", chapter: 5 },
+  { term: "Pericardium", definition: "التامور", chapter: 5 },
+  { term: "Chamber", definition: "حُجْرَة", chapter: 5 },
+  { term: "Right Atrium", definition: "الأذينة اليمنى", chapter: 5 },
+  { term: "Auricle", definition: "الصيوان", chapter: 5 },
+  { term: "Musculi pectinati", definition: "العضلة المشطية", chapter: 5 },
+  { term: "Fossa ovalis", definition: "الحفرة البيضية", chapter: 5 },
+  { term: "Crista terminalis", definition: "العرف الانتهائي", chapter: 5 },
+  { term: "Coronary sinus", definition: "الجيب الإكليلي", chapter: 5 },
+  { term: "Right ventricle", definition: "البطين الأيمن", chapter: 5 },
+  { term: "Tricuspid valve", definition: "الدسام ثلاثي الشرف", chapter: 5 },
+  { term: "Conus arteriosus", definition: "المخروط الشرياني", chapter: 5 },
+  { term: "Septal papillary muscle", definition: "العضلة الحليمية الحاجزية", chapter: 5 },
+  { term: "posterior papillary muscle", definition: "العضلة الحليمية الخلفية", chapter: 5 },
+  { term: "Anterior papillary muscle", definition: "العضلة الحليمية الأمامية", chapter: 5 },
+  { term: "Chordae tendineae", definition: "الحبال الوترية", chapter: 5 },
+  { term: "Pulmonary valve", definition: "الدسام الرئوي", chapter: 5 },
+  { term: "pulmonary trunk", definition: "الجذع الرئوي", chapter: 5 },
+  { term: "Septal cusp", definition: "الشرفة الحاجزية(من شرف الدسام ثلاثي الشرف)", chapter: 5 },
+  { term: "Anterior /Posterior cusp", definition: "الشرفة الأمامية/الخلفية(للدسام ثلاثي الشرف)", chapter: 5 },
+  { term: "Left atrium", definition: "الأذينة اليسرى", chapter: 5 },
+  { term: "Valve of foramen ovale", definition: "دسام الثقبة البيضية", chapter: 5 },
+  { term: "Left ventricle", definition: "البطين الأيسر", chapter: 5 },
+  { term: "Mitral valve", definition: "الدسام التاجي", chapter: 5 },
+  { term: "Trabeculae carneae", definition: "العوارض(الترابيق)", chapter: 5 },
+  { term: "Fibrous ring of plumonary valve", definition: "الحلقة الليفية للدسام الرئوي", chapter: 5 },
+  { term: "Atrioventricular bundle", definition: "الحزمة الأذينية البطينية", chapter: 5 },
+  { term: "Right/ Left fibrous trigone", definition: "المثلث الليفي الأيمن/ الأيسر", chapter: 5 },
+  { term: "Systole", definition: "الانقباض", chapter: 5 },
+  { term: "Diastole", definition: "الانبساط", chapter: 5 },
+  { term: "Echography", definition: "التصوير بالصدى", chapter: 5 },
+  { term: "Arch of aorta", definition: "قوس الأبهر", chapter: 5 },
+  { term: "Ascending aorta", definition: "الأبهر الصاعد", chapter: 5 },
+  { term: "Descending aorta", definition: "الأبهر النازل", chapter: 5 },
+  { term: "Posterior intercostal arteries", definition: "الشرايين الوربية الخلفية", chapter: 5 },
+  { term: "Subcostal artery", definition: "الشريان تحت الضلعي", chapter: 5 },
+  { term: "Diaphragmus artery", definition: "الشريان الحجابي", chapter: 5 },
+  { term: "Renale arteries", definition: "الشريانان الكلويان", chapter: 5 },
+  { term: "Suprarenal arteries", definition: "الشريانان الكظريان", chapter: 5 },
+  { term: "Gonadic arteries", definition: "الشريانان القنديان(المنسليان)", chapter: 5 },
+  { term: "Celiac trunk", definition: "الجذع البطني(الزلاقي)", chapter: 5 },
+  { term: "Aortic hiatus", definition: "الفرجة الأبهرية", chapter: 5 },
+  { term: "Abdominal aorta", definition: "الأبهر البطني", chapter: 5 },
+  { term: "Left common iliac artery", definition: "الشريان الحرقفي المشترك الأيسر", chapter: 5 },
+  { term: "Superior mesentric artery", definition: "الشريان المساريقي العلوي", chapter: 5 },
+  { term: "Inferior mesentric artery", definition: "الشريان المساريقي السفلي", chapter: 5 },
+  { term: "Duodenum", definition: "العفج", chapter: 5 },
+  { term: "Superior Rectal Artery", definition: "الشريان المستقيمي العلوي", chapter: 5 },
+  { term: "Internal carotid artery", definition: "الشريان السباتي الباطن", chapter: 5 },
+  { term: "External carotid artery", definition: "الشريان السباتي الخارجي", chapter: 5 },
+  { term: "Superficial temporal artery", definition: "الشريان الصدغي السطحي", chapter: 5 },
+  { term: "Maxillary artery", definition: "الشريان الفكي", chapter: 5 },
+  { term: "Superior thyroid artery", definition: "الشريان الدرقي العلوي", chapter: 5 },
+  { term: "Lingual artery", definition: "الشريان اللساني", chapter: 5 },
+  { term: "Facial artery", definition: "الشريان الوجهي", chapter: 5 },
+  { term: "Angular Artery", definition: "الشريان الزاوي", chapter: 5 },
+  { term: "Carotid Sheath", definition: "الغمد السباتي", chapter: 5 },
+  { term: "Axillary Artery", definition: "الشريان الإبطي", chapter: 5 },
+  { term: "Subclavian artery", definition: "الشريان تحت الترقوة", chapter: 5 },
+  { term: "Brachial artery", definition: "الشريان العضدي", chapter: 5 },
+  { term: "Circumflex", definition: "منعطف", chapter: 5 },
+  { term: "Ophthalmic artery", definition: "الشريان العيني(الفرع الجانبي الوحيد للسباتي الباطن)", chapter: 5 },
+  { term: "Middle Cerebral Artery (MCA)", definition: "الشريان المخي الأوسط", chapter: 5 },
+  { term: "Anterior Cerebral Artery (ACA)", definition: "الشريان المخي الأمامي", chapter: 5 },
+  { term: "Posterior Cerebral Artery (PCA)", definition: "الشريان المخي الخلفي(فرع للشريان القاعدي)", chapter: 5 },
+  { term: "Radial Artery", definition: "الشريان الكعبري", chapter: 5 },
+  { term: "Ulnar Artery", definition: "الشريان الزندي", chapter: 5 },
+  { term: "Pulse site", definition: "ميزابة النبض", chapter: 5 },
+  { term: "Cephalic vein", definition: "الوريد الرأسي", chapter: 5 },
+  { term: "Anatomical Snuff_box", definition: "منشقة المشرحين", chapter: 5 },
+  { term: "Deep Palmar Arch", definition: "القوس الراحية العميقة", chapter: 5 },
+  { term: "Superficial Palmar Arch", definition: "القوس الراحية السطحية", chapter: 5 },
+  { term: "Femoral Artery", definition: "الشريان الفخذي", chapter: 5 },
+  { term: "Lnguinal Ligament", definition: "الرباط الإربي", chapter: 5 },
+  { term: "Popliteal artery", definition: "الشريان المأبضي", chapter: 5 },
+  { term: "Anterior/Posterior tibial artery", definition: "شريان ظنبوبي أمامي/خلفي", chapter: 5 },
+  { term: "Superficial epigastric artery", definition: "الشريان الشرسوفي السحطي(فرع جانبي للشريان الفخذي)", chapter: 5 },
+  { term: "Superficial circumflex iliac artery", definition: "الشريان المنعكس الحرقفي السطحي(فرع جانبي للفخذي)", chapter: 5 },
+  { term: "Dorsalis pedis artery", definition: "شريان ظهر القدم(امتداد للظنبوبي الأمامي)", chapter: 5 },
+  { term: "Superficial medial genicular artery", definition: "شريان ركبي علوي إنسي", chapter: 5 },
+  { term: "Internal jugular vein", definition: "الوريد الوداجي الداخلي", chapter: 5 },
+  { term: "Subclavian vein", definition: "الوريد تحت الترقوة", chapter: 5 },
+  { term: "Axillary vein", definition: "الوريد الإبطي", chapter: 5 },
+  { term: "Cephalic vein", definition: "الوريد الرأسي", chapter: 5 },
+  { term: "Azygos vein", definition: "الوريد الفرد", chapter: 5 },
+  { term: "Hemiazygos vein", definition: "الوريد نصف الفرد", chapter: 5 },
+  { term: "Jugular foramen", definition: "الثقبة الوداجية", chapter: 5 },
+  { term: "Median cubital vein", definition: "الوريد المرفقي الناصف(فرع الوريد الرأسي)", chapter: 5 },
+  { term: "External iliac vein", definition: "الوريد الحرقفي الخارجي", chapter: 5 },
+  { term: "Pelvic inlet", definition: "مدخل الحوض", chapter: 5 },
+  { term: "Femoral vein", definition: "الوريد الفخذي", chapter: 5 },
+  { term: "Popliteal vein", definition: "الوريد المأبضي", chapter: 5 },
+  { term: "Greater saphenous vein", definition: "الوريد الصافن الكبير الإنسي", chapter: 5 },
+  { term: "Left Renal vein", definition: "الوريد الكلوي الأيسر", chapter: 5 },
+  { term: "Left Suprarenal Vein", definition: "الوريد الكظري الأيسر", chapter: 5 },
+  { term: "Varicose", definition: "دوالٍ", chapter: 5 },
+  { term: "Lymphatic vessele", definition: "الأوعية اللمفية", chapter: 5 },
+  { term: "Lymphatic nodes", definition: "العقد اللمفية", chapter: 5 },
+  { term: "Thoracic duct", definition: "القناة الصدرية", chapter: 5 },
+  { term: "Chyle cistern", definition: "الصهريج الكيلوسي", chapter: 5 },
+  { term: "Right hypochondrium", definition: "المراق الأيمن", chapter: 6 },
+  { term: "Epigastric region", definition: "الناحية الشرسوفية", chapter: 6 },
+  { term: "Right lumbar region (right flank)", definition: "الناحية القطنية اليمنى (الخاصرة اليمنى)", chapter: 6 },
+  { term: "Umbilical region", definition: "الناحية السرية", chapter: 6 },
+  { term: "Left lumbar region", definition: "الناحية القطنية اليسرى", chapter: 6 },
+  { term: "Right groin", definition: "الناحية الإربية اليمنى", chapter: 6 },
+  { term: "Hypogastric region", definition: "الناحية الخثلية", chapter: 6 },
+  { term: "left groin", definition: "الناحية الإربية اليسرى", chapter: 6 },
+  { term: "Midclavicular planes", definition: "مستويا منتصف الترقوة", chapter: 6 },
+  { term: "Subcostal plane", definition: "المستوى تحت الضلعي", chapter: 6 },
+  { term: "Intertubercular plane", definition: "المستوى بين الحديبي", chapter: 6 },
+  { term: "Oral cavity", definition: "جوف الفم", chapter: 6 },
+  { term: "Oral vestibule", definition: "دهليز الفم", chapter: 6 },
+  { term: "Gingivae", definition: "اللثتان", chapter: 6 },
+  { term: "Labia oris", definition: "الشفتان", chapter: 6 },
+  { term: "Bucca", definition: "الشدق (الخد)", chapter: 6 },
+  { term: "Palatum", definition: "الحنك", chapter: 6 },
+  { term: "Uvula", definition: "اللهاة", chapter: 6 },
+  { term: "Hard palate", definition: "الحنك الصلب", chapter: 6 },
+  { term: "Tongue", definition: "اللسان", chapter: 6 },
+  { term: "Foramen cecum", definition: "الثقبة العوراء", chapter: 6 },
+  { term: "Filiform papillae", definition: "الحليمات الخيطية", chapter: 6 },
+  { term: "Fungiform papillae", definition: "الحليمات الكمئية(الفطرية)", chapter: 6 },
+  { term: "Foliate papillae", definition: "الحليمات الورقية", chapter: 6 },
+  { term: "Valate papillae", definition: "الحليمات المحوطة", chapter: 6 },
+  { term: "Deciduous teeth", definition: "الأسنان الساقطة", chapter: 6 },
+  { term: "Permanent teeth", definition: "الأسنان الدائمة", chapter: 6 },
+  { term: "Terminal sulcus", definition: "التلم الانتهائي", chapter: 6 },
+  { term: "incisors", definition: "قواطع", chapter: 6 },
+  { term: "Canines", definition: "أنياب", chapter: 6 },
+  { term: "Premolars", definition: "ضواحك", chapter: 6 },
+  { term: "Molars", definition: "أرحاء(أضراس)", chapter: 6 },
+  { term: "Pharynx", definition: "البلعوم", chapter: 6 },
+  { term: "Oropharynx", definition: "البلعوم الفموي", chapter: 6 },
+  { term: "Palatine tonsilla", definition: "اللوزة الحنكية", chapter: 6 },
+  { term: "Laryngopharynx", definition: "البلعوم الحنجري", chapter: 6 },
+  { term: "Piriform recess (fossa)", definition: "الردب (الحفرة) الكمثري", chapter: 6 },
+  { term: "Cheek", definition: "الخد", chapter: 6 },
+  { term: "Oral fissure", definition: "المشق الفموي", chapter: 6 },
+  { term: "Oropharyngeal isthmus", definition: "البرزخ البلعومي الفموي(برزخ الحلق)", chapter: 6 },
+  { term: "Frenulum of lip", definition: "لجام الشفة", chapter: 6 },
+  { term: "Valleculae", definition: "الأخدود(الوهدة)", chapter: 6 },
+  { term: "Epiglottis", definition: "الفلكة", chapter: 6 },
+  { term: "Esophagus", definition: "المريء", chapter: 6 },
+  { term: "Esophageal hiatus", definition: "الفرجة المريئية", chapter: 6 },
+  { term: "Stomach", definition: "المعدة", chapter: 6 },
+  { term: "Cardia", definition: "الفؤاد", chapter: 6 },
+  { term: "Fundus", definition: "القاع", chapter: 6 },
+  { term: "Antrum", definition: "الغار", chapter: 6 },
+  { term: "Pylorus", definition: "البواب", chapter: 6 },
+  { term: "Lesser curvature", definition: "الانحناء الصغير", chapter: 6 },
+  { term: "Greater curvature", definition: "الانحناء الكبير", chapter: 6 },
+  { term: "Celiac trunk", definition: "الجذع البطني(الزلاقي)", chapter: 6 },
+  { term: "Pyloric antrum", definition: "الغار البوابي", chapter: 6 },
+  { term: "Angular incisure", definition: "الثلمة الزاوية", chapter: 6 },
+  { term: "Left gastric artery", definition: "الشريان المعدي الأيسر", chapter: 6 },
+  { term: "Common hepatic artery", definition: "الشريان الكبدي المشترك", chapter: 6 },
+  { term: "Splenic artery", definition: "الشريان الطحالي", chapter: 6 },
+  { term: "Small intestine", definition: "المعي الدقيق", chapter: 6 },
+  { term: "Doudenum", definition: "العفج (الاثنا عشري)", chapter: 6 },
+  { term: "Ampulla of Vater", definition: "الحليمة العفجية(أنبورة فاتر)", chapter: 6 },
+  { term: "Duct", definition: "قناة", chapter: 6 },
+  { term: "Jejunum", definition: "الصائم", chapter: 6 },
+  { term: "Ileum", definition: "اللفائفي", chapter: 6 },
+  { term: "Large intestine", definition: "المعي الغليظ", chapter: 6 },
+  { term: "Cecum", definition: "الأعور", chapter: 6 },
+  { term: "Appendix vermiforme", definition: "الزائدة الدودية", chapter: 6 },
+  { term: "Appendicitis", definition: "التهاب الزائدة", chapter: 6 },
+  { term: "Rectum", definition: "المستقيم", chapter: 6 },
+  { term: "Anal canal", definition: "القناة الشرجية", chapter: 6 },
+  { term: "Transverse colon", definition: "القولون المعترض", chapter: 6 },
+  { term: "Descending colon", definition: "الكولون النازل", chapter: 6 },
+  { term: "Sigmoid colon", definition: "الكولون السيني", chapter: 6 },
+  { term: "Jejunal arteries", definition: "الشرايين الصائمية", chapter: 6 },
+  { term: "Salivary glands", definition: "الغدد اللعابية", chapter: 6 },
+  { term: "Parotid gland", definition: "الغدة النكفية", chapter: 6 },
+  { term: "Submandibular gland", definition: "الغدة تحت الفك السفلي", chapter: 6 },
+  { term: "Sublingual gland", definition: "الغدة تحت اللسان", chapter: 6 },
+  { term: "Buccinator", definition: "العضلة المبوقة", chapter: 6 },
+  { term: "Masseter", definition: "العضلة الماضغة", chapter: 6 },
+  { term: "Sternocleidomastoid muscle", definition: "العضلة القترائية", chapter: 6 },
+  { term: "Chorda tympani", definition: "عصب حبل الطبل", chapter: 6 },
+  { term: "Lingual nerve", definition: "العصب اللساني", chapter: 6 },
+  { term: "Mylohyoid muscle", definition: "العضلة الضرسية اللامية", chapter: 6 },
+  { term: "Liver ( hepar)", definition: "الكبد", chapter: 6 },
+  { term: "Bile ducts", definition: "الطرق الصفراوية", chapter: 6 },
+  { term: "Sublingual caruncle", definition: "اللحيمة تحت اللسانية", chapter: 6 },
+  { term: "Otic ganglion", definition: "العقدة الأذنية", chapter: 6 },
+  { term: "ganglion", definition: "عقدة", chapter: 6 },
+  { term: "Falciform ligament", definition: "الرباط المنجلي(المشولي)", chapter: 6 },
+  { term: "Round ligament", definition: "الرباط المدور", chapter: 6 },
+  { term: "Porta hepatis", definition: "باب الكبد", chapter: 6 },
+  { term: "Caudate lobe", definition: "الفص المذنب", chapter: 6 },
+  { term: "Exterahepatic bile ducts", definition: "الطرق الصفراوية خارج الكبد", chapter: 6 },
+  { term: "Common hepatic duct", definition: "القناة الكبدية المشتركة", chapter: 6 },
+  { term: "Cystic duct", definition: "القناة المرارية(الكيسية)", chapter: 6 },
+  { term: "Bile duct", definition: "قناة الصفراء(الجامعة)", chapter: 6 },
+  { term: "Gall bladder", definition: "المرارة(الحويصل الصفراوي)", chapter: 6 },
+  { term: "Acute cholecystitis", definition: "التهاب المرارة الحاد", chapter: 6 },
+  { term: "Main pancreatic duct", definition: "القناة المعثكلية الرئيسية", chapter: 6 },
+  { term: "Pancreas", definition: "المعثكلة", chapter: 6 },
+  { term: "Spleen", definition: "الطِحال", chapter: 6 },
+  { term: "Visceral surface", definition: "الوجه الحشوي", chapter: 6 },
+  { term: "Hilum", definition: "السرّة", chapter: 6 },
+  { term: "Peritoneum", definition: "البريتوان(الصفاق)", chapter: 6 },
+  { term: "Omentum", definition: "الثرب", chapter: 6 },
+  { term: "Mesentery", definition: "المسراق", chapter: 6 },
+  { term: "Ductus Choledochus", definition: "القناة الصفراء (مصطلح ثانٍ ورد في إحدى الدورات)", chapter: 6 },
+  { term: "Quadrate lobe", definition: "الفص المربع", chapter: 6 },
+  { term: "Right / Left lobe", definition: "الفص الأيمن والأيسر للكبد", chapter: 6 },
+  { term: "Ascending colon", definition: "الكولون الصاعد", chapter: 6 },
+  { term: "Palatoglossal fold", definition: "طيّة حنكيّة لسانيّة", chapter: 6 },
+  { term: "Pharyngeal recess", definition: "ردب بلعومي", chapter: 6 },
+  { term: "Soft palate", definition: "الحنك الرخو", chapter: 6 },
+  { term: "Pharyngeal isthmus", definition: "برزخ البلعوم", chapter: 6 },
+  { term: "Proper oral cavity", definition: "جوف الفم المخصوص", chapter: 6 },
+  { term: "Left hypochondrium", definition: "المراق الأيسر", chapter: 6 },
+  { term: "Abdominal regions", definition: "نواحي البطن", chapter: 6 },
+  { term: "Hindgut", definition: "المعي الخلفي", chapter: 6 },
+  { term: "Midgut", definition: "المعي المتوسط", chapter: 6 },
+  { term: "Foregut", definition: "المعي الأمامي", chapter: 6 },
+  { term: "Kidneys", definition: "الكليتان", chapter: 7 },
+  { term: "Gross Anatomy", definition: "التشريح العياني", chapter: 7 },
+  { term: "Renal fascia", definition: "اللفافة الكلوية", chapter: 7 },
+  { term: "Pararenal fat", definition: "الشحم المجاور للكلية (جانب)", chapter: 7 },
+  { term: "Perirenal fat", definition: "الشحم المحيط بالكلية (حول الكلية)", chapter: 7 },
+  { term: "Medulla renalis", definition: "لب الكلية", chapter: 7 },
+  { term: "Renal papilla", definition: "الحليمة الكلوية", chapter: 7 },
+  { term: "Radi medullares", definition: "الأشعة اللبية", chapter: 7 },
+  { term: "Pelvis", definition: "الحويضة", chapter: 7 },
+  { term: "Histology of kidneys", definition: "البنية النسيجية للكلية", chapter: 7 },
+  { term: "Nephron", definition: "الكليون(النفرون)", chapter: 7 },
+  { term: "Glomerulus", definition: "الكُبيبة الكلوية", chapter: 7 },
+  { term: "Tubule", definition: "النبيب الكلوي", chapter: 7 },
+  { term: "Proximal tubule", definition: "النبيب القريب", chapter: 7 },
+  { term: "Distal tubule", definition: "النبيب البعيد", chapter: 7 },
+  { term: "Henle's loop", definition: "عروة هانله", chapter: 7 },
+  { term: "Thin descening limb", definition: "الشعبة النازلة الرقيقة", chapter: 7 },
+  { term: "Thick ascending limb", definition: "الشعبة الصاعدة الثخينة", chapter: 7 },
+  { term: "Thin ascending limb", definition: "الشعبة الصاعدة الرقيقة", chapter: 7 },
+  { term: "Collecting Duct", definition: "القناة الجامعة", chapter: 7 },
+  { term: "Renal artery", definition: "الشريان الكلوي", chapter: 7 },
+  { term: "Arcuate arteries", definition: "الشرايين المقوسة", chapter: 7 },
+  { term: "Cortex", definition: "القشر", chapter: 7 },
+  { term: "Arteriola glomerularis afferens", definition: "شرينات كبيبية واردة", chapter: 7 },
+  { term: "Minor calyx", definition: "كأس صغيرة", chapter: 7 },
+  { term: "Hilum of kidney", definition: "سرة الكلية", chapter: 7 },
+  { term: "Major calyx", definition: "كأس كبيرة", chapter: 7 },
+  { term: "Testicular arteries", definition: "الشريانان الخصويان", chapter: 7 },
+  { term: "Ureter", definition: "الحالب", chapter: 7 },
+  { term: "Constriction", definition: "انخصار", chapter: 7 },
+  { term: "Urinary bladder", definition: "المثانة", chapter: 7 },
+  { term: "Trigone of bladder", definition: "مثلث المثانة", chapter: 7 },
+  { term: "Internal urethral orifice", definition: "الفوهة الإحليلية الداخلية", chapter: 7 },
+  { term: "Urethra", definition: "الإحليل", chapter: 7 },
+  { term: "Preprostatic urethra", definition: "الإحليل قبل الموثي", chapter: 7 },
+  { term: "Prostatic urethra", definition: "الإحليل الموثي", chapter: 7 },
+  { term: "Membranous urethra", definition: "الإحليل الغشائي", chapter: 7 },
+  { term: "Spongy urethra", definition: "الإحليل الإسفنجي", chapter: 7 },
+  { term: "External urethral sphincter (Skeletal muscle)", definition: "المصرة الإحليلية الخارجية (مخططة)", chapter: 7 },
+  { term: "Penis", definition: "القضيب", chapter: 7 },
+  { term: "Navicular fossa", definition: "الحفرة الزورقية", chapter: 7 },
+  { term: "Reproductive system", definition: "الجهاز التناسلي", chapter: 7 },
+  { term: "Renal column", definition: "عمود كلوي", chapter: 7 },
+  { term: "Renal sinus", definition: "جيب كلوي", chapter: 7 },
+  { term: "Pyramid in renal medulla", definition: "هرم ضمن لب الكلية", chapter: 7 },
+  { term: "Renal blood supply", definition: "التروية الدموية للكلية", chapter: 7 },
+  { term: "Interlobaris arteries", definition: "الشرايين بين الفصيصات", chapter: 7 },
+  { term: "Abdominal aorta", definition: "الأبهر البطني", chapter: 7 },
+  { term: "Inferior vena cava", definition: "الوريد الأجوف السفلي", chapter: 7 },
+  { term: "Common iliac artery", definition: "الشريان الحرقفي المشترك", chapter: 7 },
+  { term: "Male urethra", definition: "الإحليل الذكري", chapter: 7 },
+  { term: "Corpus spongisum", definition: "الجسم الاسفنجي", chapter: 7 },
+  { term: "Glans", definition: "الحشفة", chapter: 7 },
+  { term: "Female urethra", definition: "الإحليل الأنثوي", chapter: 7 },
+  { term: "Clitoris", definition: "البظر", chapter: 7 },
+  { term: "Vagine", definition: "المهبل", chapter: 7 },
+  { term: "Renal vein", definition: "الوريد الكلوي", chapter: 7 },
+  { term: "Reproductive system", definition: "الجهاز التناسلي", chapter: 8 },
+  { term: "Penis", definition: "القضيب", chapter: 8 },
+  { term: "Bulbospongiosus", definition: "العضلتين البصليتين الإسفنجيتين", chapter: 8 },
+  { term: "Glans penis", definition: "حشفة القضيب", chapter: 8 },
+  { term: "Frenulum", definition: "اللجام", chapter: 8 },
+  { term: "Ischiocavernosus muscle", definition: "العضلة الاسكية الكهفية", chapter: 8 },
+  { term: "Corpus spongiosum", definition: "الجسم الاسفنجي", chapter: 8 },
+  { term: "Corpus cavernosum", definition: "الجسم الكهفي", chapter: 8 },
+  { term: "Prepuce", definition: "القُلفة", chapter: 8 },
+  { term: "External urethral orifice", definition: "فوهة الإحليل الخارجية", chapter: 8 },
+  { term: "Scrotum", definition: "الصفن", chapter: 8 },
+  { term: "Dartos", definition: "عضلة السلخ", chapter: 8 },
+  { term: "External spermatic fascia", definition: "اللفافة المنوية الخارجية", chapter: 8 },
+  { term: "Cremaster", definition: "العضلة المشمرة", chapter: 8 },
+  { term: "Tunica vaginalis", definition: "الغلالة الغمدية", chapter: 8 },
+  { term: "Testes", definition: "الخصيتان", chapter: 8 },
+  { term: "Tunica albuginea", definition: "الغلالة البيضاء", chapter: 8 },
+  { term: "Rete testis", definition: "الشبكة الخصوية", chapter: 8 },
+  { term: "Efferent ductules", definition: "القُنيَّات الصادرة", chapter: 8 },
+  { term: "Epididymis", definition: "البربخان", chapter: 8 },
+  { term: "Sinus Epididymidis", definition: "جيب البربخ", chapter: 8 },
+  { term: "Vas deferens", definition: "الأسهران", chapter: 8 },
+  { term: "Seminal vesicles", definition: "الحويصلان المنويتان", chapter: 8 },
+  { term: "Ejaculatory ducts", definition: "القناتان الدافقتان", chapter: 8 },
+  { term: "Seminal colliculus", definition: "الأكيمة المنوية", chapter: 8 },
+  { term: "Utricle", definition: "القُريبة", chapter: 8 },
+  { term: "Prostate", definition: "البروستات(الموثة)", chapter: 8 },
+  { term: "Vulva(pudendum)", definition: "الفرج", chapter: 8 },
+  { term: "Mons pubis", definition: "جبل العانة", chapter: 8 },
+  { term: "Labia majora", definition: "الشفرين الكبيرين", chapter: 8 },
+  { term: "Clitoris", definition: "البظر", chapter: 8 },
+  { term: "Vaginal opening", definition: "فتحة المهبل", chapter: 8 },
+  { term: "Symphysis pubis", definition: "الارتفاق العاني", chapter: 8 },
+  { term: "Perineum", definition: "العجان", chapter: 8 },
+  { term: "Mucosal tissue", definition: "النسيج المخاطي", chapter: 8 },
+  { term: "Lamella", definition: "صفيحة", chapter: 8 },
+  { term: "Frenulum", definition: "لُجيم", chapter: 8 },
+  { term: "Fourchette", definition: "العويكشة", chapter: 8 },
+  { term: "Vestibule", definition: "الدهليز", chapter: 8 },
+  { term: "Urethral meatus", definition: "الصماخ الإحليلي", chapter: 8 },
+  { term: "Hymen", definition: "غشاء البكارة", chapter: 8 },
+  { term: "Fasciae", definition: "لفافات", chapter: 8 },
+  { term: "Bulb of vestibule", definition: "بصلة الدهليز", chapter: 8 },
+  { term: "Ligament of ovary", definition: "رباط المبيض", chapter: 8 },
+  { term: "Vagina", definition: "المهبل", chapter: 8 },
+  { term: "Epithelial tissue", definition: "نسيج ظهاري", chapter: 8 },
+  { term: "Loose connective", definition: "نسيج ضام رخو", chapter: 8 },
+  { term: "Vaginal fornix", definition: "قبو المهبل", chapter: 8 },
+  { term: "Vaginal artery", definition: "الشريان المهبلي", chapter: 8 },
+  { term: "Middle rectal artery", definition: "الشريان المستقيمي المتوسط", chapter: 8 },
+  { term: "Internal pudendal artery", definition: "الشريان الحيائي الباطن(الفرجي الداخلي)", chapter: 8 },
+  { term: "Uterus", definition: "الرحم", chapter: 8 },
+  { term: "Fundus", definition: "القاع", chapter: 8 },
+  { term: "Cervix", definition: "العنق", chapter: 8 },
+  { term: "Vagina", definition: "المهبل", chapter: 8 },
+  { term: "Mucous membrane", definition: "الغشاء المخاطي", chapter: 8 },
+  { term: "Endometrium", definition: "البطانة الرحمية", chapter: 8 },
+  { term: "Myometrium", definition: "العضلة الرحمية", chapter: 8 },
+  { term: "Uterine tube", definition: "البوق(أنبوب الرحم)", chapter: 8 },
+  { term: "Infundibulum", definition: "القمع", chapter: 8 },
+  { term: "Fimbriae", definition: "أخمال", chapter: 8 },
+  { term: "Ampulla", definition: "أنبورة(مجل)", chapter: 8 },
+  { term: "Isthmus", definition: "البرزخ", chapter: 8 },
+  { term: "Intramural part", definition: "الجزء داخل الرحم", chapter: 8 },
+  { term: "Ovaries", definition: "المبيضان", chapter: 8 },
+  { term: "Menopause", definition: "سن الضهي", chapter: 8 },
+  { term: "Mammary glands", definition: "الغدد الثديية", chapter: 8 },
+  { term: "Greater pectoralis muscle", definition: "العضلة الصدرية الكبيرة", chapter: 8 },
+  { term: "Anterior serratus muscle", definition: "العضلة المنشارية الأمامية", chapter: 8 },
+  { term: "Nipple", definition: "الحلمة", chapter: 8 },
+  { term: "Areola", definition: "هالة الثدي (القسم المصطبغ)", chapter: 8 },
+  { term: "Sebaceous glands", definition: "الغدد الدهنية (الزهمية)", chapter: 8 },
+  { term: "Sebum", definition: "الزهم", chapter: 8 },
+  { term: "Suspensory ligaments", definition: "الأربطة المعلقة", chapter: 8 },
+  { term: "Excretory (Lactiferous ducts)", definition: "القنوات المفرغة(الناقلة للبن)", chapter: 8 },
+  { term: "Lactiferous sinuses", definition: "الجيوب الناقلة للبن", chapter: 8 },
+  { term: "Menstrual cycle", definition: "الدورة الطمثيّة", chapter: 8 },
+  { term: "Montgomery’s tubercles", definition: "حديبات مونتغمري", chapter: 8 },
+  { term: "Ovarian artery", definition: "الشريان المبيضي", chapter: 8 },
+  { term: "Uterine artery", definition: "الشريان الرحمي", chapter: 8 },
+  { term: "Interamural part", definition: "الجزء داخل الجدار", chapter: 8 },
+  { term: "Labia minora", definition: "الشفرين الصغيرين", chapter: 8 },
+  { term: "Colles fascia", definition: "لفافة كولس", chapter: 8 },
+  { term: "Testicular arteries", definition: "الشريانان الخصويان", chapter: 8 },
+  { term: "Lobules of tastis", definition: "فصيصات الخصية", chapter: 8 },
+  { term: "Appendix epididymis", definition: "زائدة بربخية", chapter: 8 },
+  { term: "Ampulla of deferens", definition: "أمبورة الأسهر", chapter: 8 },
+  { term: "Lnguinal canal", definition: "القناة الإربية", chapter: 8 },
+  { term: "External urethral sphincter", definition: "المصّرة الإحليليّة الخارجية", chapter: 8 },
+  { term: "Bulbourethral glands (cowper)", definition: "الغدتان البصليتان الإحليليّتان (كوبر)", chapter: 8 },
+  { term: "Muscular tissue", definition: "نسيج عضلي", chapter: 8 },
+  { term: "Pituitary gland (Hypophysis)", definition: "الغدة النخامية", chapter: 9 },
+  { term: "Sella turcica", definition: "السرج التركي", chapter: 9 },
+  { term: "Hypothalamus", definition: "الوطاء", chapter: 9 },
+  { term: "Infundibulum", definition: "القمع", chapter: 9 },
+  { term: "Anterior hypophysis", definition: "النخامة الأمامية", chapter: 9 },
+  { term: "Adenohypophysis", definition: "النخامى الغدية(الأمامية)", chapter: 9 },
+  { term: "Somatotropin", definition: "الموجهة الجسدية(هرمون النمو)", chapter: 9 },
+  { term: "Thyroid Stimulating Hormone (TSH)", definition: "الهرمون المنبه للدرق", chapter: 9 },
+  { term: "Thyrotropin", definition: "الموجهة الدرقية", chapter: 9 },
+  { term: "Adrenocorticotropic hormone (ACTH)", definition: "الهرمون الموجه لقشرة الكظر", chapter: 9 },
+  { term: "Follicle stimulating hormone ( FSH)", definition: "الهرمون المنبه للجريب", chapter: 9 },
+  { term: "Luteinizing hormone ( LH )", definition: "الهرمون الملوتن", chapter: 9 },
+  { term: "Posterior hypophysis", definition: "النخامى الخلفية", chapter: 9 },
+  { term: "Antidiuretic hormone (ADH) (Vasopressin)", definition: "الهرمون المضاد للإبالة (الفازوبرسين)", chapter: 9 },
+  { term: "Pineal gland", definition: "الغدة الصنوبرية", chapter: 9 },
+  { term: "Circadian rhythms", definition: "الإيقاعات اليومية", chapter: 9 },
+  { term: "Thyroid gland", definition: "الغدة الدرقية", chapter: 9 },
+  { term: "Lateral lobes", definition: "فصان جانبيان", chapter: 9 },
+  { term: "Isthmus", definition: "البرزخ", chapter: 9 },
+  { term: "Follicular cells", definition: "الخلايا الجريبية", chapter: 9 },
+  { term: "Parafollicular cells", definition: "الخلايا المجاورة للجريبات", chapter: 9 },
+  { term: "Parathyroid glands", definition: "الغدد جارات الدرق", chapter: 9 },
+  { term: "Adrenal glands", definition: "الغدتان الكظريتان", chapter: 9 },
+  { term: "Adrenal cortex", definition: "القشرة الكظرية", chapter: 9 },
+  { term: "Zona glomerulosa", definition: "المنطقة الكبيبية", chapter: 9 },
+  { term: "Zona fasciculata", definition: "المنطقة الحزمية", chapter: 9 },
+  { term: "Zona reticularis", definition: "المنطقة الشبكية", chapter: 9 },
+  { term: "Adrenal medulla", definition: "اللب الكظري (عصبي)", chapter: 9 },
+  { term: "Pancreas", definition: "المعثكلة", chapter: 9 },
+  { term: "Medullary vein", definition: "وريد اللب", chapter: 9 },
+  { term: "Capsular artery", definition: "شريان المحفظة", chapter: 9 },
+  { term: "Islet of Langrhans", definition: "جزر لانغرهانس", chapter: 9 },
+  { term: "Exocrine cells", definition: "خلايا خارجية الإفراز", chapter: 9 },
+  { term: "Endocrine cells", definition: "خلايا داخلية الإفراز", chapter: 9 },
+  { term: "Thymus", definition: "التوتة، التايموس، الغدة الصعترية، الغدة الزعترية", chapter: 9 },
+  { term: "T lymphocytes cells", definition: "الخلايا اللمفية التائية", chapter: 9 },
+  { term: "Right internal thoracic artery", definition: "الشريان الصدري الداخلي الأيمن (فرع من تحت الترقوة)", chapter: 9 },
+  { term: "Gonads", definition: "الأقناد، المناسل", chapter: 9 },
+  { term: "Ovula", definition: "البويضات", chapter: 9 },
+  { term: "Ovary", definition: "المبيض", chapter: 9 },
+  { term: "Scrotum", definition: "كيس الصفن", chapter: 9 },
+  { term: "Glands", definition: "الغدد", chapter: 9 },
+  { term: "Hormones", definition: "الهرمونات", chapter: 9 },
+  { term: "Target cell", definition: "الخلية الهدف", chapter: 9 },
+  { term: "Master gland", definition: "الغدة القائدة (النخاميّة)", chapter: 9 },
+  { term: "Testes", definition: "الخصيتان", chapter: 9 },
+  { term: "Growth Hormone (GH)", definition: "هرمون النمو", chapter: 9 },
+  { term: "Prolactin (PRL)", definition: "البرولاكتين", chapter: 9 },
+  { term: "Oxytocin", definition: "هرمون الأوكسيتوسين", chapter: 9 },
+  { term: "Melatonine", definition: "الميلاتونين", chapter: 9 },
+  { term: "Estrogen", definition: "الإستروجين", chapter: 9 },
+  { term: "Progesterone", definition: "البروجسترون", chapter: 9 },
+  { term: "Catecholamines", definition: "الكاتيكولامينات", chapter: 9 },
+  { term: "Epinephrine", definition: "الإيبنفرن", chapter: 9 },
+  { term: "Norepinephrine", definition: "النورإيبنفرن", chapter: 9 },
+  { term: "Receptors", definition: "المستقبلات", chapter: 9 },
+  { term: "Thyroxine T4", definition: "التيروكسين", chapter: 9 },
+  { term: "Alpha cells", definition: "خلايا إلفا", chapter: 9 },
+  { term: "Beta Cells", definition: "خلايا بيتا", chapter: 9 },
+  { term: "Brain (encephalon)", definition: "الدماغ", chapter: 10 },
+  { term: "Cerebrum", definition: "المخ", chapter: 10 },
+  { term: "Cerebellum", definition: "المخيخ", chapter: 10 },
+  { term: "Telencephalon", definition: "الدماغ النهائي", chapter: 10 },
+  { term: "Hemisphere", definition: "نصف كرة مخية", chapter: 10 },
+  { term: "Longitudinal fissure", definition: "الشق الطولاني", chapter: 10 },
+  { term: "Corpus callosum", definition: "الجسم الثفني", chapter: 10 },
+  { term: "Sulci", definition: "أتلام", chapter: 10 },
+  { term: "Parietooccipital sulcus", definition: "التلم الجداري القذالي", chapter: 10 },
+  { term: "Central sulcus", definition: "التلم المركزي(رولاندو)", chapter: 10 },
+  { term: "Lateral sulcus (Sylvian)", definition: "التلم الوحشي(الجانبي_سيلفيوس)", chapter: 10 },
+  { term: "Parietal", definition: "الجداري", chapter: 10 },
+  { term: "Occipital", definition: "القذالي", chapter: 10 },
+  { term: "Insula", definition: "فص الجزيرة", chapter: 10 },
+  { term: "Precentral gyrus", definition: "التلفيف أمام المركزي", chapter: 10 },
+  { term: "Inferior frontal gyrus", definition: "التلفيف الجبهي السفلي", chapter: 10 },
+  { term: "Superior temporal gyrus", definition: "التلفيف الصدغي العلوي", chapter: 10 },
+  { term: "Postcentral gyrus", definition: "التلفيف خلف المركزي", chapter: 10 },
+  { term: "Calcarine sulcus", definition: "التلم المهمازي", chapter: 10 },
+  { term: "Cingulate sulcus", definition: "التلم الحزامي", chapter: 10 },
+  { term: "Paracentral lobule", definition: "الفصيص حول المركزي", chapter: 10 },
+  { term: "Cingulate gyrus", definition: "التلفيف الحزامي", chapter: 10 },
+  { term: "Cuneus", definition: "الوتد", chapter: 10 },
+  { term: "Lingual gyrus", definition: "التلفيف اللساني", chapter: 10 },
+  { term: "Olfactory sulcus", definition: "التلم الشمي", chapter: 10 },
+  { term: "Collateral sulcus", definition: "التلم الجانبي(المساير)", chapter: 10 },
+  { term: "Occipitotemporal sulcus", definition: "التلم القذالي الصدغي", chapter: 10 },
+  { term: "Straight gyrus", definition: "التلفيف المستقيم", chapter: 10 },
+  { term: "Parahippocampal gyrus", definition: "التلفيف جانب حصان البحر (جانب الحُصين)", chapter: 10 },
+  { term: "Uncus", definition: "المحجن", chapter: 10 },
+  { term: "Neocortex", definition: "القشرة الجديدة", chapter: 10 },
+  { term: "Molecular layer", definition: "الطبقة الجزيئية", chapter: 10 },
+  { term: "External pyramidal layer", definition: "الطبقة الهرمية الخارجية", chapter: 10 },
+  { term: "Internal pyramidal layer", definition: "الطبقة الهرمية الداخلية", chapter: 10 },
+  { term: "Multiforme layer", definition: "الطبقة عديدة الأشكال", chapter: 10 },
+  { term: "Optic chiasm", definition: "التصالب البصري", chapter: 10 },
+  { term: "Orbital gyri", definition: "تلافيف حجاجية", chapter: 10 },
+  { term: "Primary somesthetic area", definition: "باحة الحس الجسدي(الجسمي) الأولية", chapter: 10 },
+  { term: "Secondary somesthetic area", definition: "باحة الحس الجسدي الثانوية", chapter: 10 },
+  { term: "Primary motor area", definition: "الباحة الحركية الأولية", chapter: 10 },
+  { term: "Premotor area", definition: "الباحة أمام الحركية", chapter: 10 },
+  { term: "Primary visual area", definition: "الباحة البصرية الأولية", chapter: 10 },
+  { term: "Primary auditory area", definition: "باحة السمع الأولية", chapter: 10 },
+  { term: "Motor speech area of Broca", definition: "باحة الكلام الحركية لبروكا", chapter: 10 },
+  { term: "Expressive aphasia", definition: "حبسة تعبيرية", chapter: 10 },
+  { term: "Receptive speech area of Weirnicke", definition: "باحة الكلام الحسية لفيرينكة", chapter: 10 },
+  { term: "White matter", definition: "المادة البيضاء", chapter: 10 },
+  { term: "Projecting fibers", definition: "الألياف الإسقاطية", chapter: 10 },
+  { term: "Internal capsule", definition: "المحفظة الداخلية", chapter: 10 },
+  { term: "Association fibers", definition: "الألياف الترابطية (المشاركة)", chapter: 10 },
+  { term: "Commissural fibers", definition: "الألياف الالتقائية (الصوارية)", chapter: 10 },
+  { term: "Rostrum", definition: "منقار", chapter: 10 },
+  { term: "Genu", definition: "ركبة", chapter: 10 },
+  { term: "Body", definition: "جسم", chapter: 10 },
+  { term: "Splenium", definition: "حوية(ضماد)", chapter: 10 },
+  { term: "Basal nuclei", definition: "النوى القاعدية", chapter: 10 },
+  { term: "Caudate nucleus", definition: "النوى المذنبة", chapter: 10 },
+  { term: "Lentiform nucleus", definition: "النواة العدسية", chapter: 10 },
+  { term: "Putamen", definition: "اللحاء، العجمة، الأتبة", chapter: 10 },
+  { term: "Globus pallidus", definition: "الكرة الشاحبة", chapter: 10 },
+  { term: "Limbic system", definition: "الجهاز الحوفي(اللمبي)", chapter: 10 },
+  { term: "Hippocampus", definition: "الحُصين", chapter: 10 },
+  { term: "Amygdaloid body", definition: "الجسم اللوزي", chapter: 10 },
+  { term: "Diencephalon", definition: "الدماغ البيني", chapter: 10 },
+  { term: "Thalamus", definition: "المهاد", chapter: 10 },
+  { term: "Epithalamus", definition: "ما فوق المهاد", chapter: 10 },
+  { term: "Subthalamus", definition: "أسفل المهاد(دون المهاد)", chapter: 10 },
+  { term: "Hypothalamus", definition: "الوطاء (تحت المهاد)", chapter: 10 },
+  { term: "Hypophysis", definition: "النخامى", chapter: 10 },
+  { term: "Brain stem", definition: "جذع الدماغ", chapter: 10 },
+  { term: "Midbrain (Mesencephalon)", definition: "الدماغ المتوسط", chapter: 10 },
+  { term: "Tegmentum", definition: "الغطاء", chapter: 10 },
+  { term: "Tectum", definition: "السقف", chapter: 10 },
+  { term: "Cerebral aqueduct", definition: "المسال المخي", chapter: 10 },
+  { term: "Pons (Metencephalon)", definition: "الجسر (الدماغ التالي)", chapter: 10 },
+  { term: "Medulla (medulla oblongata)", definition: "البصلة( النخاع المتطاول)", chapter: 10 },
+  { term: "Cerebullum", definition: "المخيخ", chapter: 10 },
+  { term: "Vermis", definition: "دودة المخيخ", chapter: 10 },
+  { term: "Olfactory bulb", definition: "البصلة الشمية", chapter: 10 },
+  { term: "Trochlear nerve", definition: "العصب البكري", chapter: 10 },
+  { term: "Spinal cord", definition: "النخاع الشوكي", chapter: 10 },
+  { term: "Foramen magnum", definition: "الثقبة الكبرى", chapter: 10 },
+  { term: "Cauda equina", definition: "ذيل الفرس", chapter: 10 },
+  { term: "Gray matter", definition: "المادة السنجابية", chapter: 10 },
+  { term: "Lumbosacral enlargement", definition: "الضخامة القطنية", chapter: 10 },
+  { term: "Spinal ganglion", definition: "عقدة شوكية", chapter: 10 },
+  { term: "Pedicles", definition: "رُجيلات", chapter: 10 },
+  { term: "Cervical englargement", definition: "الضخامة الرقبية", chapter: 10 },
+  { term: "internal carotid artery", definition: "الشريان السباتي الباطن", chapter: 10 },
+  { term: "Vertebral arteries", definition: "الشريانان الفقريان", chapter: 10 },
+  { term: "Basilar artery", definition: "الشريان القاعدي", chapter: 10 },
+  { term: "Anterior cerebral artery (ACA)", definition: "الشريان المخي الأمامي", chapter: 10 },
+  { term: "Middle cerebral artery (MCA)", definition: "الشريان المخي الأوسط", chapter: 10 },
+  { term: "Ophthalmic artery", definition: "الشريان العيني", chapter: 10 },
+  { term: "Posterior cerebral artery (PCA)", definition: "الشريان المخي الخلفي", chapter: 10 },
+  { term: "Superior cerebellar artery (SCA)", definition: "الشريان المخيخي العلوي", chapter: 10 },
+  { term: "Anterior inferior cerebellar artery (AICA)", definition: "الشريان المخيخي السفلي الأمامي", chapter: 10 },
+  { term: "Posterior inferior cerebellar artery ( PICA)", definition: "الشريان المخيخي السفلي الخلفي", chapter: 10 },
+  { term: "Spinal arteries", definition: "شريانان شوكيان", chapter: 10 },
+  { term: "Cerebral arterial circle", definition: "الدائرة المخية الشريانية، مسبع ويلس", chapter: 10 },
+  { term: "Meninges", definition: "السحايا", chapter: 10 },
+  { term: "Dura mater", definition: "الأم الجافية", chapter: 10 },
+  { term: "Falx cerebri", definition: "منجل (مشول) المخ", chapter: 10 },
+  { term: "Falx cerebelli", definition: "منجل (مشول) المخيخ", chapter: 10 },
+  { term: "Tentorium cerebelli", definition: "الخيمة المخيخية", chapter: 10 },
+  { term: "Superior sagittal sinus", definition: "الجيب السهمي العلوي", chapter: 10 },
+  { term: "Inferior sagittal sinus", definition: "الجيب السهمي السفلي", chapter: 10 },
+  { term: "Straight sinus", definition: "الجيب المستقيم", chapter: 10 },
+  { term: "Greater cerebral vein", definition: "الوريد المخي الكبير", chapter: 10 },
+  { term: "Confluence of sinus", definition: "ملتقى الجيوب (مقرن)", chapter: 10 },
+  { term: "Transverse sinus", definition: "الجيب المعترض", chapter: 10 },
+  { term: "Sigmoid sinus", definition: "الجيب السيني", chapter: 10 },
+  { term: "Basilar sinus", definition: "الجيب القاعدي", chapter: 10 },
+  { term: "Occipital sinus", definition: "الجيب القذالي", chapter: 10 },
+  { term: "Cavernous sinus", definition: "الجيب الكهفي", chapter: 10 },
+  { term: "Arachnoid mater", definition: "الأم العنكبوتية", chapter: 10 },
+  { term: "Subdural space", definition: "الحيز تحت الجافية", chapter: 10 },
+  { term: "Subarachnoid space", definition: "الحيز تحت العنكبوتي", chapter: 10 },
+  { term: "Pia mater", definition: "الأم الحنون", chapter: 10 },
+  { term: "Diploic vein", definition: "وريد خلالي", chapter: 10 },
+  { term: "Lateral ventricles", definition: "البطينان الجانبيان", chapter: 10 },
+  { term: "Third ventricle", definition: "البطين الثالث", chapter: 10 },
+  { term: "Fourth ventricle", definition: "البطين الرابع", chapter: 10 },
+  { term: "Interventricular foramen", definition: "الثقبة بين البطينية، ثقبة مونرو", chapter: 10 },
+  { term: "Cerebral aqueduct", definition: "المسال المخي", chapter: 10 },
+  { term: "Central canal", definition: "القناة المركزية", chapter: 10 },
+  { term: "Median aperture", definition: "الفتحة الناصفة، ثقبة ماجندي", chapter: 10 },
+  { term: "Lateral apertures", definition: "الفتحتان الوحشيتان، ثقبتا لوشكا", chapter: 10 },
+  { term: "Terminal ventricle", definition: "البطين الانتهائي", chapter: 10 },
+  { term: "Cerebro spinal fluid ( CSF)", definition: "السائل الدماغي الشوكي", chapter: 10 },
+  { term: "Choroid plexuses", definition: "الضفائر المشيمية", chapter: 10 },
+  { term: "Lobes", definition: "فصوص", chapter: 10 },
+  { term: "Gyri", definition: "تلافيف", chapter: 10 },
+  { term: "External granular layer", definition: "الطبقة الحبيبية الخارجية", chapter: 10 },
+  { term: "Receptive aphasia", definition: "حبسة استقبالية", chapter: 10 },
+  { term: "Projecting fibers", definition: "ألياف إسقاطيّة", chapter: 10 },
+  { term: "Rostrum", definition: "المنقار", chapter: 10 },
+  { term: "Medulla", definition: "البصلة", chapter: 10 },
+  { term: "Oculomotor nerve", definition: "العصب محرّك العين", chapter: 10 },
+  { term: "Ectoderm", definition: "الأديم الظاهر", chapter: 10 },
+  { term: "Folds", definition: "طيّات", chapter: 10 },
+  { term: "Forebrain", definition: "الدماغ الجبهي", chapter: 10 },
+  { term: "Microgliocyte", definition: "خلايا الدبق الصغيرة", chapter: 10 },
+  { term: "Myelin sheath", definition: "غمد النخاعين", chapter: 10 },
+  { term: "Central nervous system (CNS)", definition: "الجهاز العصبي المركزي", chapter: 11 },
+  { term: "Peripheral nervous system (PNC)", definition: "الجهاز العصبي المحيطي", chapter: 11 },
+  { term: "Peripheral nerves", definition: "الأعصاب المحيطية", chapter: 11 },
+  { term: "Motor nerves", definition: "الأعصاب الحركية", chapter: 11 },
+  { term: "Efferent", definition: "صادرة", chapter: 11 },
+  { term: "Sensitive nerves", definition: "الأعصاب الحسية", chapter: 11 },
+  { term: "Afferent", definition: "واردة", chapter: 11 },
+  { term: "Sensorial nerves", definition: "الأعصاب الحاسية", chapter: 11 },
+  { term: "Plexus", definition: "الضفيرة العصبية", chapter: 11 },
+  { term: "Ganglion", definition: "العقدة العصبية", chapter: 11 },
+  { term: "Preganglionic fibers", definition: "ألياف قبل عقدية(قبل مشبكية)", chapter: 11 },
+  { term: "Postganglionic fibers", definition: "ألياف بعد عقدية (بعد مشبكية)", chapter: 11 },
+  { term: "Somatic nervous system (SNS)", definition: "الجهاز العصبي الجسدي (الجسمي)", chapter: 11 },
+  { term: "Autonomic nervous system (ANS)", definition: "الجهاز العصبي الذاتي (الحشوي، الإنباتي، المستقل)", chapter: 11 },
+  { term: "Cranial nerves", definition: "الأعصاب القحفية", chapter: 11 },
+  { term: "Olfactory nerve", definition: "العصب الشمي (القحفي الأول)", chapter: 11 },
+  { term: "Optic nerve", definition: "العصب البصري(القحفي الثاني)", chapter: 11 },
+  { term: "Occulomotor nerve", definition: "العصب محرّك العين (القحفي الثالث)", chapter: 11 },
+  { term: "Trochlear nerve", definition: "العصب البَكَري (القحفي الرابع)", chapter: 11 },
+  { term: "Trigeminal nerve", definition: "العصب مثلث التوائم (القحفي الخامس)", chapter: 11 },
+  { term: "Ophthalmic nerve", definition: "العصب العيني V1", chapter: 11 },
+  { term: "Maxillary nerve", definition: "العصب الفكي العلوي V2", chapter: 11 },
+  { term: "Mandibular nerve", definition: "العصب الفكي السفلي V3", chapter: 11 },
+  { term: "Abducent nerve", definition: "العصب المبعد (القحفي السادس)", chapter: 11 },
+  { term: "Facial nerve", definition: "العصب الوجهي(القحفي السابع)", chapter: 11 },
+  { term: "Vestibulocochlear nerve", definition: "العصب الدهليزي القوقعي (القحفي الثامن)", chapter: 11 },
+  { term: "Glossopharyngeal nerve", definition: "العصب الللساني البلعومي (القحفي التاسع)", chapter: 11 },
+  { term: "Vagus nerve", definition: "العصب المبهم (القحفي العاشر)", chapter: 11 },
+  { term: "Accessory nerve", definition: "العصب اللاحق، الإضافي (القحفي الحادي عشر)", chapter: 11 },
+  { term: "Hypoglossal nerve", definition: "العصب تحت اللساني (القحفي الثاني عشر)", chapter: 11 },
+  { term: "Olfactory bulbs", definition: "البصلة الشمية", chapter: 11 },
+  { term: "Pons", definition: "الجسر", chapter: 11 },
+  { term: "Cribriform plate", definition: "الصفيحة المصفوية", chapter: 11 },
+  { term: "Jugular foramen", definition: "الثقبة الوداجية", chapter: 11 },
+  { term: "Recurrent laryngeal nerve", definition: "عصب حنجري راجع", chapter: 11 },
+  { term: "Pharyngeal plexus", definition: "الضفيرة البلعومية", chapter: 11 },
+  { term: "Hypoglossal canal", definition: "النفق تحت اللساني", chapter: 11 },
+  { term: "Stylomostoid foramen", definition: "الثقبة الإبرية الخشائية", chapter: 11 },
+  { term: "Foramen ovale", definition: "الثقبة البيضوية", chapter: 11 },
+  { term: "Foramen rotundum", definition: "الثقبة المدورة", chapter: 11 },
+  { term: "Optic canal", definition: "النفق البصري", chapter: 11 },
+  { term: "Spinal nerves", definition: "الأعصاب الشوكية", chapter: 11 },
+  { term: "Dermatome", definition: "القطاع (البضعة) الجلدي", chapter: 11 },
+  { term: "Myotome", definition: "القطاع (البضعة) العضلي", chapter: 11 },
+  { term: "Ramus", definition: "فرع", chapter: 11 },
+  { term: "Splanchnic nerves", definition: "الأعصاب الحشوية", chapter: 11 },
+  { term: "Somatic plexuses", definition: "الضفائر الجسمية", chapter: 11 },
+  { term: "Cervical plexus", definition: "الضفيرة الرقبية", chapter: 11 },
+  { term: "Phrenic nerve", definition: "العصب الحجابي", chapter: 11 },
+  { term: "Brachial plexus", definition: "الضفيرة العضدية", chapter: 11 },
+  { term: "Musculocutaneous nerve", definition: "العصب العضلي الجلدي", chapter: 11 },
+  { term: "Axillary nerve", definition: "العصب الإبطي", chapter: 11 },
+  { term: "Ulnar nerve", definition: "العصب الزندي", chapter: 11 },
+  { term: "Radial nerve", definition: "العصب الكعبري", chapter: 11 },
+  { term: "Median nerve", definition: "العصب الناصف", chapter: 11 },
+  { term: "Lumbar plexus", definition: "الضفيرة القطنية", chapter: 11 },
+  { term: "Femoral nerve", definition: "العصب الفخذي", chapter: 11 },
+  { term: "Obturator nerve", definition: "العصب السدادي", chapter: 11 },
+  { term: "Sacral plexus", definition: "الضفيرة العجزية", chapter: 11 },
+  { term: "Sciatic nerve", definition: "العصب الوركي(العصب الأكبر في الجسم)", chapter: 11 },
+  { term: "Pudendal nerve", definition: "العصب الفرجي الحيائي", chapter: 11 },
+  { term: "Ilioinguinal nerve", definition: "العصب الحرقفي الإربي", chapter: 11 },
+  { term: "Iliohypogastric nerve", definition: "العصب الحرقفي الخثلي", chapter: 11 },
+  { term: "Genitofemoral nerve", definition: "العصب الفخذي التناسلي", chapter: 11 },
+  { term: "Ventral root", definition: "جذر أمامي محرك", chapter: 11 },
+  { term: "Dorsal root", definition: "جذر خلفي حسي", chapter: 11 },
+  { term: "Sympathetic ganglion", definition: "عقدة ودية ذاتية", chapter: 11 },
+  { term: "Spinal cord segment", definition: "شدفة نخاعية", chapter: 11 },
+  { term: "Posterior ramus", definition: "فرع خلفي", chapter: 11 },
+  { term: "Anterior ramus", definition: "فرع أمامي", chapter: 11 },
+  { term: "Anterior root", definition: "جذر أمامي", chapter: 11 },
+  { term: "Cutaneous nerves", definition: "أعصاب جلدية", chapter: 11 },
+  { term: "Lateral pectoral nerve", definition: "عصب صدري وحشي", chapter: 11 },
+  { term: "Suprascapular nerve", definition: "عصب فوق كتفي", chapter: 11 },
+  { term: "Subclavian nerve", definition: "عصب تحت الترقوة", chapter: 11 },
+  { term: "Autonomic nervous system", definition: "الجهاز العصبي الذاتي (المستقل)", chapter: 11 },
+  { term: "Sympathetic system", definition: "الجملة الودية", chapter: 11 },
+  { term: "Stress", definition: "حالة الشدة", chapter: 11 },
+  { term: "Fight or Flight", definition: "المجابهة أو الهروب (حالة شدة)", chapter: 11 },
+  { term: "Abdominal viscera", definition: "الأحشاء البطنية", chapter: 11 },
+  { term: "Pelvic viscera", definition: "الأحشاء الحوضية", chapter: 11 },
+  { term: "Parasympathetic system", definition: "الجملة نظير الودية", chapter: 11 },
+  { term: "Ciliary ganglion", definition: "العقدة الهدبية", chapter: 11 },
+  { term: "Pterygopalatine ganglion", definition: "العقدة الجناحية الحنكية", chapter: 11 },
+  { term: "Otic ganglion", definition: "العقدة الأذنية", chapter: 11 },
+  { term: "Submandibular ganglion", definition: "العقدة تحت الفك السفلي", chapter: 11 },
+  { term: "Erectile tissues", definition: "النسج الناعظة", chapter: 11 },
+  { term: "Thoracic visceral plexus", definition: "الضفائر الحشوية الصدرية", chapter: 11 },
+  { term: "Prevertebral plexus", definition: "الضفائر أمام الفقرية (حول الأبهر)", chapter: 11 },
+  { term: "Autonomic nervous plexuses", definition: "الضفائر العصبية الذاتية", chapter: 11 },
+  { term: "Cardiac plexus", definition: "الضفيرة القلبية", chapter: 11 },
+  { term: "Pulmonary plexus", definition: "الضفيرة الرئوية", chapter: 11 },
+  { term: "Celiac plexus", definition: "الضفيرة البطنية (الزلاقية)", chapter: 11 },
+  { term: "Superior mesenteric plexus", definition: "الضفيرة المساريقية العلوية", chapter: 11 },
+  { term: "Renal plexus", definition: "الضفيرة الكلوية", chapter: 11 },
+  { term: "Suprarenal plexus", definition: "الضفيرة الكظرية", chapter: 11 },
+  { term: "Inferior hypogastric (pelvic) plexus", definition: "الضفيرة الخثلية السفلية (الحوضية)", chapter: 11 },
+  { term: "Greater splanchnic nerve", definition: "العصب الحشوي الكبير", chapter: 11 },
+  { term: "Lesser splanchnic nerve", definition: "العصب الحشوي الصغير", chapter: 11 },
+  { term: "Least splanchnic nerve", definition: "العصب الحشوي الأصغر", chapter: 11 },
+  { term: "Lumber splanchnic nerves", definition: "الأعصاب الحشوية القطنية", chapter: 11 },
+  { term: "Sympathetic trunk", definition: "الجذع الودي", chapter: 11 },
+  { term: "Gray ramus communicans", definition: "فرع واصل رمادي", chapter: 11 },
+  { term: "White ramus communicans", definition: "فرع واصل أبيض", chapter: 11 },
+  { term: "Spinal cord", definition: "النخاع الشوكي", chapter: 11 },
+  { term: "Eye (Ophthalmos)", definition: "العين", chapter: 12 },
+  { term: "Orbit", definition: "الحجاج", chapter: 12 },
+  { term: "Upper eyelid", definition: "الجفن العلوي", chapter: 12 },
+  { term: "Lower eyelid", definition: "الجفن السفلي", chapter: 12 },
+  { term: "Medial commissure", definition: "الصوار الإنسي", chapter: 12 },
+  { term: "Lateral commissure", definition: "الصوار الوحشي", chapter: 12 },
+  { term: "Eyelids", definition: "الأجفان", chapter: 12 },
+  { term: "Conjunctiva", definition: "الملتحمة", chapter: 12 },
+  { term: "Lacrimal apparatus", definition: "جهاز الدمع", chapter: 12 },
+  { term: "Lacrimal gland", definition: "الغدة الدمعية", chapter: 12 },
+  { term: "Lacrimal sac", definition: "كيس الدمع", chapter: 12 },
+  { term: "Lacrimal canals", definition: "قُنيتا الدمع", chapter: 12 },
+  { term: "Lacrimonasal duct", definition: "القناة الدمعية الأنفية", chapter: 12 },
+  { term: "Eyeball (Oculi)", definition: "كرة العين", chapter: 12 },
+  { term: "Fibrous layer", definition: "الطبقة الليفية (غلالة خارجية)", chapter: 12 },
+  { term: "Cornea", definition: "القرنية", chapter: 12 },
+  { term: "Sclera", definition: "الصلبة", chapter: 12 },
+  { term: "Vascular (pigmental) layer", definition: "الطبقة الوعائية(المصطبغة)، تمثل الغلالة الوسطى", chapter: 12 },
+  { term: "Retina", definition: "الشبكية", chapter: 12 },
+  { term: "Ora serrata", definition: "الحاشية المشرشرة", chapter: 12 },
+  { term: "Ciliary body", definition: "الجسم الهدبي", chapter: 12 },
+  { term: "Choroid", definition: "المشيمية", chapter: 12 },
+  { term: "Ciliary processes", definition: "الزوائد الهدبية", chapter: 12 },
+  { term: "Aqueus humor", definition: "الخلط المائي", chapter: 12 },
+  { term: "Chambers of eye", definition: "حجرتي العين", chapter: 12 },
+  { term: "Posterior chamber", definition: "الحجرة الخلفية", chapter: 12 },
+  { term: "Anterior chamber", definition: "الحجرة الأمامية", chapter: 12 },
+  { term: "Iris", definition: "القزحية", chapter: 12 },
+  { term: "Pupil", definition: "الحدقة", chapter: 12 },
+  { term: "Sphincter pupillae muscle", definition: "العضلة مصرة الحدقة", chapter: 12 },
+  { term: "Dilator pupillae muscle", definition: "العضلة موسعة الحدقة", chapter: 12 },
+  { term: "Pupillary light reflex", definition: "المنعكس الحدقي للضوء", chapter: 12 },
+  { term: "Optic part of the retina", definition: "المنطقة البصرية من الشبكية", chapter: 12 },
+  { term: "Unoptic part of the retina", definition: "المنطقة غير البصرية من الشبكية", chapter: 12 },
+  { term: "Fundus", definition: "القاع (قعر)", chapter: 12 },
+  { term: "Optic disc", definition: "القرص البصري (الحليمة البصرية، البقعة العمياء)", chapter: 12 },
+  { term: "Macula lutea", definition: "البقعة (اللطخة) الصفراء", chapter: 12 },
+  { term: "Central artery of the retina", definition: "الشريان الشبكي المركزي", chapter: 12 },
+  { term: "Choriocapillaries", definition: "الشعيرات المشيمية (الطبقة الشعيرية للمشيمية)", chapter: 12 },
+  { term: "Refractive media of the eye", definition: "الأوساط الكاسرة في العين", chapter: 12 },
+  { term: "Lens", definition: "العدسة", chapter: 12 },
+  { term: "Lens capsule", definition: "محفظة العدسة", chapter: 12 },
+  { term: "Vitrous humer (Vitrous body)", definition: "الخلط الزجاجي (الجسم الزجاجي)", chapter: 12 },
+  { term: "Nervous layer of retina", definition: "الطبقة العصبية من الشبكية", chapter: 12 },
+  { term: "Ciliary muscle", definition: "العضلة الهدبية", chapter: 12 },
+  { term: "Pupil", definition: "الحدقة", chapter: 12 },
+  { term: "Canal Schlemm", definition: "قناة شليم", chapter: 12 },
+  { term: "Ophthalmic artery", definition: "الشريان العيني", chapter: 12 },
+  { term: "Optic nerve", definition: "العصب البصري", chapter: 12 },
+  { term: "Inferior nasal concha", definition: "الصماخ الأنفي السفلي", chapter: 12 },
+  { term: "Retinal pigment epithelium", definition: "الظهارة الصباغية للشبكية", chapter: 12 },
+  { term: "Ear (Auris)", definition: "الأذن", chapter: 12 },
+  { term: "External ear (auris externa)", definition: "الأذن الخارجية", chapter: 12 },
+  { term: "Auricle", definition: "صيوان الأذن", chapter: 12 },
+  { term: "Concha", definition: "المحارة", chapter: 12 },
+  { term: "Helix", definition: "الحِتار", chapter: 12 },
+  { term: "External acoustic meatus", definition: "الصماخ السمعي الخارجي", chapter: 12 },
+  { term: "Pharyngotympanic tube", definition: "النفير البلعومي الطبلي (نفير أوستاش)", chapter: 12 },
+  { term: "Cartilage", definition: "غضروف", chapter: 12 },
+  { term: "Tympanic membrana (membrane tympani)", definition: "غشاء الطبل", chapter: 12 },
+  { term: "Middle ear (auris medius)", definition: "الأذن الوسطى", chapter: 12 },
+  { term: "Tympanic cavity", definition: "الجوف الطبلي", chapter: 12 },
+  { term: "Ossicula auditus", definition: "عُظيمات السمع", chapter: 12 },
+  { term: "Malleus", definition: "المطرقة", chapter: 12 },
+  { term: "Incus", definition: "السندان", chapter: 12 },
+  { term: "Stapes", definition: "الرِكاب", chapter: 12 },
+  { term: "Internal ear (auris internus)", definition: "الأذن الداخلية", chapter: 12 },
+  { term: "Semicircular canals", definition: "الأنفاق نصف الدائرية", chapter: 12 },
+  { term: "Vestibule", definition: "الدهليز", chapter: 12 },
+  { term: "Utricle", definition: "القُرَيبة", chapter: 12 },
+  { term: "Saccule", definition: "الكُيَيْس", chapter: 12 },
+  { term: "Cochlea", definition: "القوقعة", chapter: 12 },
+  { term: "Vestibulocochlear nerve", definition: "العصب الدهليزي القوقعي", chapter: 12 },
+  { term: "Spiral organ", definition: "العضو الحلزوني", chapter: 12 },
+  { term: "Round window", definition: "النافذة المدورة (القوقعية)", chapter: 12 },
+  { term: "Oval window", definition: "النافذة البيضية (الدهليزية)", chapter: 12 },
+  { term: "Skin (Cutis)", definition: "الجلد", chapter: 12 },
+  { term: "Epidermis", definition: "البشرة (الظهارة الجلدية)", chapter: 12 },
+  { term: "Dermis", definition: "الأدمة", chapter: 12 },
+  { term: "Hairs (Pili)", definition: "الأشعار", chapter: 12 },
+  { term: "Lines of cleavage", definition: "خطوط التشطّر", chapter: 12 },
+  { term: "Erector muscle", definition: "العضلة الناصبة (المقفّة) للشعرة", chapter: 12 },
+  { term: "Nails (Ungues مفردها Ungius)", definition: "الأظافر", chapter: 12 },
+  { term: "Sebaceous glands", definition: "الغدد الزهمية", chapter: 12 },
+  { term: "Sudorific glands", definition: "الغدد العرقية", chapter: 12 },
+  { term: "Nose", definition: "الأنف", chapter: 12 },
+  { term: "Incudomalleolar joint", definition: "المفصل السنداني المطرقي", chapter: 12 },
+  { term: "Incudostapedial joint", definition: "المفصل السنداني الركابي", chapter: 12 },
+  { term: "Tensor tympani muscle", definition: "العضلة موترة غشاء الطبل", chapter: 12 },
+  { term: "Stapedius muscle", definition: "عضلة الركابة", chapter: 12 },
+  { term: "Stylomastoid foramen", definition: "الثقبة الإبرية الخشائية", chapter: 12 },
+  { term: "Hair follicle", definition: "جريب الشعرة", chapter: 12 },
+  { term: "Bulb of hair", definition: "بصلة الشعرة", chapter: 12 },
+  { term: "Papilla pili", definition: "حليمة الشعرة", chapter: 12 },
+  { term: "Lunula of nail", definition: "هليل الظفر", chapter: 12 },
+  { term: "Vallum unguis", definition: "إستارة الظفر", chapter: 12 },
+  { term: "Chorda tympani nerve", definition: "عصب حبل الطبل", chapter: 12 },
+  { term: "Ophthalmic nerve", definition: "العصب العيني", chapter: 12 },
+  { term: "Oculomoter nerve", definition: "العصب محرّك العين", chapter: 12 },
+  { term: "Ciliary ganglion", definition: "العقدة الهدبية", chapter: 12 },
+  { term: "Palpebral fissure", definition: "الشق الجفني", chapter: 12 },
+  { term: "Nasolacrimal canal", definition: "النفق الدمعي الأنفي", chapter: 12 },
+  { term: "Lobule of auricle", definition: "فصيص الأذن", chapter: 12 },
+  { term: "Cochlear duct", definition: "القناة القوقعية", chapter: 12 },
+  { term: "Glossopharyngeal nerve", definition: "العصب اللساني البلعومي", chapter: 12 },
+  { term: "Fatty tissue", definition: "نسيج دهني", chapter: 12 },
+  { term: "Sinus venosus of sclera", definition: "الجيب الوريدي الصلبي", chapter: 12 }
+];
+
+const chapterNames = {
+  1: "مقدمة في التشريح العام",
+  2: "الهيكل العظمي والمفاصل",
+  3: "الجهاز العضلي",
+  4: "الجهاز التنفسي",
+  5: "الجهاز القلبي الوعائي",
+  6: "الجهاز الهضمي",
+  7: "الجهاز البولي",
+  8: "الجهاز التناسلي",
+  9: "الجهاز الغدي الصماوي",
+  10: "الجهاز العصبي المركزي",
+  11: "الجهاز العصبي المحيطي",
+  12: "أعضاء الحواس"
+};
+
+const chapterColors = {
+  1: "#EC407A", 2: "#66BB6A", 3: "#FFA726", 4: "#AB47BC",
+  5: "#EF5350", 6: "#26C6DA", 7: "#5C6BC0", 8: "#A5D6A7",
+  9: "#FFEE58", 10: "#8D6E63", 11: "#B0BEC5", 12: "#4DB6AC"
+};
+
+let currentTerms = [...termsData];
+let flashcardsIndex = 0;
+let currentFlashcardsList = [];
+let quizQuestions = [];
+let currentQuizIndex = 0;
+let quizScore = 0;
+let studentName = "";
+let quizReverse = false;
+let hardOnly = false;
+let sessionReviews = new Set();
+
+// SRS state
+let srsDueList = [];
+let srsIndex = 0;
+let srsSessionDone = 0;
+let srsFlipped = false;
+
+const $ = id => document.getElementById(id);
+const nameScreen = $('nameScreen'), menuScreen = $('menuScreen');
+const flashcardsSection = $('flashcardsSection'), quizSection = $('quizSection');
+const glossarySection = $('glossarySection'), statsSection = $('statsSection');
+const srsSection = $('srsSection');
+const flashcardDiv = $('flashcard'), focusCardDiv = $('focusCard');
+const cardCounterSpan = $('cardCounter'), focusCounter = $('focusCounter');
+const chapterFilterFlash = $('chapterFilterFlash'), chapterFilterQuiz = $('chapterFilterQuiz');
+const chapterFilterGlossary = $('chapterFilterGlossary');
+const chapterFilterSrs = $('chapterFilterSrs');
+const glossaryListDiv = $('glossaryList');
+const quizQuestionDiv = $('quizQuestion'), quizOptionsDiv = $('quizOptions');
+const quizFeedbackDiv = $('quizFeedback'), nextQuizBtn = $('nextQuizBtn');
+const quizScoreDiv = $('quizScore'), restartQuizBtn = $('restartQuizBtn');
+const progressBar = $('progressBar'), progressText = $('progressText');
+const hardOnlyFilter = $('hardOnlyFilter');
+
+function getHardTerms() {
+  try { return JSON.parse(localStorage.getItem('lujain-hard') || '[]'); }
+  catch { return []; }
+}
+function setHardTerms(arr) { localStorage.setItem('lujain-hard', JSON.stringify(arr)); }
+function isHard(term) { return getHardTerms().includes(term); }
+function toggleHard(term) {
+  const arr = getHardTerms();
+  const idx = arr.indexOf(term);
+  if (idx >= 0) arr.splice(idx, 1); else arr.push(term);
+  setHardTerms(arr);
+  renderFlashcard();
+  renderFocusCard();
+  renderGlossary();
+}
+function recordReview(term, known) {
+  // When user clicks "Known" → remove from hard, add to known
+  // When user clicks "Hard" → add to hard, remove from known
+  const knownKey = 'lujain-known';
+  const hardKey = 'lujain-hard';
+  let knownList = JSON.parse(localStorage.getItem(knownKey) || '[]');
+  let hardList = JSON.parse(localStorage.getItem(hardKey) || '[]');
+
+  if (known) {
+    // User knows it → add to known, remove from hard
+    if (!knownList.includes(term)) knownList.push(term);
+    const hIdx = hardList.indexOf(term);
+    if (hIdx >= 0) hardList.splice(hIdx, 1);
+  } else {
+    // User doesn't know it → add to hard, remove from known
+    if (!hardList.includes(term)) hardList.push(term);
+    const kIdx = knownList.indexOf(term);
+    if (kIdx >= 0) knownList.splice(kIdx, 1);
+  }
+
+  localStorage.setItem(knownKey, JSON.stringify(knownList));
+  localStorage.setItem(hardKey, JSON.stringify(hardList));
+  sessionReviews.add(term);
+  updateProgress();
+}
+function getStats() {
+  const known = JSON.parse(localStorage.getItem('lujain-known') || '[]');
+  const hard = JSON.parse(localStorage.getItem('lujain-hard') || '[]');
+  const total = known.length + hard.length;
+  const accuracy = total > 0 ? Math.round((known.length / total) * 100) : 0;
+  return { known, hard, total, accuracy };
+}
+const themeToggle = $('themeToggle');
+let themeIndex = 0;
+const themes = ['light', 'dark', 'medical-blue', 'girly'];
+function setTheme(idx) {
+  document.body.classList.remove(...themes);
+  document.body.classList.add(themes[idx]);
+  localStorage.setItem('lujain-theme', idx);
+}
+themeToggle.addEventListener('click', () => { themeIndex = (themeIndex + 1) % 4; setTheme(themeIndex); });
+const savedTheme = localStorage.getItem('lujain-theme');
+if (savedTheme !== null) { themeIndex = parseInt(savedTheme); setTheme(themeIndex); }
+
+function populateChapterFilters() {
+  const chapters = [...new Set(termsData.map(t => t.chapter))].sort((a,b)=>a-b);
+  const options = [['all', 'كل الفصول'], ...chapters.map(c => [c, chapterNames[c]])];
+  [chapterFilterFlash, chapterFilterQuiz, chapterFilterGlossary, chapterFilterSrs].forEach(sel => {
+    sel.innerHTML = '';
+    options.forEach(([val, text]) => {
+      const opt = document.createElement('option');
+      opt.value = val; opt.textContent = text;
+      sel.appendChild(opt);
+    });
+  });
+}
+
+function getFilteredTerms(chapterValue, hardFilter = false) {
+  let list = chapterValue === 'all' ? [...termsData] : termsData.filter(t => t.chapter == chapterValue);
+  if (hardFilter) list = list.filter(t => isHard(t.term));
+  return list;
+}
+
+function updateProgress() {
+  const total = currentFlashcardsList.length;
+  const reviewed = Math.min(sessionReviews.size, total);
+  const pct = total > 0 ? (reviewed / total) * 100 : 0;
+  progressBar.style.width = pct + '%';
+  progressText.textContent = `تقدم الجلسة: ${reviewed} / ${total} بطاقة`;
+}
+
+function renderFlashcard() {
+  if (!currentFlashcardsList.length) {
+    flashcardDiv.className = 'card';
+    flashcardDiv.innerHTML = '<div class="term-front">لا توجد مصطلحات</div>';
+    cardCounterSpan.innerText = '';
+    updateProgress();
+    return;
+  }
+  const t = currentFlashcardsList[flashcardsIndex];
+  flashcardDiv.className = 'card ch' + t.chapter;
+  flashcardDiv.classList.remove('flipped');
+  $('fcChapterLabel').textContent = chapterNames[t.chapter];
+  $('fcHardBadge').classList.toggle('show', isHard(t.term));
+  $('fcTerm').textContent = t.term;
+  $('fcDef').textContent = t.definition;
+  cardCounterSpan.innerText = `بطاقة ${flashcardsIndex+1} من ${currentFlashcardsList.length}`;
+  updateProgress();
+}
+
+function updateFlashcardsByChapter() {
+  currentFlashcardsList = getFilteredTerms(chapterFilterFlash.value, hardOnly);
+  flashcardsIndex = 0;
+  sessionReviews.clear();
+  renderFlashcard();
+}
+
+function renderFocusCard() {
+  if (!currentFlashcardsList.length) return;
+  const t = currentFlashcardsList[flashcardsIndex];
+  focusCardDiv.className = 'card ch' + t.chapter;
+  focusCardDiv.classList.remove('flipped');
+  $('focusChapterLabel').textContent = chapterNames[t.chapter];
+  $('focusHardBadge').classList.toggle('show', isHard(t.term));
+  $('focusTerm').textContent = t.term;
+  $('focusDef').textContent = t.definition;
+  focusCounter.innerText = `بطاقة ${flashcardsIndex+1} من ${currentFlashcardsList.length}`;
+}
+
+function enterFocusMode() {
+  renderFocusCard();
+  document.body.classList.add('focus-mode');
+}
+function exitFocusMode() {
+  document.body.classList.remove('focus-mode');
+  renderFlashcard();
+}
+
+function generateQuiz(chapterValue) {
+  let pool = getFilteredTerms(chapterValue);
+  if (pool.length < 4) pool = [...termsData];
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  quizQuestions = shuffled.slice(0, Math.min(10, pool.length));
+  currentQuizIndex = 0; quizScore = 0;
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  if (currentQuizIndex >= quizQuestions.length) {
+    quizQuestionDiv.innerText = '✨ انتهى الاختبار!';
+    quizOptionsDiv.innerHTML = '';
+    quizFeedbackDiv.className = 'quiz-feedback';
+    nextQuizBtn.style.display = 'none';
+    quizScoreDiv.innerText = `نتيجتك: ${quizScore} من ${quizQuestions.length}`;
+    restartQuizBtn.style.display = 'block';
+    $('quizCounter').innerText = '';
+    return;
+  }
+  const q = quizQuestions[currentQuizIndex];
+  const questionText = quizReverse ? q.definition : q.term;
+  const correctAnswer = quizReverse ? q.term : q.definition;
+  quizQuestionDiv.innerText = questionText;
+  $('quizCounter').innerText = `سؤال ${currentQuizIndex+1} / ${quizQuestions.length}`;
+
+  let others = termsData.filter(t => t.term !== q.term).map(t => quizReverse ? t.term : t.definition);
+  others = [...new Set(others)];
+  const wrong = [];
+  while (wrong.length < 3 && others.length) {
+    const r = others[Math.floor(Math.random() * others.length)];
+    if (!wrong.includes(r)) wrong.push(r);
+  }
+  let options = [correctAnswer, ...wrong];
+  options.sort(() => Math.random() - 0.5);
+
+  quizOptionsDiv.innerHTML = '';
+  quizFeedbackDiv.className = 'quiz-feedback';
+  quizFeedbackDiv.innerText = '';
+  nextQuizBtn.style.display = 'none';
+  quizScoreDiv.innerText = '';
+  restartQuizBtn.style.display = 'none';
+
+  options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option fade-in';
+    btn.innerText = opt;
+    btn.dataset.index = i;
+    btn.onclick = () => handleQuizAnswer(opt === correctAnswer, correctAnswer, btn);
+    quizOptionsDiv.appendChild(btn);
+  });
+}
+
+function handleQuizAnswer(isCorrect, correctAnswer, btn) {
+  if (isCorrect) { quizScore++; quizFeedbackDiv.innerText = '✅ صحيح!'; quizFeedbackDiv.className = 'quiz-feedback show correct'; }
+  else { quizFeedbackDiv.innerText = `❌ خطأ! الصحيحة: ${correctAnswer}`; quizFeedbackDiv.className = 'quiz-feedback show wrong'; }
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  Array.from(quizOptionsDiv.children).forEach(b => b.disabled = true);
+  currentQuizIndex++;
+  setTimeout(() => renderQuizQuestion(), 1200);
+}
+function renderGlossary() {
+  let filtered = getFilteredTerms(chapterFilterGlossary.value);
+  const search = $('glossarySearch').value.trim().toLowerCase();
+  if (search) filtered = filtered.filter(t => t.term.toLowerCase().includes(search) || t.definition.includes(search));
+  glossaryListDiv.innerHTML = '';
+  if (!filtered.length) {
+    glossaryListDiv.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div>لا توجد نتائج</div>';
+    return;
+  }
+  filtered.forEach(t => {
+    const div = document.createElement('div');
+    div.className = 'glossary-item fade-in';
+    div.style.borderRightColor = chapterColors[t.chapter] || '#1E88E5';
+    const badge = isHard(t.term) ? '<span class="glossary-badge">صعبة</span>' : '';
+    div.innerHTML = `<div class="glossary-term">${t.term} ${badge}</div><div class="glossary-def">${t.definition}</div><div style="font-size:0.75rem;color:#8A9BB0;margin-top:4px;">${chapterNames[t.chapter]}</div>`;
+    glossaryListDiv.appendChild(div);
+  });
+}
+
+function renderStats() {
+  const stats = getStats();
+  $('statTotal').textContent = stats.total;
+  $('statKnown').textContent = stats.known.length;
+  $('statHard').textContent = stats.hard.length;
+  $('statAccuracy').textContent = stats.accuracy + '%';
+
+  const container = $('chapterStats');
+  container.innerHTML = '';
+  const chapters = [...new Set(termsData.map(t => t.chapter))].sort((a,b)=>a-b);
+  chapters.forEach(ch => {
+    const chTerms = termsData.filter(t => t.chapter === ch);
+    const chKnown = chTerms.filter(t => stats.known.includes(t.term)).length;
+    const pct = Math.round((chKnown / chTerms.length) * 100);
+    const row = document.createElement('div');
+    row.className = 'chapter-progress';
+    row.innerHTML = `
+      <div style="display:flex;justify-content:space-between;font-size:0.9rem;font-weight:600;">
+        <span>${chapterNames[ch]}</span>
+        <span>${chKnown}/${chTerms.length} (${pct}%)</span>
+      </div>
+      <div class="chapter-progress-bar"><div class="chapter-progress-fill" style="width:${pct}%;background:${chapterColors[ch]}"></div></div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+// ===== SRS FUNCTIONS =====
+function getSrsData() {
+  try { return JSON.parse(localStorage.getItem('lujain-srs') || '{}'); }
+  catch { return {}; }
+}
+function saveSrsData(data) { localStorage.setItem('lujain-srs', JSON.stringify(data)); }
+
+function getSrsDueTerms(chapterValue = 'all') {
+  const data = getSrsData();
+  const now = Date.now();
+  const allTerms = chapterValue === 'all'
+    ? termsData.map(t => t.term)
+    : termsData.filter(t => t.chapter == chapterValue).map(t => t.term);
+  return allTerms.filter(term => {
+    const entry = data[term];
+    if (!entry) return true;
+    return entry.nextReview <= now;
+  });
+}
+
+function getDueBadgeCount() {
+  return getSrsDueTerms(chapterFilterSrs ? chapterFilterSrs.value : 'all').length;
+}
+
+function recordSrsReview(term, rating) {
+  // rating: 'hard' → 1 day, 'ok' → 3 days, 'easy' → 14 days
+  const data = getSrsData();
+  const now = Date.now();
+  const DAY = 86400000;
+  const intervals = { hard: 1, ok: 3, easy: 7 };
+  const days = intervals[rating];
+  const entry = data[term] || { interval: 0, reviews: 0 };
+  entry.lastReview = now;
+  entry.nextReview = now + (days * DAY);
+  entry.interval = days;
+  entry.reviews = (entry.reviews || 0) + 1;
+  entry.lastRating = rating;
+  data[term] = entry;
+  saveSrsData(data);
+}
+
+function initSrsSession() {
+  const chapterValue = chapterFilterSrs ? chapterFilterSrs.value : 'all';
+  const dueTerms = getSrsDueTerms(chapterValue);
+  srsDueList = dueTerms
+    .map(term => termsData.find(t => t.term === term))
+    .filter(Boolean)
+    .sort(() => Math.random() - 0.5);
+  srsIndex = 0;
+  srsSessionDone = 0;
+  srsFlipped = false;
+  updateSrsDueBadge();
+  renderSrsCard();
+}
+
+function updateSrsDueBadge() {
+  const count = getDueBadgeCount();
+  $('srsDueBadge').textContent = count > 0 ? `${count} مصطلح للمراجعة اليوم` : 'كل المصطلحات مراجَعة ✓';
+}
+
+function renderSrsCard() {
+  const cardEl = $('srsCard');
+  const ratingBtns = $('srsRatingBtns');
+  const flipHint = $('srsFlipHint');
+  const emptyEl = $('srsEmpty');
+
+  if (!srsDueList.length || srsIndex >= srsDueList.length) {
+    // Session done
+    cardEl.style.display = 'none';
+    ratingBtns.style.display = 'none';
+    flipHint.style.display = 'none';
+    emptyEl.style.display = 'block';
+    $('srsCounter').textContent = '';
+    $('srsProgressText').textContent = `${srsSessionDone} / ${srsSessionDone}`;
+    $('srsProgressBar').style.width = '100%';
+    // Next due time
+    const data = getSrsData();
+    const future = Object.values(data).map(e => e.nextReview).filter(t => t > Date.now());
+    if (future.length) {
+      const next = Math.min(...future);
+      const hours = Math.round((next - Date.now()) / 3600000);
+      const days = Math.round(hours / 24);
+      $('srsNextSession').textContent = hours < 24
+        ? `المراجعة الجاية خلال ${hours} ساعة`
+        : `المراجعة الجاية بعد ${days} يوم`;
+    } else {
+      $('srsNextSession').textContent = '';
+    }
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+  cardEl.style.display = '';
+
+  const t = srsDueList[srsIndex];
+  srsFlipped = false;
+  cardEl.className = 'card ch' + t.chapter;
+  cardEl.classList.remove('flipped');
+  $('srsChapterLabel').textContent = chapterNames[t.chapter];
+  $('srsTerm').textContent = t.term;
+  $('srsDef').textContent = t.definition;
+
+  // Show next review info if previously reviewed
+  const data = getSrsData();
+  const entry = data[t.term];
+  if (entry && entry.lastRating) {
+    const labels = { hard: 'صعبة سابقاً', ok: 'مضبوط سابقاً', easy: 'سهلة سابقاً' };
+    $('srsNextBadge').textContent = labels[entry.lastRating] || '';
+  } else {
+    $('srsNextBadge').textContent = 'جديدة';
+  }
+
+  ratingBtns.style.display = 'none';
+  flipHint.style.display = 'block';
+
+  const total = srsDueList.length;
+  $('srsCounter').textContent = `${srsIndex + 1} من ${total}`;
+  const pct = Math.round((srsSessionDone / total) * 100);
+  $('srsProgressText').textContent = `${srsSessionDone} / ${total}`;
+  $('srsProgressBar').style.width = pct + '%';
+}
+
+function srsFlipCard() {
+  if (srsFlipped) return;
+  srsFlipped = true;
+  $('srsCard').classList.add('flipped');
+  $('srsRatingBtns').style.display = 'flex';
+  $('srsFlipHint').style.display = 'none';
+}
+
+function srsRate(rating) {
+  const t = srsDueList[srsIndex];
+  recordSrsReview(t.term, rating);
+  srsSessionDone++;
+  srsIndex++;
+  renderSrsCard();
+}
+// ===== END SRS =====
+
+function showScreen(screenId) {
+  [nameScreen, menuScreen, flashcardsSection, quizSection, glossarySection, statsSection, srsSection].forEach(s => s.classList.remove('active-section'));
+  if (screenId === 'name') nameScreen.classList.add('active-section');
+  else if (screenId === 'menu') { menuScreen.classList.add('active-section'); $('userGreeting').innerText = studentName ? `مرحباً ${studentName} 👋` : ''; }
+  else if (screenId === 'flashcards') { flashcardsSection.classList.add('active-section'); updateFlashcardsByChapter(); }
+  else if (screenId === 'quiz') { quizSection.classList.add('active-section'); generateQuiz(chapterFilterQuiz.value); }
+  else if (screenId === 'glossary') { glossarySection.classList.add('active-section'); renderGlossary(); }
+  else if (screenId === 'stats') { statsSection.classList.add('active-section'); renderStats(); }
+  else if (screenId === 'srs') { srsSection.classList.add('active-section'); initSrsSession(); }
+  // Show update button only on inner screens (not name screen)
+  const updateBtn = $('updateBtn');
+  const changeNameBtn = $('changeNameBtn');
+  if (screenId === 'name') {
+    updateBtn.classList.add('hidden-screen');
+    changeNameBtn.classList.remove('show');
+  } else if (screenId === 'menu') {
+    updateBtn.classList.remove('hidden-screen');
+    changeNameBtn.classList.add('show');
+  } else {
+    updateBtn.classList.remove('hidden-screen');
+    changeNameBtn.classList.remove('show');
+  }
+  // Push history so back button works
+  if (screenId !== 'name' && screenId !== 'menu') {
+    history.pushState({ screen: screenId }, '', '');
+  } else if (screenId === 'menu') {
+    history.replaceState({ screen: 'menu' }, '', '');
+  }
+}
+
+$('enterBtn').onclick = () => {
+  const name = $('studentName').value.trim();
+  if (!name) { alert('الرجاء إدخال اسمك'); return; }
+  studentName = name; localStorage.setItem('lujain-name', name);
+  showScreen('menu');
+};
+document.querySelectorAll('.menu-btn').forEach(btn => btn.onclick = (e) => {
+  const section = e.currentTarget.dataset.section;
+  if (section) showScreen(section);
+});
+$('backToMenuFlash').onclick = () => showScreen('menu');
+$('backToMenuQuiz').onclick = () => showScreen('menu');
+$('backToMenuGlossary').onclick = () => showScreen('menu');
+$('backToMenuStats').onclick = () => showScreen('menu');
+$('backToMenuSrs').onclick = () => showScreen('menu');
+chapterFilterSrs.addEventListener('change', initSrsSession);
+$('changeNameBtn').onclick = () => {
+  localStorage.removeItem('lujain-name');
+  studentName = '';
+  $('studentName').value = '';
+  showScreen('name');
+};
+
+// SRS card flip and rating
+$('srsCard').addEventListener('click', srsFlipCard);
+$('srsBtnHard').onclick = () => srsRate('hard');
+$('srsBtnOk').onclick   = () => srsRate('ok');
+$('srsBtnEasy').onclick = () => srsRate('easy');
+
+window.addEventListener('popstate', (e) => {
+  // Back button pressed - always go to menu
+  showScreen('menu');
+  history.replaceState({ screen: 'menu' }, '', '');
+});
+
+flashcardDiv.addEventListener('click', () => flashcardDiv.classList.toggle('flipped'));
+focusCardDiv.addEventListener('click', () => focusCardDiv.classList.toggle('flipped'));
+$('prevCard').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex - 1 + currentFlashcardsList.length) % currentFlashcardsList.length; renderFlashcard(); } };
+$('nextCard').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFlashcard(); } };
+$('focusPrev').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex - 1 + currentFlashcardsList.length) % currentFlashcardsList.length; renderFocusCard(); } };
+$('focusNext').onclick = () => { if (currentFlashcardsList.length) { flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; renderFocusCard(); } };
+
+$('btnKnown').onclick = () => { 
+  if (currentFlashcardsList.length) { 
+    const term = currentFlashcardsList[flashcardsIndex].term;
+    recordReview(term, true); 
+    // Also remove from hard list if it was marked hard before
+    const hardList = getHardTerms();
+    if (hardList.includes(term)) {
+      const idx = hardList.indexOf(term);
+      hardList.splice(idx, 1);
+      setHardTerms(hardList);
+    }
+    flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; 
+    renderFlashcard(); 
+  } 
+};
+$('btnHard').onclick = () => { 
+  if (currentFlashcardsList.length) { 
+    const term = currentFlashcardsList[flashcardsIndex].term;
+    recordReview(term, false); 
+    flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; 
+    renderFlashcard(); 
+  } 
+};
+$('focusBtnKnown').onclick = () => { 
+  if (currentFlashcardsList.length) { 
+    const term = currentFlashcardsList[flashcardsIndex].term;
+    recordReview(term, true); 
+    const hardList = getHardTerms();
+    if (hardList.includes(term)) {
+      const idx = hardList.indexOf(term);
+      hardList.splice(idx, 1);
+      setHardTerms(hardList);
+    }
+    flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; 
+    renderFocusCard(); 
+  } 
+};
+$('focusBtnHard').onclick = () => { 
+  if (currentFlashcardsList.length) { 
+    const term = currentFlashcardsList[flashcardsIndex].term;
+    recordReview(term, false); 
+    flashcardsIndex = (flashcardsIndex + 1) % currentFlashcardsList.length; 
+    renderFocusCard(); 
+  } 
+};
+
+chapterFilterFlash.addEventListener('change', updateFlashcardsByChapter);
+chapterFilterQuiz.addEventListener('change', () => generateQuiz(chapterFilterQuiz.value));
+chapterFilterGlossary.addEventListener('change', renderGlossary);
+$('glossarySearch').addEventListener('input', renderGlossary);
+hardOnlyFilter.addEventListener('click', () => {
+  hardOnly = !hardOnly;
+  hardOnlyFilter.classList.toggle('active', hardOnly);
+  updateFlashcardsByChapter();
+});
+
+$('quizDirToggle').onclick = () => { quizReverse = !quizReverse; $('quizDirToggle').innerText = quizReverse ? '🔄 عربي → إنجليزي' : '🔄 إنجليزي → عربي'; generateQuiz(chapterFilterQuiz.value); };
+restartQuizBtn.addEventListener('click', () => generateQuiz(chapterFilterQuiz.value));
+
+$('focusModeBtn').onclick = enterFocusMode;
+$('focusExit').onclick = exitFocusMode;
+
+document.addEventListener('keydown', (e) => {
+  if (document.body.classList.contains('focus-mode')) {
+    if (e.key === 'Escape') { e.preventDefault(); exitFocusMode(); return; }
+    if (e.code === 'Space' || e.key === 'Enter') { e.preventDefault(); focusCardDiv.classList.toggle('flipped'); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); $('focusNext').click(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); $('focusPrev').click(); }
+    if (e.key === 'k' || e.key === 'K') { e.preventDefault(); $('focusBtnKnown').click(); }
+    if (e.key === 'h' || e.key === 'H') { e.preventDefault(); $('focusBtnHard').click(); }
+    return;
+  }
+  if (flashcardsSection.classList.contains('active-section')) {
+    if (e.code === 'Space' || e.key === 'Enter') { e.preventDefault(); flashcardDiv.classList.toggle('flipped'); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); $('nextCard').click(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); $('prevCard').click(); }
+    if (e.key === 'k' || e.key === 'K') { e.preventDefault(); $('btnKnown').click(); }
+    if (e.key === 'h' || e.key === 'H') { e.preventDefault(); $('btnHard').click(); }
+    if (e.key === 'f' || e.key === 'F') { e.preventDefault(); enterFocusMode(); }
+  }
+  if (quizSection.classList.contains('active-section')) {
+    const opts = Array.from(quizOptionsDiv.children);
+    if (e.key >= '1' && e.key <= '4') {
+      const idx = parseInt(e.key) - 1;
+      if (opts[idx] && !opts[idx].disabled) opts[idx].click();
+    }
+  }
+});
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  $('installBtn').classList.add('show');
+});
+$('installBtn').onclick = async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') $('installBtn').classList.remove('show');
+  deferredPrompt = null;
+};
+
+let waitingWorker;
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(reg => {
+      console.log('SW registered');
+
+      // Check for updates
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // New version available!
+            waitingWorker = newWorker;
+            const updateBtn = document.getElementById('updateBtn');
+            if (updateBtn) updateBtn.classList.add('show');
+          }
+        });
+      });
+    })
+    .catch(err => console.log('SW error', err));
+}
+
+// Update button click — backup data before reload
+document.getElementById('updateBtn').addEventListener('click', () => {
+  if (waitingWorker) {
+    // Data is safe in localStorage — no need to backup
+    waitingWorker.postMessage({action: 'skipWaiting'});
+  }
+});
+
+// Reload when new SW takes control
+navigator.serviceWorker.addEventListener('controllerchange', () => {
+  window.location.reload();
+});
+
+const savedName = localStorage.getItem('lujain-name');
+if (savedName) { studentName = savedName; $('studentName').value = savedName; }
+populateChapterFilters();
+// If name already saved, go directly to menu - never show name screen again
+if (savedName) {
+  showScreen('menu');
+} else {
+  showScreen('name');
+}
+</script>
+</body>
+</html>
