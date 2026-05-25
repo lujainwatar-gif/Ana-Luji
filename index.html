@@ -549,13 +549,13 @@
 
     .update-btn {
       position: fixed;
-      top: 15px;
+      top: 60px;
       right: 15px;
       background: var(--warning);
       color: white;
       border: none;
       border-radius: 40px;
-      padding: 8px 16px;
+      padding: 8px 14px;
       font-family: 'Cairo', sans-serif;
       font-weight: 700;
       font-size: 0.85rem;
@@ -567,7 +567,6 @@
       backdrop-filter: blur(6px);
     }
     .update-btn.show { display: block; animation: fadeIn 0.4s ease; }
-    .update-btn.show.hidden-screen { display: none !important; }
     .update-btn:hover { transform: scale(1.05); background: #F57C00; }
 
 
@@ -2900,19 +2899,15 @@ function showScreen(screenId) {
   else if (screenId === 'glossary') { glossarySection.classList.add('active-section'); renderGlossary(); }
   else if (screenId === 'stats') { statsSection.classList.add('active-section'); renderStats(); }
   else if (screenId === 'srs') { srsSection.classList.add('active-section'); initSrsSession(); }
-  // Show update button only on inner screens (not name screen)
-  const updateBtn = $('updateBtn');
+  // زر تغيير الاسم بس بالقائمة الرئيسية
   const changeNameBtn = $('changeNameBtn');
-  if (screenId === 'name') {
-    updateBtn.classList.add('hidden-screen');
-    changeNameBtn.classList.remove('show');
-  } else if (screenId === 'menu') {
-    updateBtn.classList.remove('hidden-screen');
+  if (screenId === 'menu') {
     changeNameBtn.classList.add('show');
   } else {
-    updateBtn.classList.remove('hidden-screen');
     changeNameBtn.classList.remove('show');
   }
+  // زر التحديث بكل الشاشات ما عدا شاشة الاسم (hidden-screen شيلناها)
+
   // Push history so back button works
   if (screenId !== 'name' && screenId !== 'menu') {
     history.pushState({ screen: screenId }, '', '');
