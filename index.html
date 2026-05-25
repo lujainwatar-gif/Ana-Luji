@@ -2670,7 +2670,8 @@ function renderFlashcard() {
 }
 
 function updateFlashcardsByChapter() {
-  currentFlashcardsList = getFilteredTerms(chapterFilterFlash.value, hardOnly);
+  const chapterVal = (chapterFilterFlash && chapterFilterFlash.value) ? chapterFilterFlash.value : 'all';
+  currentFlashcardsList = getFilteredTerms(chapterVal, hardOnly);
   flashcardsIndex = 0;
   sessionReviews.clear();
   renderFlashcard();
@@ -2759,8 +2760,10 @@ function handleQuizAnswer(isCorrect, correctAnswer, btn) {
   setTimeout(() => renderQuizQuestion(), 1200);
 }
 function renderGlossary() {
-  let filtered = getFilteredTerms(chapterFilterGlossary.value);
-  const search = $('glossarySearch').value.trim().toLowerCase();
+  const chapterVal = (chapterFilterGlossary && chapterFilterGlossary.value) ? chapterFilterGlossary.value : 'all';
+  let filtered = getFilteredTerms(chapterVal);
+  const searchEl = $('glossarySearch');
+  const search = searchEl ? searchEl.value.trim().toLowerCase() : '';
   if (search) filtered = filtered.filter(t => t.term.toLowerCase().includes(search) || t.definition.includes(search));
   glossaryListDiv.innerHTML = '';
   if (!filtered.length) {
@@ -2954,11 +2957,11 @@ function showScreen(screenId) {
   [nameScreen, menuScreen, flashcardsSection, quizSection, glossarySection, statsSection, srsSection].forEach(s => s.classList.remove('active-section'));
   if (screenId === 'name') nameScreen.classList.add('active-section');
   else if (screenId === 'menu') { menuScreen.classList.add('active-section'); $('userGreeting').innerText = studentName ? `مرحباً ${studentName} 👋` : ''; }
-  else if (screenId === 'flashcards') { flashcardsSection.classList.add('active-section'); updateFlashcardsByChapter(); }
-  else if (screenId === 'quiz') { quizSection.classList.add('active-section'); generateQuiz(chapterFilterQuiz.value); }
-  else if (screenId === 'glossary') { glossarySection.classList.add('active-section'); renderGlossary(); }
+  else if (screenId === 'flashcards') { flashcardsSection.classList.add('active-section'); setTimeout(updateFlashcardsByChapter, 50); }
+  else if (screenId === 'quiz') { quizSection.classList.add('active-section'); setTimeout(() => generateQuiz((chapterFilterQuiz && chapterFilterQuiz.value) ? chapterFilterQuiz.value : 'all'), 50); }
+  else if (screenId === 'glossary') { glossarySection.classList.add('active-section'); setTimeout(renderGlossary, 50); }
   else if (screenId === 'stats') { statsSection.classList.add('active-section'); renderStats(); }
-  else if (screenId === 'srs') { srsSection.classList.add('active-section'); initSrsSession(); }
+  else if (screenId === 'srs') { srsSection.classList.add('active-section'); setTimeout(initSrsSession, 50); }
   // زر تغيير الاسم بس بالقائمة الرئيسية
   const changeNameBtn = $('changeNameBtn');
   if (screenId === 'menu') {
