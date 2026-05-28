@@ -2915,7 +2915,7 @@ function renderSrsCard() {
   const data = getSrsData();
   const entry = data[t.term];
   if (entry && entry.lastRating) {
-    const labels = { hard: 'صعبة سابقاً', ok: 'مضبوط سابقاً', easy: 'سهلة سابقاً' };
+    const labels = { hard: '😓 صعب سابقاً', ok: '🙃 متوسط سابقاً', easy: '😊 سهل سابقاً' };
     $('srsNextBadge').textContent = labels[entry.lastRating] || '';
   } else {
     $('srsNextBadge').textContent = 'جديدة';
