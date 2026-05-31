@@ -535,7 +535,7 @@
 
     .update-btn {
       position: fixed;
-      top: 60px;
+      top: 15px;
       right: 15px;
       background: var(--warning);
       color: white;
@@ -655,7 +655,7 @@
     /* Change name button */
     .change-name-btn {
       position: fixed;
-      top: 15px;
+      top: 60px;
       right: 15px;
       background: rgba(30,136,229,0.92);
       border: none;
@@ -744,8 +744,12 @@ if ('standalone' in window.navigator && window.navigator.standalone) {
   }
 }
 </script>
-<script data-goatcounter="https://sandy.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-LvBTabJqU5x5OrPKljSmA.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
 </head>
 <body class="light">
 <button class="update-btn" id="updateBtn">🔄 تحديث التطبيق</button>
@@ -2968,10 +2972,11 @@ function showScreen(screenId) {
   const changeNameBtn = $('changeNameBtn');
   if (screenId === 'menu') {
     changeNameBtn.classList.add('show');
+    // ضبط الموقع حسب وجود زر التحديث
+    changeNameBtn.style.top = $('updateBtn').classList.contains('show') ? '60px' : '15px';
   } else {
     changeNameBtn.classList.remove('show');
   }
-  // زر التحديث بكل الشاشات ما عدا شاشة الاسم (hidden-screen شيلناها)
 
   // Push history so back button works
   if (screenId !== 'name' && screenId !== 'menu') {
