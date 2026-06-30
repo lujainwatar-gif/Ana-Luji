@@ -673,6 +673,31 @@
     .change-name-btn:hover { transform: scale(1.05); }
     .change-name-btn.show { display: block; }
 
+    .telegram-btn {
+      position: fixed;
+      bottom: 15px;
+      left: 15px;
+      background: #0088cc;
+      border: none;
+      border-radius: 40px;
+      padding: 8px 14px;
+      color: white;
+      font-size: 0.8rem;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .telegram-btn:hover { transform: scale(1.05); background: #0077b3; }
+    .telegram-btn.show { display: flex; }
+
   
     /* iOS Safari Fixes */
     * { -webkit-tap-highlight-color: transparent; }
@@ -756,6 +781,10 @@ if ('standalone' in window.navigator && window.navigator.standalone) {
 <button class="theme-toggle" id="themeToggle" title="تبديل الوضع"><span>☀️</span><span>🌙</span><span>💙</span><span>🌸</span></button>
 <button class="install-btn" id="installBtn">📲 تثبيت التطبيق</button>
 <button class="change-name-btn" id="changeNameBtn">✏️ تغيير الاسم</button>
+<a href="https://t.me/AnatoLuji_bot" target="_blank" rel="noopener" class="telegram-btn" id="telegramBtn">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+  <span>تواصل معي</span>
+</a>
 
 <div class="app-container" id="appContainer">
 
@@ -2970,12 +2999,15 @@ function showScreen(screenId) {
   else if (screenId === 'srs') { srsSection.classList.add('active-section'); setTimeout(initSrsSession, 50); }
   // زر تغيير الاسم بس بالقائمة الرئيسية
   const changeNameBtn = $('changeNameBtn');
+  const telegramBtn = $('telegramBtn');
   if (screenId === 'menu') {
     changeNameBtn.classList.add('show');
+    telegramBtn.classList.add('show');
     // ضبط الموقع حسب وجود زر التحديث
     changeNameBtn.style.top = $('updateBtn').classList.contains('show') ? '60px' : '15px';
   } else {
     changeNameBtn.classList.remove('show');
+    telegramBtn.classList.remove('show');
   }
 
   // Push history so back button works
