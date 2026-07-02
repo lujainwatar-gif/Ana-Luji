@@ -3406,7 +3406,7 @@ hardOnlyFilter.addEventListener('click', () => {
   updateFlashcardsByChapter();
 });
 
-$('quizDirToggle').onclick = () => { quizReverse = !quizReverse; $('quizDirToggle').innerText = quizReverse ? '🔄 عربي → إنجليزي' : '🔄 إنجليزي → عربي'; generateQuiz(chapterFilterQuiz.value); };
+$('quizDirToggle').onclick = () => { quizReverse = !quizReverse; generateQuiz(chapterFilterQuiz.value); };
 restartQuizBtn.addEventListener('click', () => generateQuiz(chapterFilterQuiz.value));
 
 $('focusModeBtn').onclick = enterFocusMode;
