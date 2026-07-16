@@ -593,6 +593,9 @@
     body.light .theme-toggle { background: #0ea5e9 !important; }
     body.light .change-name-btn { background: #0ea5e9 !important; }
     body.light .telegram-btn { background: #0ea5e9 !important; }
+    body.light .farewell-modal { background: rgba(255,255,255,0.97); }
+    body.light .farewell-poem { color: #0369a1; }
+    body.light .farewell-divider { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
     body.light h1, body.light h2, body.light h3 { color: #0c4a6e; }
     body.light .welcome-card { background: rgba(255,255,255,0.45); }
     body.light .srs-hard { background: rgba(239,68,68,0.2); color: #7f1d1d; }
@@ -621,6 +624,10 @@
     body.dark .theme-toggle { background: rgba(124,58,237,0.75); }
     body.dark .change-name-btn { background: rgba(124,58,237,0.75); }
     body.dark .telegram-btn { background: rgba(124,58,237,0.75); }
+    body.dark .farewell-modal { background: #1a1040; border: 1px solid rgba(180,150,255,0.18); color: #e0d7ff; }
+    body.dark .farewell-poem { color: #c4b5fd; }
+    body.dark .farewell-divider { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    body.dark .farewell-close { background: rgba(255,255,255,0.1); color: #e0d7ff; }
     body.dark h1, body.dark h2, body.dark h3 { color: #c4b5fd; }
     body.dark .welcome-card { background: rgba(255,255,255,0.06); }
     body.dark .srs-hard { background: rgba(239,68,68,0.25); color: #fca5a5; }
@@ -650,6 +657,10 @@
     body.medical-blue .theme-toggle { background: rgba(255,255,255,0.3); color: #14532d; }
     body.medical-blue .change-name-btn { background: rgba(255,255,255,0.3); color: #14532d; }
     body.medical-blue .telegram-btn { background: rgba(255,255,255,0.3); color: #14532d; }
+    body.medical-blue .farewell-modal { background: rgba(60,140,60,0.96); border: 1px solid rgba(255,255,255,0.38); color: #f0fdf4; }
+    body.medical-blue .farewell-poem { color: #dcfce7; }
+    body.medical-blue .farewell-divider { background: rgba(255,255,255,0.5); }
+    body.medical-blue .farewell-close { background: rgba(255,255,255,0.25); color: #f0fdf4; }
     body.medical-blue h1, body.medical-blue h2, body.medical-blue h3 { color: #f0fdf4; }
     body.medical-blue .welcome-card { background: rgba(255,255,255,0.2); }
     body.medical-blue .srs-hard { background: rgba(239,68,68,0.25); color: #fca5a5; }
@@ -680,6 +691,10 @@
     body.girly .theme-toggle { background: rgba(190,24,93,0.5); }
     body.girly .change-name-btn { background: rgba(190,24,93,0.5); }
     body.girly .telegram-btn { background: rgba(190,24,93,0.5); }
+    body.girly .farewell-modal { background: rgba(255,220,230,0.97); border: 1px solid rgba(255,255,255,0.72); color: #4a0020; }
+    body.girly .farewell-poem { color: #9d174d; }
+    body.girly .farewell-divider { background: linear-gradient(90deg, #f9a8d4, #fbcfe8); }
+    body.girly .farewell-close { background: rgba(255,255,255,0.5); color: #831843; }
     body.girly h1, body.girly h2, body.girly h3 { color: #831843; }
     body.girly .welcome-card { background: rgba(255,255,255,0.46); }
     body.girly .srs-hard { background: rgba(239,68,68,0.2); color: #7f1d1d; }
@@ -768,10 +783,17 @@
     body.dark .srs-empty { color: #E2E8F0; }
 
     /* Change name button */
-    .change-name-btn {
+    .top-right-btns {
       position: fixed;
       top: 60px;
       right: 15px;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+    .top-right-btns.show { display: flex; }
+    .change-name-btn {
       background: rgba(30,136,229,0.92);
       border: none;
       border-radius: 40px;
@@ -779,14 +801,103 @@
       color: white;
       font-size: 1rem;
       cursor: pointer;
-      z-index: 1000;
       box-shadow: var(--shadow-sm);
       backdrop-filter: blur(6px);
-      display: none;
       transition: transform 0.2s;
     }
     .change-name-btn:hover { transform: scale(1.05); }
-    .change-name-btn.show { display: block; }
+    .farewell-reopen-btn {
+      padding: 8px 10px;
+      border-radius: 50%;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Farewell message popup */
+    .farewell-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,15,30,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .farewell-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+    .farewell-modal {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.97);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.7);
+      padding: 32px 22px 26px;
+      text-align: center;
+      transform: scale(0.9) translateY(10px);
+      transition: transform 0.28s cubic-bezier(0.4,0.2,0.2,1);
+    }
+    .farewell-overlay.show .farewell-modal {
+      transform: scale(1) translateY(0);
+    }
+    .farewell-close {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.08);
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: inherit;
+      line-height: 1;
+    }
+    .farewell-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .farewell-poem {
+      font-weight: 700;
+      font-size: 1.02rem;
+      margin-bottom: 16px;
+      color: var(--primary-dark);
+    }
+    .poem-line {
+      white-space: nowrap;
+      display: block;
+      width: 100%;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      transform-origin: center;
+    }
+    .poem-line:last-child { margin-bottom: 0; }
+    .farewell-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), #42A5F5);
+      border-radius: 4px;
+      margin: 0 auto 16px;
+    }
+    .farewell-msg {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-bottom: 16px;
+      text-align: right;
+    }
+    .farewell-sign {
+      font-weight: 700;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      text-align: right;
+    }
 
     .telegram-btn {
       position: fixed;
@@ -840,7 +951,7 @@
         top: max(15px, env(safe-area-inset-top));
         left: max(15px, env(safe-area-inset-left));
       }
-      .change-name-btn {
+      .top-right-btns {
         top: max(15px, env(safe-area-inset-top));
         right: max(15px, env(safe-area-inset-right));
       }
@@ -937,11 +1048,38 @@ if ('standalone' in window.navigator && window.navigator.standalone) {
 <button class="update-btn" id="updateBtn">🔄 تحديث التطبيق</button>
 <button class="theme-toggle" id="themeToggle" title="تبديل الوضع"><span>☀️</span><span>🌙</span><span>🌿</span><span>🌸</span></button>
 <button class="install-btn" id="installBtn">📲 تثبيت التطبيق</button>
-<button class="change-name-btn" id="changeNameBtn">✏️ تغيير الاسم</button>
+<div class="top-right-btns" id="topRightBtns">
+  <button class="change-name-btn" id="changeNameBtn">✏️ تغيير الاسم</button>
+  <button class="change-name-btn farewell-reopen-btn" id="farewellReopenBtn" title="رسالة لجين">🔥</button>
+</div>
 <a href="https://t.me/Letjanecook" target="_blank" rel="noopener" class="telegram-btn" id="telegramBtn">
   <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
   <span>تواصل معي</span>
 </a>
+
+<div class="farewell-overlay" id="farewellOverlay">
+  <div class="farewell-modal" id="farewellModal">
+    <button class="farewell-close" id="farewellClose" title="إغلاق">✕</button>
+    <div class="farewell-icon">🔥✨</div>
+    <div class="farewell-poem">
+      <div class="poem-line">وَامضِ لِحُلمِكَ وَاثِقاً كُنْ فِي مُقَدِّمَةِ الصُّفُوفْ</div>
+      <div class="poem-line">وَامنَحْ فُؤَادَكَ أَن يُسَافِرَ فِي الأَمَانِي دُونَ خَوْفْ</div>
+      <div class="poem-line">فَاليَوْمُ تُبْذَلُ لِلمُنَى وَغَداً سَتُرضِيكَ الْقُطُوفْ</div>
+      <div class="poem-line">أَنتَ الصَّبَاحُ فَلَا تَضِقْ مَهمَا تَكَدَّرَتِ الظُّرُوفْ</div>
+    </div>
+    <div class="farewell-divider"></div>
+    <div class="farewell-msg">
+      مع اقتراب بداية النهاية وودت أن أذكركم أنكم بذلتم و ما زلتم تبذلون مافي وسعكم فلا تجعلوا الخوف و القلق يربككم و يثني عزائمكم .. لقد تجاوزتم الكثير و هاقد آن الأوان لأحلامكم أن تصير واقعاً فلا تخذلوها و لا تخذلوا أنفسكم ...🔥✨
+      <br><br>
+      أشكركم جداً على استخدام التطبيق الخاص بي ...🔥✨✨
+      <br>
+      و أفخر أنني كنت جزءًا من رحلة أكثر من 900 طبيب و طبيبة ... 🔥✨
+      <br><br>
+      أرجو لكم كل التوفيق ... 💫🔥
+    </div>
+    <div class="farewell-sign">زميلتكم لجين خالد وتر ... 💫 ✨</div>
+  </div>
+</div>
 
 <div class="app-container" id="appContainer">
 
@@ -3274,15 +3412,16 @@ function showScreen(screenId) {
   else if (screenId === 'stats') { statsSection.classList.add('active-section'); switchStatsTab('cards'); renderStats(); }
   else if (screenId === 'srs') { srsSection.classList.add('active-section'); setTimeout(initSrsSession, 50); }
   // زر تغيير الاسم بس بالقائمة الرئيسية
-  const changeNameBtn = $('changeNameBtn');
+  const topRightBtns = $('topRightBtns');
   const telegramBtn = $('telegramBtn');
   if (screenId === 'menu') {
-    changeNameBtn.classList.add('show');
+    topRightBtns.classList.add('show');
     telegramBtn.classList.add('show');
     // ضبط الموقع حسب وجود زر التحديث
-    changeNameBtn.style.top = $('updateBtn').classList.contains('show') ? '60px' : '15px';
+    topRightBtns.style.top = $('updateBtn').classList.contains('show') ? '60px' : '15px';
+    updateFarewellReopenBtnVisibility();
   } else {
-    changeNameBtn.classList.remove('show');
+    topRightBtns.classList.remove('show');
     telegramBtn.classList.remove('show');
   }
 
@@ -3316,6 +3455,62 @@ $('changeNameBtn').onclick = () => {
   $('studentName').value = '';
   showScreen('name');
 };
+
+// ===== رسالة الوداع (لجين) =====
+// تظهر مرة واحدة يومياً حتى نهاية يوم السبت بتوقيت سوريا
+const FAREWELL_END_TS = new Date('2026-07-18T23:59:59+03:00').getTime();
+function isFarewellCampaignActive() {
+  return Date.now() <= FAREWELL_END_TS;
+}
+function getDamascusDateStr() {
+  try {
+    return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Damascus' });
+  } catch (e) {
+    return new Date().toDateString();
+  }
+}
+function fitPoemLines() {
+  document.querySelectorAll('#farewellModal .poem-line').forEach(line => {
+    line.style.fontSize = '';
+    const containerWidth = line.parentElement.clientWidth;
+    if (!containerWidth) return;
+    let fontSize = parseFloat(getComputedStyle(line).fontSize);
+    let guard = 0;
+    while (line.scrollWidth > containerWidth && fontSize > 9 && guard < 40) {
+      fontSize -= 0.5;
+      line.style.fontSize = fontSize + 'px';
+      guard++;
+    }
+  });
+}
+function showFarewellModal() {
+  $('farewellOverlay').classList.add('show');
+  requestAnimationFrame(() => requestAnimationFrame(fitPoemLines));
+}
+function hideFarewellModal() {
+  $('farewellOverlay').classList.remove('show');
+}
+window.addEventListener('resize', () => {
+  if ($('farewellOverlay').classList.contains('show')) fitPoemLines();
+});
+function updateFarewellReopenBtnVisibility() {
+  const btn = $('farewellReopenBtn');
+  if (btn) btn.style.display = isFarewellCampaignActive() ? '' : 'none';
+}
+function maybeShowFarewellOnce() {
+  if (!isFarewellCampaignActive()) return;
+  const todayStr = getDamascusDateStr();
+  if (LS.getItem('farewell-shown-date') === todayStr) return;
+  setTimeout(() => {
+    showFarewellModal();
+    LS.setItem('farewell-shown-date', todayStr);
+  }, 1000);
+}
+$('farewellClose').onclick = hideFarewellModal;
+$('farewellOverlay').addEventListener('click', (e) => {
+  if (e.target === $('farewellOverlay')) hideFarewellModal();
+});
+$('farewellReopenBtn').onclick = showFarewellModal;
 
 // SRS card flip and rating
 addTapListener($('srsCard'), srsFlipCard);
@@ -3528,6 +3723,7 @@ if (savedName) {
 } else {
   showScreen('name');
 }
+maybeShowFarewellOnce();
 </script>
 </body>
 </html>
